@@ -1,35 +1,28 @@
-export const profileSummary =
-  "A technical brand platform for QA leadership, automation architecture, AI-supported quality workflows, and practical engineering communication. The first release keeps the surface intentionally focused while the content system matures.";
+import { focusAreas } from "./expertise";
 
-export const focusAreas = [
-  {
-    title: "Test automation expertise",
-    description:
-      "Reusable architecture for dependable automated checks across product, API, integration, and end-to-end layers.",
-    icon: "automation",
+export const profile = {
+  name: "Mateusz Koczorowski",
+  role: "Senior QA Engineer",
+  headline: "Quality engineering for teams shipping complex software with confidence.",
+  summary:
+    "A technical brand platform for QA leadership, automation architecture, AI-supported quality workflows, and practical engineering communication. The first release keeps the surface intentionally focused while the content system matures.",
+  location: {
+    label: "Poland",
+    isRemoteFriendly: true,
   },
-  {
-    title: "AI-assisted QA workflows",
-    description:
-      "Human-reviewed AI support for test design, exploratory charters, risk analysis, documentation, and maintenance work.",
-    icon: "ai",
+  positioning:
+    "Senior quality engineering focused on practical automation, risk-aware delivery, and responsible AI-assisted QA workflows.",
+  publicBio:
+    "Senior QA Engineer working at the intersection of automation architecture, quality strategy, exploratory thinking, and technical communication.",
+  availability: {
+    status: "available-for-selected-conversations",
+    label: "Open to selected QA leadership, automation, mentoring, and speaking conversations.",
   },
-  {
-    title: "Quality strategy",
-    description:
-      "Decision frameworks that connect release confidence, observability, defect prevention, and team operating models.",
-    icon: "strategy",
-  },
-  {
-    title: "Technical case studies",
-    description:
-      "Public, sanitized narratives that describe engineering problems, constraints, trade-offs, and outcomes without confidential details.",
-    icon: "studies",
-  },
-  {
-    title: "Speaking and community",
-    description:
-      "A home for talks, articles, mentoring notes, and community contributions around pragmatic quality engineering.",
-    icon: "speaking",
-  },
-] as const;
+  editingNotes: [
+    "Replace summary and publicBio with a more personal version when final approved wording is ready.",
+    "Keep claims specific and evidence-led. Do not add metrics unless they can be verified publicly.",
+  ],
+} as const;
+
+export const profileSummary = profile.summary;
+export { focusAreas };

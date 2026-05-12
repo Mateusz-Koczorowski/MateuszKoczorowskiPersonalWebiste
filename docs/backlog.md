@@ -17,9 +17,9 @@
 ## Next
 
 - Replace placeholder production URL metadata.
-- Add full navigation model.
+- Wire the full navigation model into implemented routes as pages are added.
 - Define reusable section and content-card components.
-- Add first sanitized case study template.
+- Add first published sanitized case study content after manual review.
 - Add accessibility test setup.
 - Add responsive smoke tests for core pages.
 - Add contact section or route.

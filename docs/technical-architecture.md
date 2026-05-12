@@ -16,6 +16,8 @@ Reusable components live in `components/`. shadcn/ui primitives live in `compone
 
 Typed starter content lives in `content/`. As the site grows, the content layer can evolve into MDX, a local content collection, or a CMS-backed model.
 
+Content editing rules and the current file map are documented in `docs/content-management.md`.
+
 ## Motion
 
 Framer Motion is isolated behind reusable components where practical. Animations must respect reduced-motion preferences.

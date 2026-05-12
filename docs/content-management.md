@@ -1,0 +1,48 @@
+# Content Management
+
+## Purpose
+
+Website content is stored as TypeScript objects in `content/`. The current project intentionally avoids a CMS, MDX pipeline, or extra dependencies until the content model and public website sections are stable.
+
+## Files
+
+- `content/profile.ts` contains the primary identity, positioning, summary, and compatibility exports used by the current home page.
+- `content/navigation.ts` defines active and planned navigation items.
+- `content/expertise.ts` defines focus areas and future expertise detail paths.
+- `content/skills.ts` defines editable technical skill entries.
+- `content/experience.ts` defines professional experience without confidential client or employer details.
+- `content/projects.ts` defines sanitized case study placeholders for future detail pages.
+- `content/speaking.ts` defines talks, workshops, articles, and community sessions.
+- `content/mentoring.ts` defines mentoring topics and boundaries.
+- `content/education.ts` contains education placeholders until public details are approved.
+- `content/contact.ts` contains contact and social links, currently with placeholder URLs.
+- `content/languages.ts` contains language entries that need confirmation.
+- `content/types.ts` contains shared content types.
+- `content/index.ts` re-exports the content model for future pages and components.
+
+## Editing Rules
+
+- Keep content concrete, technical, and public-safe.
+- Do not add confidential employer, client, product, repository, environment, or project names without explicit approval.
+- Do not invent metrics, dates, outcomes, seniority claims, certifications, event names, or technologies.
+- Use anonymized case study names based on domains, such as `SaaS platform`, `web application`, or `QA workflow`.
+- Keep placeholders marked with `needsDetail`, `needsManualInput`, `needsConfirmation`, or `isPlaceholder`.
+- Prefer short, scannable summaries that can be reused on mobile layouts.
+- Add final routes only when the corresponding pages exist.
+
+## Case Study Template
+
+Every case study should keep these public-safe sections:
+
+- Problem
+- Constraints
+- Approach
+- Trade-offs
+- Public-safe outcome
+- Future detail page note
+
+Before publishing a detailed case study, review it for confidentiality, unsupported claims, and accidental client identification.
+
+## Future Expansion
+
+The TypeScript content layer can later move to MDX, local content collections, or a CMS. Until then, the typed objects give the site a stable editing surface without adding unnecessary tooling.

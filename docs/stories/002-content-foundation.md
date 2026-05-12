@@ -13,6 +13,13 @@ Create the first structured content model for focus areas, case studies, speakin
 - Content structure supports semantic headings, sections, articles, and descriptive link text.
 - Content guidance includes mobile-first scanning and avoids copy that depends on desktop-only layout.
 
+## Implementation Notes
+
+- Structured TypeScript content objects live in `content/`.
+- Public-safe case study placeholders use anonymized domain names.
+- Placeholder fields mark details that still need manual approval or confirmation.
+- Content management guidance lives in `docs/content-management.md`.
+
 ## Status
 
-Planned.
+Implemented.
