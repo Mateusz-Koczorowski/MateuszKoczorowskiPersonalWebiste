@@ -74,6 +74,42 @@ const groupedSkills = skills.reduce(
 const experienceItems: readonly ExperienceItem[] = professionalExperience;
 const communicationEntries: readonly SpeakingEntry[] = speakingEntries;
 
+const caseStudyDisplayCopy = {
+  "quality-strategy-for-saas-platform": {
+    problem:
+      "A product delivery context needed clearer risk framing, release confidence, and quality ownership without exposing client-specific detail.",
+    responsibility:
+      "Shape the quality strategy, align testing effort with delivery constraints, and make trade-offs visible to engineering and delivery partners.",
+    impact:
+      "Prepared for verified public outcomes; this preview intentionally avoids unsupported metrics until details are approved.",
+  },
+  "automation-architecture-for-web-application": {
+    problem:
+      "A modern web product needed automation choices that improved feedback without creating fragile maintenance overhead.",
+    responsibility:
+      "Define useful test-layer boundaries, focus end-to-end coverage where it carries real value, and improve maintainability signals.",
+    impact:
+      "Prepared for a future detail page with reviewed outcomes around suite reliability, ownership, and feedback quality.",
+  },
+  "ai-assisted-testing-workflow": {
+    problem:
+      "QA work needed better support for analysis, test ideas, and documentation while preserving confidentiality and human review.",
+    responsibility:
+      "Introduce AI as reviewed assistance for quality work, with clear boundaries for source material, accuracy, and decision-making.",
+    impact:
+      "Prepared for public-safe examples that separate useful support from unverified automation or coverage claims.",
+  },
+} satisfies Record<
+  (typeof caseStudies)[number]["slug"],
+  Record<"problem" | "responsibility" | "impact", string>
+>;
+
+const contactDisplayCopy = {
+  LinkedIn: "Professional profile and direct network contact.",
+  GitHub: "Public repositories and engineering activity.",
+  Email: "Direct contact for selected QA, mentoring, and speaking conversations.",
+};
+
 export default function Home() {
   const contactHref = contactLinks[0]?.href ?? "mailto:add-public-email@example.com";
   const linkedin = socialLinks.find((link) => link.label === "LinkedIn");
@@ -86,7 +122,7 @@ export default function Home() {
       <main id="main-content" className="overflow-hidden bg-background/35">
         <section
           aria-labelledby="home-hero-heading"
-          className="relative flex min-h-[calc(100vh-4rem)] items-center px-6 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+          className="relative flex min-h-[calc(100vh-4rem)] items-center px-6 py-14 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
         >
           <div
             aria-hidden="true"
@@ -198,11 +234,11 @@ export default function Home() {
           eyebrow="Quality ownership"
           title="Engineering quality as a shared system, not a late-stage inspection."
           intro="The work is strongest when automation, exploratory thinking, review habits, and delivery context are designed together. Good QA leadership makes risks visible early and keeps feedback useful for the people building the product."
-          className="border-t border-border/55"
+          className="border-t border-border/55 bg-background/20"
         >
-          <div className="mt-10 grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(18rem,0.55fr)] lg:gap-8">
+          <div className="mt-9 grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(18rem,0.55fr)] lg:gap-8">
             <AnimatedSection>
-              <div className="space-y-5 text-base leading-8 text-muted-foreground">
+              <div className="max-w-3xl space-y-5 text-base leading-8 text-muted-foreground">
                 <p>
                   {profile.publicBio} The focus is practical: tests should explain risk, automation
                   should earn its maintenance cost, and quality conversations should help teams make
@@ -217,7 +253,7 @@ export default function Home() {
               </div>
             </AnimatedSection>
             <AnimatedSection>
-              <aside className="rounded-lg border border-border/75 bg-card/45 p-5 sm:p-6">
+              <aside className="rounded-lg border border-border/75 bg-card/40 p-5 sm:p-6">
                 <h3 className="text-lg font-semibold text-foreground">Working principles</h3>
                 <ul className="mt-5 space-y-4 text-sm leading-7 text-muted-foreground">
                   <li className="flex gap-3">
@@ -254,7 +290,7 @@ export default function Home() {
           title="A compact operating model for reliable software delivery."
           intro="The expertise system groups skills by engineering responsibility rather than rating them. Each area can grow into deeper pages without changing the homepage architecture."
         >
-          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-9 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {expertiseAreas.map((area) => {
               const Icon = iconMap[area.icon];
 
@@ -271,8 +307,8 @@ export default function Home() {
             })}
           </div>
 
-          <AnimatedSection className="mt-10">
-            <div className="grid gap-4 rounded-lg border border-border/75 bg-background/35 p-5 sm:p-6 md:grid-cols-2 lg:grid-cols-3">
+          <AnimatedSection className="mt-8">
+            <div className="grid gap-6 rounded-lg border border-border/70 bg-background/30 p-5 sm:p-6 md:grid-cols-2 lg:grid-cols-3">
               {Object.entries(groupedSkills).map(([group, groupSkills]) => (
                 <div key={group}>
                   <h3 className="font-mono text-xs uppercase tracking-[0.16em] text-primary">
@@ -299,47 +335,51 @@ export default function Home() {
           eyebrow="Selected case studies"
           title="Sanitized engineering narratives prepared for deeper public pages."
           intro="Each preview follows a problem, responsibility, and impact structure while keeping confidential details out of the public surface. Detail pages can later expand constraints, trade-offs, and verified outcomes."
-          className="border-y border-border/55 bg-card/20"
+          className="border-y border-border/55 bg-card/15"
         >
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
-            {caseStudies.map((study) => (
-              <AnimatedSection key={study.slug}>
-                <TechnicalCard title={study.title} eyebrow={study.domain}>
-                  <div className="mb-5">
-                    <StatusBadge>{study.confidentialityLevel.replace("-", " ")}</StatusBadge>
-                  </div>
-                  <dl className="space-y-4">
-                    <div>
-                      <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                        Problem
-                      </dt>
-                      <dd className="mt-2 text-sm leading-6 text-foreground">
-                        {study.sections.problem.body}
-                      </dd>
+          <div className="mt-9 grid gap-5 lg:grid-cols-3">
+            {caseStudies.map((study) => {
+              const displayCopy = caseStudyDisplayCopy[study.slug];
+
+              return (
+                <AnimatedSection key={study.slug}>
+                  <TechnicalCard title={study.title} eyebrow={study.domain}>
+                    <div className="mb-5">
+                      <StatusBadge>{study.confidentialityLevel.replace("-", " ")}</StatusBadge>
                     </div>
-                    <div>
-                      <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                        Responsibility
-                      </dt>
-                      <dd className="mt-2 text-sm leading-6 text-foreground">
-                        {study.sections.approach.body}
-                      </dd>
+                    <dl className="space-y-4">
+                      <div>
+                        <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                          Problem
+                        </dt>
+                        <dd className="mt-2 text-sm leading-6 text-foreground">
+                          {displayCopy.problem}
+                        </dd>
+                      </div>
+                      <div>
+                        <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                          Responsibility
+                        </dt>
+                        <dd className="mt-2 text-sm leading-6 text-foreground">
+                          {displayCopy.responsibility}
+                        </dd>
+                      </div>
+                      <div>
+                        <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                          Impact
+                        </dt>
+                        <dd className="mt-2 text-sm leading-6 text-foreground">
+                          {displayCopy.impact}
+                        </dd>
+                      </div>
+                    </dl>
+                    <div className="mt-5">
+                      <TagList items={study.tags} />
                     </div>
-                    <div>
-                      <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                        Impact
-                      </dt>
-                      <dd className="mt-2 text-sm leading-6 text-foreground">
-                        {study.sections.outcome.body}
-                      </dd>
-                    </div>
-                  </dl>
-                  <div className="mt-5">
-                    <TagList items={study.tags} />
-                  </div>
-                </TechnicalCard>
-              </AnimatedSection>
-            ))}
+                  </TechnicalCard>
+                </AnimatedSection>
+              );
+            })}
           </div>
         </SectionShell>
 
@@ -349,10 +389,10 @@ export default function Home() {
           title="A scalable timeline for quality engineering work."
           intro="The current public version keeps employer and client details confidential while still showing the shape of the work: automation design, risk analysis, release confidence, and team collaboration."
         >
-          <div className="mt-10 space-y-6">
+          <div className="mt-9 space-y-5">
             {experienceItems.map((item) => (
               <AnimatedSection key={item.slug}>
-                <article className="grid gap-5 rounded-lg border border-border/75 bg-card/50 p-5 sm:p-6 lg:grid-cols-[14rem_minmax(0,1fr)] lg:p-7">
+                <article className="grid gap-5 rounded-lg border border-border/75 bg-card/45 p-5 sm:p-6 lg:grid-cols-[14rem_minmax(0,1fr)] lg:p-7">
                   <div>
                     <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">
                       {item.dateRange?.start ?? "Date range pending"}
@@ -388,9 +428,9 @@ export default function Home() {
           eyebrow="Speaking and community"
           title="Public technical communication with room for future talks and articles."
           intro="This section starts with confirmed community presence and planned content structures. It can grow into a speaking archive without changing the section pattern."
-          className="border-y border-border/55 bg-card/20"
+          className="border-y border-border/55 bg-card/15"
         >
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {communicationEntries.map((entry) => (
               <AnimatedSection key={entry.slug}>
                 <TechnicalCard
@@ -420,39 +460,40 @@ export default function Home() {
           title="Open to selected QA leadership, automation, mentoring, and speaking conversations."
           intro="Use the channels below for practical conversations around quality strategy, automation architecture, AI-assisted QA workflows, and community work."
         >
-          <AnimatedSection className="mt-10">
-            <address className="not-italic">
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-                {primaryContactLinks.map((link) => {
-                  if (!link) return null;
-                  const Icon = contactIconMap[link.label as keyof typeof contactIconMap] ?? Mail;
+          <AnimatedSection className="mt-9">
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {primaryContactLinks.map((link) => {
+                if (!link) return null;
+                const Icon = contactIconMap[link.label as keyof typeof contactIconMap] ?? Mail;
+                const description =
+                  contactDisplayCopy[link.label as keyof typeof contactDisplayCopy] ??
+                  link.description;
 
-                  return (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      className="group rounded-lg border border-border/75 bg-card/55 p-5 transition-colors hover:border-primary/45 hover:bg-card/75 focus-visible:ring-2 focus-visible:ring-ring"
-                    >
-                      <Icon aria-hidden="true" className="size-5 text-primary" />
-                      <span className="mt-4 block font-semibold text-foreground">{link.label}</span>
-                      <span className="mt-2 block text-sm leading-6 text-muted-foreground">
-                        {link.description}
-                      </span>
-                    </a>
-                  );
-                })}
-                <a
-                  href="/files/mateusz-koczorowski-cv.pdf"
-                  className="group rounded-lg border border-border/75 bg-card/55 p-5 transition-colors hover:border-primary/45 hover:bg-card/75 focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  <ArrowDownToLine aria-hidden="true" className="size-5 text-primary" />
-                  <span className="mt-4 block font-semibold text-foreground">Download CV</span>
-                  <span className="mt-2 block text-sm leading-6 text-muted-foreground">
-                    CV download endpoint prepared for the approved public PDF.
-                  </span>
-                </a>
-              </div>
-            </address>
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="group rounded-lg border border-border/75 bg-card/45 p-5 transition-colors hover:border-primary/45 hover:bg-card/65 focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    <Icon aria-hidden="true" className="size-5 text-primary" />
+                    <span className="mt-4 block font-semibold text-foreground">{link.label}</span>
+                    <span className="mt-2 block text-sm leading-6 text-muted-foreground">
+                      {description}
+                    </span>
+                  </a>
+                );
+              })}
+              <a
+                href="/files/mateusz-koczorowski-cv.pdf"
+                className="group rounded-lg border border-border/75 bg-card/45 p-5 transition-colors hover:border-primary/45 hover:bg-card/65 focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <ArrowDownToLine aria-hidden="true" className="size-5 text-primary" />
+                <span className="mt-4 block font-semibold text-foreground">Download CV</span>
+                <span className="mt-2 block text-sm leading-6 text-muted-foreground">
+                  CV download endpoint prepared for the approved public PDF.
+                </span>
+              </a>
+            </div>
           </AnimatedSection>
         </SectionShell>
       </main>
