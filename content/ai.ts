@@ -24,15 +24,15 @@ export const aiQaNarrative = {
   eyebrow: "AI in QA",
   title: "AI-assisted QA workflows built around orchestration, not replacement.",
   intro:
-    "My AI work started around 2023 with ChatGPT and GitHub Copilot as support for test ideas, debugging notes, and code assistance. It has since evolved into a deliberate QA engineering workflow: specialized agents, reusable skills, MCP integrations, and repeatable processes that move from ticket analysis to test planning, automation, review, and defect reporting.",
+    "My AI work has evolved into a deliberate QA engineering workflow: specialized agents, reusable skills, MCP integrations, and reviewed processes that connect ticket analysis, planning, automation, and review.",
   paragraphs: [
-    "The goal is not to hand testing over to a model. The value is orchestration: using AI to prepare structure, surface blind spots, accelerate routine analysis, and keep a human engineer in control of product risk, architecture, and release confidence.",
-    "Today my primary AI engineering tools are OpenAI Codex and Claude Code. I use them to design modular workflows for Playwright and Cypress automation, Jira-driven test generation, structured reviews, application exploration, and documentation that stays connected to the actual delivery context.",
+    "The goal is not to hand testing over to a model. The value is orchestration: using AI to prepare structure, surface blind spots, and accelerate routine analysis while a human engineer owns risk, architecture, and release confidence.",
+    "I use OpenAI Codex and Claude Code for modular Playwright and Cypress workflows, Jira-driven planning, structured reviews, application exploration, and documentation tied to delivery context.",
   ],
   highlights: [
-    "AI-augmented QA workflows with human review at every decision point.",
-    "Reusable skill-based systems for automation, planning, reporting, and review.",
-    "Specialized agents and MCP integrations used to connect tickets, code, browsers, and design context.",
+    "Human review stays present at every quality decision.",
+    "Reusable skills support automation, planning, reporting, and review.",
+    "MCP integrations connect tickets, code, browsers, and design context.",
   ],
   tags: ["OpenAI Codex", "Claude Code", "AI agents", "MCP", "workflow orchestration"],
 } as const;
@@ -42,11 +42,11 @@ export const aiQaWorkflowAreas = [
     slug: "ai-assisted-test-automation",
     title: "AI-assisted Test Automation",
     summary:
-      "Automation workflows start from product context, not from a blank spec. A ticket, existing test architecture, and observed application behavior can become a reviewed Playwright or Cypress implementation plan before generated code is accepted.",
+      "Automation starts from product context: tickets, existing framework conventions, observed behavior, and reviewed Playwright or Cypress implementation plans.",
     examples: [
-      "Generate Playwright and Cypress test structures from acceptance criteria and existing framework conventions.",
-      "Use reusable automation skills to keep selectors, fixtures, data setup, and assertions aligned with the project style.",
-      "Delegate focused automation work to specialized agents, then review generated tests against product risk, evidence, and maintainability.",
+      "Draft test structures from acceptance criteria and project conventions.",
+      "Keep selectors, fixtures, data setup, and assertions aligned with the framework style.",
+      "Review generated tests against risk, evidence, and maintainability.",
     ],
     outcomes: [
       "Faster first drafts for regression checks.",
@@ -59,11 +59,11 @@ export const aiQaWorkflowAreas = [
     slug: "ai-assisted-test-planning",
     title: "AI-assisted Test Planning",
     summary:
-      "Planning becomes stronger when AI helps structure the raw material: tickets, acceptance criteria, risk areas, regression history, and unclear assumptions. The engineer still decides priority and scope.",
+      "Planning becomes stronger when AI structures tickets, acceptance criteria, risk areas, regression history, and unclear assumptions before the engineer decides priority and scope.",
     examples: [
-      "Analyze feature tickets into test conditions, open questions, and risk-based scenario groups.",
-      "Draft regression plans that connect new behavior with existing high-risk workflows.",
-      "Generate scenario candidates for manual, exploratory, API, and end-to-end testing layers.",
+      "Turn tickets into test conditions, open questions, and scenario groups.",
+      "Connect new behavior with existing high-risk workflows.",
+      "Draft candidates for manual, exploratory, API, and end-to-end coverage.",
     ],
     outcomes: [
       "Clearer test scope before implementation.",
@@ -76,11 +76,11 @@ export const aiQaWorkflowAreas = [
     slug: "ai-assisted-review-workflows",
     title: "AI-assisted Review Workflows",
     summary:
-      "Review workflows use AI as structured second-pass support: checking test intent, assertion quality, maintainability, missing negative paths, and alignment with the original ticket.",
+      "Review workflows use AI as structured second-pass support for test intent, assertion quality, maintainability, negative paths, and ticket alignment.",
     examples: [
-      "Run reusable review skills against generated or hand-written automation before merging.",
-      "Validate whether scenarios still match the feature risk instead of only checking syntax.",
-      "Use exploratory assistance to compare expected behavior, application state, and observed failures.",
+      "Run reusable review skills against generated or hand-written automation.",
+      "Check whether scenarios still match the feature risk.",
+      "Compare expected behavior, application state, and observed failures.",
     ],
     outcomes: [
       "Cleaner automation before code review.",
@@ -130,7 +130,7 @@ export const aiMcpIntegrations = [
     slug: "atlassian-mcp",
     title: "Atlassian MCP",
     summary:
-      "Ticket systems become part of the QA workflow instead of a separate source to copy from. Jira context can drive analysis, planning, automation scope, and defect reporting.",
+      "Jira context can drive analysis, planning, automation scope, and defect reporting without constant manual copying.",
     workflowUse: [
       "Analyze Jira tickets into risks, questions, test scenarios, and acceptance criteria gaps.",
       "Connect defect reports back to ticket context with consistent structure.",
@@ -142,7 +142,7 @@ export const aiMcpIntegrations = [
     slug: "playwright-mcp",
     title: "Playwright MCP",
     summary:
-      "Live application behavior can be inspected as part of the workflow. This supports UI exploration, scenario validation, and automation design before tests are finalized.",
+      "Live application behavior can be inspected during planning, scenario validation, and automation design.",
     workflowUse: [
       "Explore the application through real browser interactions.",
       "Validate UI paths and scenario assumptions against the running product.",
@@ -154,7 +154,7 @@ export const aiMcpIntegrations = [
     slug: "chrome-devtools-mcp",
     title: "Chrome DevTools MCP",
     summary:
-      "Frontend debugging becomes easier when browser inspection is connected to the QA investigation flow instead of handled as a separate manual step.",
+      "Browser inspection becomes part of QA investigation, from console and network evidence to clearer developer notes.",
     workflowUse: [
       "Inspect console output, network behavior, and frontend state during defect analysis.",
       "Support debugging hypotheses with browser-level evidence.",
@@ -166,7 +166,7 @@ export const aiMcpIntegrations = [
     slug: "figma-mcp",
     title: "Figma MCP",
     summary:
-      "Design context can support testing when it is used to compare intent with implementation. The workflow stays focused on consistency, not pixel-perfect busywork.",
+      "Design context supports testing when it helps compare intended states, layouts, and interaction paths with implementation.",
     workflowUse: [
       "Align UI validation with approved design intent and component behavior.",
       "Check consistency across states, layouts, and important interaction paths.",

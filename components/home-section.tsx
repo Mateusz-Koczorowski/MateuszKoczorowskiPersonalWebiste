@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 
 import { AnimatedSection } from "@/components/animated-section";
 import { cn } from "@/lib/utils";
@@ -9,6 +9,7 @@ type SectionShellProps = PropsWithChildren<{
   eyebrow: string;
   title: string;
   intro: string;
+  aside?: ReactNode;
   className?: string;
   headerClassName?: string;
 }>;
@@ -18,6 +19,7 @@ export function SectionShell({
   eyebrow,
   title,
   intro,
+  aside,
   className,
   headerClassName,
   children,
@@ -28,19 +30,29 @@ export function SectionShell({
     <section
       id={id}
       aria-labelledby={headingId}
-      className={cn("relative px-6 py-14 sm:px-8 sm:py-20 lg:px-10 lg:py-24", className)}
+      className={cn("relative px-6 py-14 sm:px-8 sm:py-[4.5rem] lg:px-10 lg:py-20", className)}
     >
       <div className="mx-auto w-full max-w-7xl">
-        <AnimatedSection className={cn("max-w-[46rem]", headerClassName)}>
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">{eyebrow}</p>
-          <h2
-            id={headingId}
-            className="mt-4 text-[clamp(1.9rem,4vw,3.1rem)] font-semibold leading-[1.12] text-foreground"
+        <div
+          className={cn(
+            aside &&
+              "grid items-start gap-6 lg:grid-cols-[minmax(0,0.58fr)_minmax(20rem,0.42fr)] lg:gap-9 xl:gap-10",
+          )}
+        >
+          <AnimatedSection
+            className={cn("max-w-[44rem]", aside && "lg:max-w-none", headerClassName)}
           >
-            {title}
-          </h2>
-          <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground">{intro}</p>
-        </AnimatedSection>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">{eyebrow}</p>
+            <h2
+              id={headingId}
+              className="mt-4 text-[clamp(1.85rem,3.5vw,3rem)] font-semibold leading-[1.12] text-foreground"
+            >
+              {title}
+            </h2>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">{intro}</p>
+          </AnimatedSection>
+          {aside ? <AnimatedSection className="lg:pt-7">{aside}</AnimatedSection> : null}
+        </div>
         {children}
       </div>
     </section>

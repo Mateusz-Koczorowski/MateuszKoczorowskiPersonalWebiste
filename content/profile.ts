@@ -17,15 +17,14 @@ export const profile = {
     "I work at the intersection of test automation, exploratory testing, delivery risk, and engineering process improvement. My focus is building testing systems that stay maintainable in CI/CD and help teams make better release decisions.",
   about: {
     intro:
-      "My QA work is based on technical ownership: understanding the product architecture, identifying failure modes early, and turning testing into an engineering feedback system rather than a final checklist.",
+      "I treat QA as technical ownership: understanding architecture, finding risk early, and turning testing into useful engineering feedback.",
     paragraphs: [
-      "I design automation around product risk, with attention to test data, environments, maintainability, and the cost of false confidence. I prefer practical coverage over broad but fragile suites, and I keep manual, exploratory, API, integration, and end-to-end testing connected instead of treating them as separate tracks.",
-      "I use AI-assisted workflows in a controlled way: for test design support, debugging hypotheses, documentation structure, and exploratory analysis. The useful part is not speed alone. It is review discipline, source verification, and the ability to turn model output into evidence a team can trust.",
+      "My work connects automation architecture, exploratory testing, API and integration validation, and release confidence. I use AI-assisted workflows for test design, debugging hypotheses, documentation structure, and review support, with human judgment kept at the center.",
     ],
     principles: [
-      "Quality ownership starts with clear risk framing and shared engineering decisions.",
-      "Automation should improve feedback quality without becoming a hidden maintenance product.",
-      "Process improvement works best when documentation, metrics, and testing habits stay lightweight and usable.",
+      "Frame quality through product risk, architecture, and release decisions.",
+      "Build automation that is maintainable, observable, and worth trusting.",
+      "Use AI to accelerate thinking while preserving review discipline and evidence.",
     ],
   },
   availability: {

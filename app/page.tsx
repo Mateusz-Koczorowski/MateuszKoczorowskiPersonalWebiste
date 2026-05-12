@@ -26,10 +26,8 @@ import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import {
   aiMcpIntegrations,
-  aiPracticalWorkflowExample,
   aiQaNarrative,
   aiQaWorkflowAreas,
-  aiWorkflowImpact,
   caseStudies,
   contactLinks,
   education,
@@ -38,7 +36,6 @@ import {
   mentoringAreas,
   professionalExperience,
   profile,
-  skills,
   socialLinks,
   speakingEntries,
   writingEntries,
@@ -65,28 +62,10 @@ const contactIconMap = {
   GitHub: Github,
 };
 
-const skillGroupLabels = {
-  automation: "Automation architecture",
-  testing: "Testing practice",
-  strategy: "Quality strategy",
-  ai: "AI-assisted QA",
-  delivery: "Delivery systems",
-  communication: "Communication",
-  tooling: "Quality tooling",
-};
-
-const groupedSkills = skills.reduce(
-  (groups, skill) => {
-    const group = skillGroupLabels[skill.category];
-    groups[group] = [...(groups[group] ?? []), skill];
-    return groups;
-  },
-  {} as Record<string, (typeof skills)[number][]>,
-);
-
 const experienceItems: readonly CompanyExperience[] = professionalExperience;
 const communicationEntries: readonly SpeakingEntry[] = speakingEntries;
 const writingItems: readonly WritingEntry[] = writingEntries;
+const homepageAiWorkflowAreas = aiQaWorkflowAreas.slice(0, 3);
 
 function formatDateRange(dateRange?: { start: string; end?: string; displayLabel?: string }) {
   if (!dateRange) return "Date range pending";
@@ -140,7 +119,7 @@ export default function Home() {
                     fill
                     priority
                     sizes="(min-width: 1024px) 40vw, (min-width: 768px) 50vw, 100vw"
-                    className="object-cover saturate-[0.92]"
+                    className="object-cover object-[50%_18%] saturate-[0.92] lg:object-[50%_12%]"
                   />
                   <div
                     aria-hidden="true"
@@ -225,33 +204,30 @@ export default function Home() {
           title="Engineering quality as a shared system, not a late-stage inspection."
           intro={profile.about.intro}
           className="border-t border-border/55 bg-background/20"
-        >
-          <div className="mt-9 grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(18rem,0.55fr)] lg:gap-8">
-            <AnimatedSection>
-              <div className="max-w-3xl space-y-5 text-base leading-8 text-muted-foreground">
-                <p>{profile.publicBio}</p>
-                {profile.about.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+          aside={
+            <aside className="rounded-lg border border-border/75 bg-card/40 p-5 sm:p-6">
+              <h3 className="text-lg font-semibold text-foreground">Working principles</h3>
+              <ul className="mt-5 space-y-4 text-sm leading-7 text-muted-foreground">
+                {profile.about.principles.map((principle) => (
+                  <li key={principle} className="flex gap-3">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-1 size-4 shrink-0 text-primary"
+                    />
+                    <span>{principle}</span>
+                  </li>
                 ))}
-              </div>
-            </AnimatedSection>
-            <AnimatedSection>
-              <aside className="rounded-lg border border-border/75 bg-card/40 p-5 sm:p-6">
-                <h3 className="text-lg font-semibold text-foreground">Working principles</h3>
-                <ul className="mt-5 space-y-4 text-sm leading-7 text-muted-foreground">
-                  {profile.about.principles.map((principle) => (
-                    <li key={principle} className="flex gap-3">
-                      <CheckCircle2
-                        aria-hidden="true"
-                        className="mt-1 size-4 shrink-0 text-primary"
-                      />
-                      <span>{principle}</span>
-                    </li>
-                  ))}
-                </ul>
-              </aside>
-            </AnimatedSection>
-          </div>
+              </ul>
+            </aside>
+          }
+        >
+          <AnimatedSection className="mt-7 max-w-[44rem] lg:mt-8">
+            <div className="space-y-5 text-base leading-7 text-muted-foreground">
+              {profile.about.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          </AnimatedSection>
         </SectionShell>
 
         <SectionShell
@@ -276,28 +252,6 @@ export default function Home() {
               );
             })}
           </div>
-
-          <AnimatedSection className="mt-8">
-            <div className="grid gap-6 rounded-lg border border-border/70 bg-background/30 p-5 sm:p-6 md:grid-cols-2 lg:grid-cols-3">
-              {Object.entries(groupedSkills).map(([group, groupSkills]) => (
-                <div key={group}>
-                  <h3 className="font-mono text-xs uppercase tracking-[0.16em] text-primary">
-                    {group}
-                  </h3>
-                  <ul className="mt-4 space-y-4">
-                    {groupSkills.map((skill) => (
-                      <li key={skill.name}>
-                        <p className="font-medium text-foreground">{skill.name}</p>
-                        <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                          {skill.summary}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </AnimatedSection>
         </SectionShell>
 
         <SectionShell
@@ -354,8 +308,8 @@ export default function Home() {
         <SectionShell
           id="experience"
           eyebrow="Experience"
-          title="Company context, project contributions, and public-safe impact."
-          intro="Experience is grouped by company context and project contribution so the progression from operational QA foundations to senior automation and quality ownership stays easy to scan."
+          title="Selected projects and engineering contributions."
+          intro="A concise view of project work, automation ownership, quality strategy, and the path from operational QA foundations to senior engineering contribution."
         >
           <div className="mt-9 space-y-6">
             {experienceItems.map((company) => (
@@ -543,38 +497,36 @@ export default function Home() {
           title={aiQaNarrative.title}
           intro={aiQaNarrative.intro}
           className="border-y border-border/55 bg-card/15"
-        >
-          <div className="mt-9 grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(18rem,0.55fr)]">
-            <AnimatedSection>
-              <div className="space-y-5 text-base leading-8 text-muted-foreground">
-                {aiQaNarrative.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+          aside={
+            <aside className="rounded-lg border border-border/75 bg-background/35 p-5 sm:p-6">
+              <h3 className="text-lg font-semibold text-foreground">Workflow principles</h3>
+              <ul className="mt-5 space-y-4 text-sm leading-7 text-muted-foreground">
+                {aiQaNarrative.highlights.map((highlight) => (
+                  <li key={highlight} className="flex gap-3">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-1 size-4 shrink-0 text-primary"
+                    />
+                    <span>{highlight}</span>
+                  </li>
                 ))}
+              </ul>
+              <div className="mt-5">
+                <TagList items={aiQaNarrative.tags} />
               </div>
-            </AnimatedSection>
-            <AnimatedSection>
-              <aside className="rounded-lg border border-border/75 bg-background/35 p-5 sm:p-6">
-                <h3 className="text-lg font-semibold text-foreground">Workflow principles</h3>
-                <ul className="mt-5 space-y-4 text-sm leading-7 text-muted-foreground">
-                  {aiQaNarrative.highlights.map((highlight) => (
-                    <li key={highlight} className="flex gap-3">
-                      <CheckCircle2
-                        aria-hidden="true"
-                        className="mt-1 size-4 shrink-0 text-primary"
-                      />
-                      <span>{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-5">
-                  <TagList items={aiQaNarrative.tags} />
-                </div>
-              </aside>
-            </AnimatedSection>
-          </div>
+            </aside>
+          }
+        >
+          <AnimatedSection className="mt-7 max-w-[44rem] lg:mt-8">
+            <div className="space-y-4 text-base leading-7 text-muted-foreground">
+              {aiQaNarrative.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          </AnimatedSection>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {aiQaWorkflowAreas.map((workflow) => (
+          <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {homepageAiWorkflowAreas.map((workflow) => (
               <AnimatedSection key={workflow.slug}>
                 <TechnicalCard title={workflow.title} icon={Bot}>
                   <p className="leading-7 text-muted-foreground">{workflow.summary}</p>
@@ -595,22 +547,6 @@ export default function Home() {
                     </ul>
                   </div>
                   <div className="mt-5">
-                    <h3 className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                      Workflow impact
-                    </h3>
-                    <ul className="mt-3 space-y-2 text-sm leading-6 text-muted-foreground">
-                      {workflow.outcomes.map((item) => (
-                        <li key={item} className="flex gap-2">
-                          <ShieldCheck
-                            aria-hidden="true"
-                            className="mt-1 size-4 shrink-0 text-primary"
-                          />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="mt-5">
                     <TagList items={workflow.tags} />
                   </div>
                 </TechnicalCard>
@@ -618,20 +554,18 @@ export default function Home() {
             ))}
           </div>
 
-          <AnimatedSection className="mt-10">
+          <AnimatedSection className="mt-9">
             <div className="rounded-lg border border-border/75 bg-background/35 p-5 sm:p-6 lg:p-7">
               <div className="max-w-3xl">
                 <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">
                   MCP integrations
                 </p>
                 <h3 className="mt-3 text-2xl font-semibold leading-tight text-foreground">
-                  Connecting tickets, browsers, design context, and debugging evidence.
+                  Connecting tickets, browsers, design context, and evidence.
                 </h3>
-                <p className="mt-4 text-base leading-8 text-muted-foreground">
-                  MCP integrations matter when they reduce context switching. The practical value is
-                  not the connector itself, but the way it lets a QA workflow move from analysis to
-                  application inspection, review, and reporting with less manual copying between
-                  tools.
+                <p className="mt-4 text-base leading-7 text-muted-foreground">
+                  MCP integrations are useful when they reduce context switching and keep QA work
+                  close to real project evidence.
                 </p>
               </div>
               <div className="mt-7 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -644,17 +578,6 @@ export default function Home() {
                     <p className="mt-3 text-sm leading-6 text-muted-foreground">
                       {integration.summary}
                     </p>
-                    <ul className="mt-4 space-y-2 text-sm leading-6 text-muted-foreground">
-                      {integration.workflowUse.map((item) => (
-                        <li key={item} className="flex gap-2">
-                          <CheckCircle2
-                            aria-hidden="true"
-                            className="mt-1 size-4 shrink-0 text-primary"
-                          />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
                     <div className="mt-4">
                       <TagList items={integration.tags} />
                     </div>
@@ -663,70 +586,13 @@ export default function Home() {
               </div>
             </div>
           </AnimatedSection>
-
-          <AnimatedSection className="mt-10">
-            <div className="grid gap-5 lg:grid-cols-[minmax(0,0.9fr)_minmax(18rem,0.55fr)]">
-              <article className="rounded-lg border border-border/75 bg-card/45 p-5 sm:p-6 lg:p-7">
-                <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">
-                  Practical workflow example
-                </p>
-                <h3 className="mt-3 text-2xl font-semibold leading-tight text-foreground">
-                  {aiPracticalWorkflowExample.title}
-                </h3>
-                <p className="mt-4 text-base leading-8 text-muted-foreground">
-                  {aiPracticalWorkflowExample.summary}
-                </p>
-                <ol className="mt-6 grid gap-4">
-                  {aiPracticalWorkflowExample.steps.map((step, index) => (
-                    <li
-                      key={step.label}
-                      className="grid gap-3 rounded-lg border border-border/70 bg-background/30 p-4 sm:grid-cols-[2.75rem_minmax(0,1fr)]"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="flex size-9 items-center justify-center rounded-md border border-primary/35 bg-primary/10 font-mono text-xs text-primary"
-                      >
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <div>
-                        <h4 className="font-semibold text-foreground">{step.label}</h4>
-                        <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                          {step.description}
-                        </p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-                <div className="mt-6">
-                  <TagList items={aiPracticalWorkflowExample.tags} />
-                </div>
-              </article>
-
-              <aside className="rounded-lg border border-border/75 bg-background/35 p-5 sm:p-6 lg:p-7">
-                <h3 className="text-lg font-semibold text-foreground">
-                  What the workflow improves
-                </h3>
-                <ul className="mt-5 space-y-4 text-sm leading-7 text-muted-foreground">
-                  {aiWorkflowImpact.map((impact) => (
-                    <li key={impact} className="flex gap-3">
-                      <ShieldCheck
-                        aria-hidden="true"
-                        className="mt-1 size-4 shrink-0 text-primary"
-                      />
-                      <span>{impact}</span>
-                    </li>
-                  ))}
-                </ul>
-              </aside>
-            </div>
-          </AnimatedSection>
         </SectionShell>
 
         <SectionShell
           id="mentoring-community"
           eyebrow="Mentoring and community"
           title="Knowledge sharing around automation, AI-assisted workflows, and QA growth."
-          intro="Mentoring and community work focus on practical technical growth: better automation decisions, clearer QA communication, recruitment support, and internal learning initiatives."
+          intro="Mentoring and community work focus on practical technical growth: better automation decisions, clearer QA communication, STX Next internal initiatives, AI bootcamp support, and recruitment context."
         >
           <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {mentoringAreas.map((area) => (
@@ -749,7 +615,7 @@ export default function Home() {
           intro="Speaking activity is focused on real quality engineering practice: AI-assisted QA, automation judgment, review discipline, and workflow improvements that teams can actually use."
           className="border-y border-border/55 bg-card/15"
         >
-          <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-9 grid max-w-3xl gap-5">
             {communicationEntries.map((entry) => (
               <AnimatedSection key={entry.slug}>
                 <TechnicalCard
@@ -849,8 +715,8 @@ export default function Home() {
         <SectionShell
           id="education-languages"
           eyebrow="Education and languages"
-          title="Supporting credentials kept compact and easy to update."
-          intro="A compact view of formal education and language context supporting the technical profile without competing with project evidence."
+          title="Education & Languages"
+          intro="Formal background and language context, kept compact so the project evidence stays in focus."
         >
           <AnimatedSection className="mt-9">
             <div className="grid gap-5 lg:grid-cols-2">

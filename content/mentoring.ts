@@ -53,7 +53,7 @@ export const mentoringAreas = [
     activityType: "workshop-support",
     status: "published",
     summary:
-      "Internal knowledge sharing and consultation around practical AI-assisted QA workflows, including support for AI bootcamp initiatives.",
+      "STX Next internal knowledge sharing and consultation around practical AI-assisted QA workflows, including support for AI bootcamp initiatives.",
     suitableFor: ["QA engineers", "Technical leads", "Internal learning programs"],
     topics: ["AI-assisted QA", "prompt engineering", "workflow optimization"],
     boundaries: [
