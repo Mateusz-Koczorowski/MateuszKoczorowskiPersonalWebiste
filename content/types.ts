@@ -17,6 +17,7 @@ export type DateRange = {
   end?: string;
   isCurrent?: boolean;
   isApproximate?: boolean;
+  displayLabel?: string;
 };
 
 export type SkillLevel = "working" | "advanced" | "lead";
@@ -45,3 +46,12 @@ export type ProjectSection = {
 };
 
 export type LanguageProficiency = "native" | "professional" | "working" | "learning";
+
+export type ProjectDomain =
+  | "SaaS platform"
+  | "Web application"
+  | "QA workflow"
+  | "Software product delivery"
+  | "Add approved domain";
+
+export type ConfidentialityLevel = "public-safe" | "sanitized" | "needs-review";

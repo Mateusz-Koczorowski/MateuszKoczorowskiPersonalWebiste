@@ -10,8 +10,8 @@ Website content is stored as TypeScript objects in `content/`. The current proje
 - `content/navigation.ts` defines active and planned navigation items.
 - `content/expertise.ts` defines focus areas and future expertise detail paths.
 - `content/skills.ts` defines editable technical skill entries.
-- `content/experience.ts` defines professional experience without confidential client or employer details.
-- `content/projects.ts` defines sanitized case study placeholders for future detail pages.
+- `content/experience.ts` defines company-level experience records with nested anonymized project contributions, project responsibilities, tech stack placeholders, challenges, impact notes, tags, and confidentiality notes.
+- `content/projects.ts` defines sanitized case study placeholders for future detail pages and can later reference the project contribution slugs from `content/experience.ts`.
 - `content/speaking.ts` defines talks, workshops, articles, and community sessions.
 - `content/mentoring.ts` defines mentoring topics and boundaries.
 - `content/education.ts` contains education placeholders until public details are approved.
@@ -25,10 +25,22 @@ Website content is stored as TypeScript objects in `content/`. The current proje
 - Keep content concrete, technical, and public-safe.
 - Do not add confidential employer, client, product, repository, environment, or project names without explicit approval.
 - Do not invent metrics, dates, outcomes, seniority claims, certifications, event names, or technologies.
-- Use anonymized case study names based on domains, such as `SaaS platform`, `web application`, or `QA workflow`.
+- Use anonymized company and project labels based on domains, such as `SaaS platform`, `web application`, or `QA workflow`.
 - Keep placeholders marked with `needsDetail`, `needsManualInput`, `needsConfirmation`, or `isPlaceholder`.
 - Prefer short, scannable summaries that can be reused on mobile layouts.
 - Add final routes only when the corresponding pages exist.
+
+## Experience Model
+
+Experience should follow this hierarchy:
+
+- Company or confidential company group
+- Role/title and employment dates
+- Short company/context description
+- Projects worked on under that company
+- Project challenge, responsibilities, tech stack, impact, tags, and confidentiality note
+
+Project names must stay anonymized until public approval exists. Impact copy should stay qualitative or placeholder-based unless a metric is verified and safe to publish.
 
 ## Case Study Template
 

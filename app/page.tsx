@@ -3,10 +3,15 @@ import {
   ArrowRight,
   Bot,
   BriefcaseBusiness,
+  Building2,
+  CalendarRange,
   CheckCircle2,
   FileText,
   FlaskConical,
   Github,
+  GraduationCap,
+  Languages as LanguagesIcon,
+  Layers3,
   Linkedin,
   Mail,
   Mic2,
@@ -23,14 +28,16 @@ import { Button } from "@/components/ui/button";
 import {
   caseStudies,
   contactLinks,
+  education,
   expertiseAreas,
+  languages,
   professionalExperience,
   profile,
   skills,
   socialLinks,
   speakingEntries,
 } from "@/content";
-import type { ExperienceItem } from "@/content/experience";
+import type { CompanyExperience } from "@/content/experience";
 import type { SpeakingEntry } from "@/content/speaking";
 
 const profileImagePath = "/images/profile/profile-photo.jpg";
@@ -71,8 +78,14 @@ const groupedSkills = skills.reduce(
   {} as Record<string, (typeof skills)[number][]>,
 );
 
-const experienceItems: readonly ExperienceItem[] = professionalExperience;
+const experienceItems: readonly CompanyExperience[] = professionalExperience;
 const communicationEntries: readonly SpeakingEntry[] = speakingEntries;
+
+function formatDateRange(dateRange?: { start: string; end?: string; displayLabel?: string }) {
+  if (!dateRange) return "Date range pending";
+  if (dateRange.displayLabel) return dateRange.displayLabel;
+  return [dateRange.start, dateRange.end].filter(Boolean).join(" - ");
+}
 
 const caseStudyDisplayCopy = {
   "quality-strategy-for-saas-platform": {
@@ -386,36 +399,157 @@ export default function Home() {
         <SectionShell
           id="experience"
           eyebrow="Experience"
-          title="A scalable timeline for quality engineering work."
-          intro="The current public version keeps employer and client details confidential while still showing the shape of the work: automation design, risk analysis, release confidence, and team collaboration."
+          title="Company context, project contributions, and public-safe impact."
+          intro="Experience is grouped by the company or client context where the work happened, with anonymized project contributions prepared for future detail pages."
         >
-          <div className="mt-9 space-y-5">
-            {experienceItems.map((item) => (
-              <AnimatedSection key={item.slug}>
-                <article className="grid gap-5 rounded-lg border border-border/75 bg-card/45 p-5 sm:p-6 lg:grid-cols-[14rem_minmax(0,1fr)] lg:p-7">
-                  <div>
-                    <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">
-                      {item.dateRange?.start ?? "Date range pending"}
-                    </p>
-                    <h3 className="mt-3 text-xl font-semibold text-foreground">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                      {item.organizationLabel}
-                    </p>
-                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.domain}</p>
-                  </div>
-                  <div>
-                    <p className="leading-7 text-muted-foreground">{item.summary}</p>
-                    <ul className="mt-5 grid gap-3 md:grid-cols-2">
-                      {item.responsibilities.map((responsibility) => (
-                        <li key={responsibility} className="flex gap-3 text-sm leading-6">
-                          <BriefcaseBusiness
-                            aria-hidden="true"
-                            className="mt-1 size-4 shrink-0 text-primary"
+          <div className="mt-9 space-y-6">
+            {experienceItems.map((company) => (
+              <AnimatedSection key={company.slug}>
+                <article className="rounded-lg border border-border/75 bg-card/45 p-5 sm:p-6 lg:p-7">
+                  <div className="grid gap-5 lg:grid-cols-[16rem_minmax(0,1fr)]">
+                    <div>
+                      <div className="flex items-start gap-3">
+                        {company.logoPath ? (
+                          <Image
+                            src={company.logoPath}
+                            alt=""
+                            width={40}
+                            height={40}
+                            className="rounded-md border border-border/75 bg-background/45 object-contain p-1.5 opacity-80"
                           />
-                          <span>{responsibility}</span>
-                        </li>
+                        ) : (
+                          <span className="flex size-10 shrink-0 items-center justify-center rounded-md border border-border/75 bg-background/40">
+                            <Building2 aria-hidden="true" className="size-5 text-primary" />
+                          </span>
+                        )}
+                        <div>
+                          <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">
+                            {formatDateRange(company.employmentDates)}
+                          </p>
+                          <h3 className="mt-3 text-xl font-semibold text-foreground">
+                            {company.companyName}
+                          </h3>
+                        </div>
+                      </div>
+                      <p className="mt-4 text-sm font-medium text-foreground">
+                        {company.roleTitle}
+                      </p>
+                      <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                        {company.contextDescription}
+                      </p>
+                    </div>
+
+                    <div className="space-y-4">
+                      {company.projects.map((project) => (
+                        <details
+                          key={project.slug}
+                          className="group rounded-lg border border-border/70 bg-background/25 p-4 transition-colors open:bg-background/35 sm:p-5"
+                        >
+                          <summary className="cursor-pointer list-none focus-visible:ring-2 focus-visible:ring-ring">
+                            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                              <div>
+                                <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                                  {project.domain}
+                                </p>
+                                <h4 className="mt-2 text-lg font-semibold leading-7 text-foreground">
+                                  {project.anonymizedName}
+                                </h4>
+                                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                                  {project.summary}
+                                </p>
+                              </div>
+                              <div className="flex shrink-0 flex-wrap gap-2 sm:justify-end">
+                                <StatusBadge>
+                                  {project.confidentialityLevel.replace("-", " ")}
+                                </StatusBadge>
+                                <span className="inline-flex rounded-md border border-border/70 bg-card/45 px-2.5 py-1 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
+                                  Details
+                                </span>
+                              </div>
+                            </div>
+                          </summary>
+
+                          <div className="mt-5 grid gap-5 border-t border-border/65 pt-5 lg:grid-cols-[minmax(0,0.9fr)_minmax(16rem,0.55fr)]">
+                            <div className="space-y-5">
+                              <dl className="grid gap-4 sm:grid-cols-2">
+                                <div>
+                                  <dt className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                                    <CalendarRange aria-hidden="true" className="size-4" />
+                                    Duration
+                                  </dt>
+                                  <dd className="mt-2 text-sm leading-6 text-foreground">
+                                    {formatDateRange(project.duration)}
+                                  </dd>
+                                </div>
+                                <div>
+                                  <dt className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                                    <BriefcaseBusiness aria-hidden="true" className="size-4" />
+                                    Role
+                                  </dt>
+                                  <dd className="mt-2 text-sm leading-6 text-foreground">
+                                    {project.roleInProject}
+                                  </dd>
+                                </div>
+                              </dl>
+
+                              <div>
+                                <h5 className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                                  Challenge
+                                </h5>
+                                <p className="mt-2 text-sm leading-6 text-foreground">
+                                  {project.challenge}
+                                </p>
+                              </div>
+
+                              <div>
+                                <h5 className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                                  Responsibilities
+                                </h5>
+                                <ul className="mt-3 grid gap-2">
+                                  {project.responsibilities.map((responsibility) => (
+                                    <li
+                                      key={responsibility}
+                                      className="flex gap-3 text-sm leading-6 text-muted-foreground"
+                                    >
+                                      <Layers3
+                                        aria-hidden="true"
+                                        className="mt-1 size-4 shrink-0 text-primary"
+                                      />
+                                      <span>{responsibility}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+
+                            <aside className="space-y-5">
+                              <div>
+                                <h5 className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                                  Tech stack
+                                </h5>
+                                <div className="mt-3">
+                                  <TagList items={project.techStack} />
+                                </div>
+                              </div>
+                              <div>
+                                <h5 className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                                  Impact
+                                </h5>
+                                <p className="mt-2 text-sm leading-6 text-foreground">
+                                  {project.impact}
+                                </p>
+                              </div>
+                              {project.confidentialityNote ? (
+                                <p className="border-l border-primary/45 pl-4 text-sm leading-6 text-muted-foreground">
+                                  {project.confidentialityNote}
+                                </p>
+                              ) : null}
+                              <TagList items={project.tags} />
+                            </aside>
+                          </div>
+                        </details>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 </article>
               </AnimatedSection>
@@ -452,6 +586,60 @@ export default function Home() {
               </AnimatedSection>
             ))}
           </div>
+        </SectionShell>
+
+        <SectionShell
+          id="education-languages"
+          eyebrow="Education and languages"
+          title="Supporting credentials kept compact and easy to update."
+          intro="This section is intentionally concise until final public education details and language labels are confirmed."
+        >
+          <AnimatedSection className="mt-9">
+            <div className="grid gap-5 lg:grid-cols-2">
+              <TechnicalCard title="Education" icon={GraduationCap}>
+                <ul className="space-y-4">
+                  {education.map((item) => (
+                    <li key={item.slug}>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <p className="font-semibold text-foreground">{item.credential}</p>
+                        <StatusBadge>{item.status.replace("-", " ")}</StatusBadge>
+                      </div>
+                      <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                        {item.institution}
+                        {item.field ? ` / ${item.field}` : ""}
+                      </p>
+                      {item.notes ? (
+                        <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                          {item.notes}
+                        </p>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+              </TechnicalCard>
+
+              <TechnicalCard title="Languages" icon={LanguagesIcon}>
+                <ul className="grid gap-3 sm:grid-cols-2">
+                  {languages.map((language) => (
+                    <li
+                      key={language.name}
+                      className="rounded-md border border-border/70 bg-background/35 p-4"
+                    >
+                      <p className="font-semibold text-foreground">{language.name}</p>
+                      <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                        {language.publicLabel}
+                      </p>
+                      {language.needsConfirmation ? (
+                        <p className="mt-2 font-mono text-xs uppercase tracking-[0.14em] text-primary">
+                          Needs confirmation
+                        </p>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+              </TechnicalCard>
+            </div>
+          </AnimatedSection>
         </SectionShell>
 
         <SectionShell

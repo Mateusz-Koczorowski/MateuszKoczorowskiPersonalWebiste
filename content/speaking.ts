@@ -5,6 +5,8 @@ export type SpeakingEntry = {
   title: string;
   format: "talk" | "workshop" | "article" | "community-session";
   status: ContentStatus;
+  eventName?: string;
+  date?: string;
   audience: string;
   summary: string;
   topics: string[];

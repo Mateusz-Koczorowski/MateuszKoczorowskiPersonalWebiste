@@ -1,4 +1,4 @@
-import type { ContentStatus, ProjectSection } from "./types";
+import type { ConfidentialityLevel, ContentStatus, ProjectSection } from "./types";
 
 export type CaseStudy = {
   slug: string;
@@ -6,7 +6,7 @@ export type CaseStudy = {
   domain: string;
   status: ContentStatus;
   summary: string;
-  confidentialityLevel: "public-safe" | "sanitized" | "needs-review";
+  confidentialityLevel: ConfidentialityLevel;
   sections: {
     problem: ProjectSection;
     constraints: ProjectSection;
