@@ -1,16 +1,15 @@
-import { ArrowDownToLine, ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Linkedin, Mail } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
 import { AnimatedSection } from "@/components/animated-section";
 import { Button } from "@/components/ui/button";
-import { contactLinks, profile } from "@/content";
+import { contactLinks, profile, socialLinks } from "@/content";
 
 const profileImagePath = "/images/profile/profile-photo.jpg";
 
-const heroStatement =
-  "Senior quality engineering for teams that need reliable test automation, practical quality strategy, and human-reviewed AI-assisted QA workflows.";
+const heroStatement = profile.positioning;
 
 export const metadata: Metadata = {
   title: "Hero Design Sandbox",
@@ -24,6 +23,7 @@ export const metadata: Metadata = {
 
 export default function HeroDesignSandboxPage() {
   const contactHref = contactLinks[0]?.href ?? "/contact";
+  const linkedin = socialLinks.find((link) => link.label === "LinkedIn");
 
   return (
     <main id="main-content" className="min-h-screen overflow-hidden bg-background/35">
@@ -120,9 +120,9 @@ export default function HeroDesignSandboxPage() {
                 variant="secondary"
                 className="min-h-12 w-full px-5 text-sm sm:w-auto"
               >
-                <a href="/files/mateusz-koczorowski-cv.pdf">
-                  Download CV
-                  <ArrowDownToLine aria-hidden="true" className="size-4" />
+                <a href={linkedin?.href ?? "/#contact"} target="_blank" rel="noopener noreferrer">
+                  LinkedIn
+                  <Linkedin aria-hidden="true" className="size-4" />
                 </a>
               </Button>
               <Button asChild variant="ghost" className="min-h-12 w-full px-4 text-sm sm:w-auto">

@@ -14,37 +14,64 @@ export type MentoringArea = {
 
 export const mentoringAreas = [
   {
-    slug: "qa-career-growth",
-    title: "QA career growth",
-    activityType: "career-mentoring",
-    status: "planned",
+    slug: "automation-mentoring",
+    title: "Automation Testing Mentoring",
+    activityType: "technical-review",
+    status: "published",
     summary:
-      "Support for QA engineers who want to move toward stronger technical judgment, automation ownership, and clearer communication.",
+      "Support for QA engineers improving Cypress, Playwright, test architecture, maintainability, and practical automation ownership.",
     suitableFor: [
       "QA engineers",
       "Automation engineers",
       "Engineers moving into quality-focused roles",
     ],
-    topics: ["technical judgment", "automation ownership", "communication"],
+    topics: ["automation architecture", "test maintainability", "technical judgment"],
     boundaries: [
       "Mentoring content should stay educational and should not disclose employer-specific processes.",
-      "Add availability and format only when they are confirmed.",
+      "Proprietary code and internal project details are not reviewed publicly.",
     ],
-    needsManualInput: ["Availability", "Format", "Public-safe examples"],
+    needsManualInput: ["Availability", "Preferred mentoring format"],
   },
   {
-    slug: "automation-review",
-    title: "Automation review",
+    slug: "qa-recruitment-support",
+    title: "QA Recruitment Support",
     activityType: "technical-review",
-    status: "planned",
+    status: "published",
     summary:
-      "Guidance on improving test structure, maintainability, and feedback value without treating automation as a goal by itself.",
-    suitableFor: ["QA leads", "Automation owners", "Product engineering teams"],
-    topics: ["test structure", "maintainability", "feedback value"],
+      "Technical recruitment support for QA engineering roles, including practical skill assessment and engineering-focused discussion.",
+    suitableFor: ["QA teams", "Hiring teams", "Engineering organizations"],
+    topics: ["technical recruitment", "QA assessment", "automation skill review"],
     boundaries: [
-      "Avoid reviewing proprietary code publicly.",
-      "Use sanitized examples or open-source examples for future content.",
+      "Candidate and company details remain confidential.",
+      "Public content should describe the contribution pattern, not hiring decisions.",
     ],
-    needsManualInput: ["Review format", "Availability", "Example material"],
+    needsManualInput: ["Approved public wording for recruitment involvement"],
+  },
+  {
+    slug: "ai-qa-knowledge-sharing",
+    title: "AI-focused QA Knowledge Sharing",
+    activityType: "workshop-support",
+    status: "published",
+    summary:
+      "Internal knowledge sharing and consultation around practical AI-assisted QA workflows, including support for AI bootcamp initiatives.",
+    suitableFor: ["QA engineers", "Technical leads", "Internal learning programs"],
+    topics: ["AI-assisted QA", "prompt engineering", "workflow optimization"],
+    boundaries: [
+      "AI examples must be reviewed for accuracy and confidentiality.",
+      "Public materials should use sanitized or synthetic examples.",
+    ],
+    needsManualInput: ["Approved public references to internal AI bootcamp materials"],
+  },
+  {
+    slug: "talent-navigator",
+    title: "Talent Navigator Participation",
+    activityType: "career-mentoring",
+    status: "published",
+    summary:
+      "Participation in a high-potential development initiative focused on leadership, growth, collaboration, and broader organizational impact.",
+    suitableFor: ["Engineering organizations", "Leadership development programs"],
+    topics: ["leadership growth", "collaboration", "organizational impact"],
+    boundaries: ["Internal program details should remain high-level unless explicitly approved."],
+    needsManualInput: ["Approved date range or cohort details"],
   },
 ] as const satisfies readonly MentoringArea[];

@@ -10,13 +10,14 @@ Website content is stored as TypeScript objects in `content/`. The current proje
 - `content/navigation.ts` defines active and planned navigation items.
 - `content/expertise.ts` defines focus areas and future expertise detail paths.
 - `content/skills.ts` defines editable technical skill entries.
-- `content/experience.ts` defines company-level experience records with nested anonymized project contributions, project responsibilities, tech stack placeholders, challenges, impact notes, tags, and confidentiality notes.
-- `content/projects.ts` defines sanitized case study placeholders for future detail pages and can later reference the project contribution slugs from `content/experience.ts`.
+- `content/experience.ts` defines company-level experience records with nested anonymized project contributions, project responsibilities, tech stacks, challenges, impact notes, tags, and confidentiality notes.
+- `content/projects.ts` defines sanitized case study previews for future detail pages and can later reference the project contribution slugs from `content/experience.ts`.
 - `content/speaking.ts` defines talks, workshops, articles, and community sessions.
+- `content/writing.ts` defines technical articles, publication references, and article links.
 - `content/mentoring.ts` defines mentoring topics and boundaries.
-- `content/education.ts` contains education placeholders until public details are approved.
-- `content/contact.ts` contains contact and social links, currently with placeholder URLs.
-- `content/languages.ts` contains language entries that need confirmation.
+- `content/education.ts` contains public education details.
+- `content/contact.ts` contains contact and social links.
+- `content/languages.ts` contains language entries.
 - `content/types.ts` contains shared content types.
 - `content/index.ts` re-exports the content model for future pages and components.
 
@@ -26,7 +27,7 @@ Website content is stored as TypeScript objects in `content/`. The current proje
 - Do not add confidential employer, client, product, repository, environment, or project names without explicit approval.
 - Do not invent metrics, dates, outcomes, seniority claims, certifications, event names, or technologies.
 - Use anonymized company and project labels based on domains, such as `SaaS platform`, `web application`, or `QA workflow`.
-- Keep placeholders marked with `needsDetail`, `needsManualInput`, `needsConfirmation`, or `isPlaceholder`.
+- Keep internal review needs marked with `needsDetail`, `needsManualInput`, or `needsConfirmation` when more public detail is required.
 - Prefer short, scannable summaries that can be reused on mobile layouts.
 - Add final routes only when the corresponding pages exist.
 
@@ -40,7 +41,7 @@ Experience should follow this hierarchy:
 - Projects worked on under that company
 - Project challenge, responsibilities, tech stack, impact, tags, and confidentiality note
 
-Project names must stay anonymized until public approval exists. Impact copy should stay qualitative or placeholder-based unless a metric is verified and safe to publish.
+Project names must stay anonymized until public approval exists. Impact copy should stay qualitative unless a metric is verified and safe to publish.
 
 ## Case Study Template
 

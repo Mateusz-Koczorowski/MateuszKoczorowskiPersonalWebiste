@@ -17,14 +17,14 @@
 
 ## Next
 
-- Replace placeholder production URL metadata.
-- Replace hero sandbox CTA placeholder destinations with approved routes and CV asset.
+- Configure `NEXT_PUBLIC_SITE_URL` in the deployment environment for sitemap and robots output.
+- Wire the hero sandbox CTA destinations into any future routes when they are promoted from prototype to production pages.
 - Wire the full navigation model into implemented routes as pages are added.
 - Define reusable section and content-card components.
 - Add first published sanitized case study content after manual review.
 - Add accessibility test setup.
 - Add responsive smoke tests for core pages.
-- Add contact section or route.
+- Add a dedicated contact route only if the homepage contact section stops being sufficient.
 
 ## Later
 

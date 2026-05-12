@@ -21,35 +21,18 @@ export type SpeakingEntry = {
 export const speakingEntries = [
   {
     slug: "paida-2024-presentation",
-    title: "PAIDA 2024 presentation",
+    title: "From Bugs to Bots - AI at the Service of Your Efficiency",
     format: "talk",
     status: "published",
-    audience: "QA and engineering community",
+    eventName: "PAIDA Meetup",
+    date: "November 2024",
+    audience: "QA engineers and AI-curious engineering teams",
     summary:
-      "A public community presentation connected to practical quality engineering, automation judgment, and responsible technical communication.",
-    topics: ["quality engineering", "automation", "community"],
-    needsManualInput: ["Final talk title", "Public event URL", "Slides or recording link"],
-  },
-  {
-    slug: "practical-quality-engineering",
-    title: "Practical quality engineering",
-    format: "talk",
-    status: "planned",
-    audience: "QA engineers, engineering teams, and delivery leaders",
-    summary:
-      "A future talk outline about risk-aware testing, automation judgment, and quality ownership in product teams.",
-    topics: ["quality strategy", "automation judgment", "delivery risk"],
-    needsManualInput: ["Final title", "Event name", "Date", "Public links"],
-  },
-  {
-    slug: "responsible-ai-assisted-qa",
-    title: "Responsible AI-assisted QA",
-    format: "workshop",
-    status: "planned",
-    audience: "QA engineers and technical leads exploring AI-supported workflows",
-    summary:
-      "A future workshop outline for using AI in test design and documentation while preserving review, accuracy, and confidentiality.",
-    topics: ["AI-assisted QA", "review discipline", "confidentiality"],
-    needsManualInput: ["Workshop scope", "Examples safe for public use", "Materials link"],
+      "Technical community presentation connected with STX Next QA initiatives, focused on practical AI usage in QA: test design support, automation assistance, exploratory workflows, and review-driven adoption without removing engineering judgment.",
+    topics: ["AI-assisted QA", "workflow orchestration", "test design", "human review"],
+    links: {
+      recording:
+        "https://www.youtube.com/watch?v=SpjqcGc_WPg&list=PLwXxS6lAcQUNPLBaXPoeIL05PWzNV0-v6&index=5&t=3263s",
+    },
   },
 ] as const satisfies readonly SpeakingEntry[];

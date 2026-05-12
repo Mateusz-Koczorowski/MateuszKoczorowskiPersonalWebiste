@@ -3,18 +3,38 @@ export type EducationItem = {
   institution: string;
   credential: string;
   field?: string;
-  status: "verified" | "needs-input";
+  dateRange?: string;
+  status: "verified" | "in-progress" | "needs-input";
   notes?: string;
+  focusAreas?: string[];
 };
 
 export const education = [
   {
-    slug: "formal-education-placeholder",
-    institution: "Add institution",
-    credential: "Add degree, certification, or program",
-    field: "Add field of study",
-    status: "needs-input",
+    slug: "masters-computer-science-wsb-merito",
+    institution: "WSB Merito University",
+    credential: "Master's Degree",
+    field: "Computer Science",
+    dateRange: "2026 - Present",
+    status: "in-progress",
     notes:
-      "Replace this placeholder with approved public education details, or remove the education section until details are ready.",
+      "Research focus: comparative analysis of AI agents, including OpenAI Codex and Claude Code, in automated software testing generation across multiple testing levels and QA workflows.",
+    focusAreas: [
+      "AI-assisted test generation",
+      "Automation engineering",
+      "AI agents in software quality processes",
+      "Comparison of AI-driven development workflows",
+    ],
+  },
+  {
+    slug: "engineering-computer-science-wsb-merito",
+    institution: "WSB Merito University",
+    credential: "Bachelor of Engineering",
+    field: "Computer Science",
+    dateRange: "Completed 2025",
+    status: "verified",
+    notes:
+      "Engineering thesis: GlukoMate, an application supporting diabetes management and monitoring workflows.",
+    focusAreas: [],
   },
 ] as const satisfies readonly EducationItem[];

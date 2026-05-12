@@ -104,7 +104,7 @@ Case-study preview card:
 
 - Best for future sanitized case studies.
 - Include domain, status, summary, and tags.
-- Make placeholder or needs-review status visible without making the content feel broken.
+- Make needs-review status visible without making the content feel broken.
 - Avoid fake metrics.
 
 Skill card:
@@ -139,7 +139,7 @@ Status badge treatment:
 
 Contact UI is deferred, but future patterns should follow:
 
-- Clear labels, not placeholder-only fields.
+- Clear labels and helpful examples instead of relying on empty-field hints.
 - Visible validation messages.
 - Helpful error text.
 - Keyboard-friendly focus order.

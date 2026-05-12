@@ -3,23 +3,20 @@ import type { LinkTarget } from "./types";
 export const contactLinks = [
   {
     label: "Email",
-    href: "mailto:add-public-email@example.com",
-    description: "Replace with the public contact email before exposing a contact UI.",
-    isPlaceholder: true,
+    href: "mailto:mkoczorowski.qa@gmail.com",
+    description: "Direct email for selected QA, mentoring, and speaking conversations.",
   },
 ] as const satisfies readonly LinkTarget[];
 
 export const socialLinks = [
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/add-profile-slug",
-    description: "Replace with the approved public LinkedIn profile URL.",
-    isPlaceholder: true,
+    href: "https://www.linkedin.com/in/mateusz-koczorowski/",
+    description: "Professional profile, experience context, and direct network contact.",
   },
   {
     label: "GitHub",
-    href: "https://github.com/add-profile-slug",
-    description: "Replace with the approved public GitHub profile URL.",
-    isPlaceholder: true,
+    href: "https://github.com/Mateusz-Koczorowski",
+    description: "Public repositories, technical activity, and engineering examples.",
   },
 ] as const satisfies readonly LinkTarget[];

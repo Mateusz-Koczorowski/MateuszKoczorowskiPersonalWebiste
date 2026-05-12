@@ -4,7 +4,6 @@ export type LinkTarget = {
   label: string;
   href: string;
   description?: string;
-  isPlaceholder?: boolean;
 };
 
 export type ContentNote = {
@@ -52,6 +51,9 @@ export type ProjectDomain =
   | "Web application"
   | "QA workflow"
   | "Software product delivery"
-  | "Add approved domain";
+  | "Industrial Systems"
+  | "Healthcare"
+  | "Sports Analytics"
+  | "E-commerce";
 
 export type ConfidentialityLevel = "public-safe" | "sanitized" | "needs-review";

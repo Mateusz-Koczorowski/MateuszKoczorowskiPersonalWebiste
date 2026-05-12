@@ -13,8 +13,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://example.com"),
+  metadataBase: siteUrl ? new URL(siteUrl) : undefined,
   title: {
     default: "Senior QA Engineer | Quality Strategy and Test Automation",
     template: "%s | Senior QA Engineer",

@@ -11,13 +11,13 @@ export const languages = [
   {
     name: "Polish",
     proficiency: "native",
-    publicLabel: "Polish: native",
-    needsConfirmation: true,
+    publicLabel: "Native",
+    needsConfirmation: false,
   },
   {
     name: "English",
     proficiency: "professional",
-    publicLabel: "English: professional working proficiency",
-    needsConfirmation: true,
+    publicLabel: "B2",
+    needsConfirmation: false,
   },
 ] as const satisfies readonly Language[];

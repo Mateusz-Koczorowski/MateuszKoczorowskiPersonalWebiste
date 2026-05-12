@@ -16,8 +16,8 @@ Create the first structured content model for focus areas, case studies, speakin
 ## Implementation Notes
 
 - Structured TypeScript content objects live in `content/`.
-- Public-safe case study placeholders use anonymized domain names.
-- Placeholder fields mark details that still need manual approval or confirmation.
+- Public-safe case study previews use anonymized domain names.
+- Review fields mark details that still need manual approval or confirmation.
 - Content management guidance lives in `docs/content-management.md`.
 
 ## Status

@@ -8,8 +8,8 @@ export type NavigationItem = {
 export const primaryNavigation = [
   {
     label: "Focus",
-    href: "#focus-areas",
-    description: "Current home-page focus area section.",
+    href: "#expertise",
+    description: "Current home-page expertise section.",
     status: "active",
   },
   {

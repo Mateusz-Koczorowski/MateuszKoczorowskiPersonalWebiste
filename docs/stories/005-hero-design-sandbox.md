@@ -8,7 +8,7 @@ Create the first visual prototype of the homepage hero section using the existin
 
 - Dedicated sandbox route at `/design-sandbox/hero`.
 - Hero section only.
-- Profile image placeholder path: `/images/profile/profile-photo.jpg`.
+- Profile image path: `/images/profile/profile-photo.jpg`.
 - Large name, role, positioning statement, and three CTA links.
 - Desktop split layout with image on the left and content on the right.
 - Mobile layout with image above content.
