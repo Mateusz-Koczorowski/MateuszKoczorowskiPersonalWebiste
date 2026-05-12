@@ -26,66 +26,102 @@ export default function HeroDesignSandboxPage() {
   const contactHref = contactLinks[0]?.href ?? "/contact";
 
   return (
-    <main id="main-content" className="min-h-screen overflow-hidden">
+    <main id="main-content" className="min-h-screen overflow-hidden bg-background/35">
       <section
         aria-labelledby="hero-sandbox-heading"
-        className="relative flex min-h-screen items-center px-6 py-12 sm:px-8 lg:px-10"
+        className="relative flex min-h-screen items-center px-6 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
       >
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"
+          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent"
         />
-        <div className="mx-auto grid w-full max-w-7xl items-center gap-10 md:gap-12 lg:grid-cols-[minmax(18rem,0.82fr)_minmax(0,1.18fr)] lg:gap-16">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[linear-gradient(to_right,oklch(0.96_0.01_255/0.035)_1px,transparent_1px),linear-gradient(to_bottom,oklch(0.96_0.01_255/0.025)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:linear-gradient(to_bottom,transparent,black_18%,black_72%,transparent)]"
+        />
+        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 md:gap-14 lg:grid-cols-[minmax(19rem,0.78fr)_minmax(0,1.22fr)] lg:gap-20 xl:gap-24">
           <AnimatedSection className="order-1">
-            <div className="relative mx-auto w-full max-w-[24rem] lg:max-w-none">
+            <figure className="relative mx-auto w-full max-w-[21rem] sm:max-w-[24rem] lg:mx-0 lg:max-w-none">
               <div
                 aria-hidden="true"
-                className="absolute -inset-3 rounded-xl border border-primary/10 bg-primary/5"
+                className="absolute -inset-4 rounded-xl border border-border/80 bg-card/35"
               />
-              <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-border bg-card shadow-2xl shadow-black/30">
+              <div
+                aria-hidden="true"
+                className="absolute -bottom-5 left-6 right-6 h-px bg-gradient-to-r from-transparent via-primary/45 to-transparent"
+              />
+              <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-border/90 bg-card shadow-2xl shadow-black/25">
                 <Image
                   src={profileImagePath}
                   alt="Mateusz Koczorowski"
                   fill
                   priority
                   sizes="(min-width: 1024px) 40vw, (min-width: 768px) 50vw, 100vw"
-                  className="object-cover"
+                  className="object-cover saturate-[0.92]"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-t from-background/22 via-transparent to-transparent"
                 />
               </div>
-            </div>
+              <figcaption className="sr-only">Portrait of Mateusz Koczorowski.</figcaption>
+            </figure>
           </AnimatedSection>
 
-          <AnimatedSection className="order-2">
-            <p className="font-mono text-sm uppercase tracking-[0.18em] text-primary">
-              Design sandbox / Homepage hero
+          <AnimatedSection className="order-2 text-center lg:text-left">
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-primary sm:text-sm">
+              Senior QA Engineering / AI-assisted quality
             </p>
             <h1
               id="hero-sandbox-heading"
-              className="mt-5 max-w-5xl text-[clamp(3rem,8vw,6.5rem)] font-semibold leading-[0.98] text-foreground"
+              className="mx-auto mt-6 max-w-5xl text-[clamp(3.25rem,8vw,6.25rem)] font-semibold leading-[0.94] text-foreground lg:mx-0"
             >
               {profile.name}
             </h1>
-            <p className="mt-5 text-xl font-medium leading-8 text-foreground sm:text-2xl">
+            <p className="mx-auto mt-6 max-w-2xl text-xl font-medium leading-8 text-foreground sm:text-2xl lg:mx-0">
               {profile.role}
             </p>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg sm:leading-9 lg:mx-0">
               {heroStatement}
             </p>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Button asChild className="min-h-11 w-full sm:w-auto">
+            <dl className="mx-auto mt-8 grid max-w-2xl grid-cols-1 gap-3 border-y border-border/70 py-5 text-left sm:grid-cols-3 lg:mx-0">
+              <div>
+                <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  Focus
+                </dt>
+                <dd className="mt-2 text-sm font-medium text-foreground">Automation strategy</dd>
+              </div>
+              <div>
+                <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  Mode
+                </dt>
+                <dd className="mt-2 text-sm font-medium text-foreground">Remote-friendly</dd>
+              </div>
+              <div>
+                <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  Base
+                </dt>
+                <dd className="mt-2 text-sm font-medium text-foreground">
+                  {profile.location.label}
+                </dd>
+              </div>
+            </dl>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start">
+              <Button asChild className="min-h-12 w-full px-5 text-sm sm:w-auto">
                 <Link href="/#experience">
                   View Experience
                   <ArrowRight aria-hidden="true" className="size-4" />
                 </Link>
               </Button>
-              <Button asChild variant="secondary" className="min-h-11 w-full sm:w-auto">
+              <Button asChild variant="secondary" className="min-h-12 w-full px-5 text-sm sm:w-auto">
                 <a href="/files/mateusz-koczorowski-cv.pdf">
                   Download CV
                   <ArrowDownToLine aria-hidden="true" className="size-4" />
                 </a>
               </Button>
-              <Button asChild variant="ghost" className="min-h-11 w-full sm:w-auto">
+              <Button asChild variant="ghost" className="min-h-12 w-full px-4 text-sm sm:w-auto">
                 <a href={contactHref}>
                   Contact
                   <Mail aria-hidden="true" className="size-4" />
