@@ -17,6 +17,18 @@ npm install
 npm run dev
 ```
 
+## Design Sandbox
+
+The homepage hero prototype lives at `/design-sandbox/hero`.
+
+Preview it locally with:
+
+```bash
+npm run dev
+```
+
+Then open `http://localhost:3000/design-sandbox/hero`.
+
 ## Project Structure
 
 ```text

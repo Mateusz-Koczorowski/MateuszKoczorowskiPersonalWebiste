@@ -6,6 +6,7 @@
 - Add initial documentation set.
 - Add semantic home page foundation.
 - Add GitHub Actions CI for install, typecheck, lint, format check, build, and configured tests.
+- Add a dedicated homepage hero design sandbox prototype.
 
 ## CI Foundation Acceptance Criteria
 
@@ -17,6 +18,7 @@
 ## Next
 
 - Replace placeholder production URL metadata.
+- Replace hero sandbox CTA placeholder destinations with approved routes and CV asset.
 - Wire the full navigation model into implemented routes as pages are added.
 - Define reusable section and content-card components.
 - Add first published sanitized case study content after manual review.
