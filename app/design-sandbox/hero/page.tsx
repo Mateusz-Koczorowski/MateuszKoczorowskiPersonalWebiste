@@ -115,7 +115,11 @@ export default function HeroDesignSandboxPage() {
                   <ArrowRight aria-hidden="true" className="size-4" />
                 </Link>
               </Button>
-              <Button asChild variant="secondary" className="min-h-12 w-full px-5 text-sm sm:w-auto">
+              <Button
+                asChild
+                variant="secondary"
+                className="min-h-12 w-full px-5 text-sm sm:w-auto"
+              >
                 <a href="/files/mateusz-koczorowski-cv.pdf">
                   Download CV
                   <ArrowDownToLine aria-hidden="true" className="size-4" />

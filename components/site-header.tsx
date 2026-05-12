@@ -4,8 +4,10 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
-  { href: "#focus-areas", label: "Focus" },
-  { href: "/docs/PRD.md", label: "Docs" },
+  { href: "#about", label: "About" },
+  { href: "#expertise", label: "Expertise" },
+  { href: "#case-studies", label: "Cases" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export function SiteHeader() {
@@ -21,13 +23,13 @@ export function SiteHeader() {
         >
           Skip to content
         </a>
-        <Link href="/" className="flex items-center gap-3 font-semibold">
+        <Link href="/" className="flex min-w-0 items-center gap-3 font-semibold">
           <span className="flex size-9 items-center justify-center rounded-md border bg-card">
             <ShieldCheck aria-hidden="true" className="size-5 text-primary" />
           </span>
-          <span>Mateusz Koczorowski</span>
+          <span className="truncate">Mateusz Koczorowski</span>
         </Link>
-        <div className="flex items-center gap-2">
+        <div className="hidden items-center gap-2 md:flex">
           {navItems.map((item) => (
             <Button key={item.href} asChild variant="ghost" size="sm">
               <a href={item.href}>{item.label}</a>

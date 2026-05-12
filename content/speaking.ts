@@ -18,6 +18,17 @@ export type SpeakingEntry = {
 
 export const speakingEntries = [
   {
+    slug: "paida-2024-presentation",
+    title: "PAIDA 2024 presentation",
+    format: "talk",
+    status: "published",
+    audience: "QA and engineering community",
+    summary:
+      "A public community presentation connected to practical quality engineering, automation judgment, and responsible technical communication.",
+    topics: ["quality engineering", "automation", "community"],
+    needsManualInput: ["Final talk title", "Public event URL", "Slides or recording link"],
+  },
+  {
     slug: "practical-quality-engineering",
     title: "Practical quality engineering",
     format: "talk",
