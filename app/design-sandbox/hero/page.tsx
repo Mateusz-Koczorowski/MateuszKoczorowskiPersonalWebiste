@@ -46,9 +46,10 @@ export default function HeroDesignSandboxPage() {
                 <Image
                   src={profileImagePath}
                   alt="Mateusz Koczorowski"
-                  width={960}
-                  height={1200}
-                  className="h-full w-full object-cover"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 40vw, (min-width: 768px) 50vw, 100vw"
+                  className="object-cover"
                 />
               </div>
             </div>
