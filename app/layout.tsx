@@ -14,9 +14,20 @@ const geistMono = Geist_Mono({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+const metadataBase = siteUrl ? new URL(siteUrl) : undefined;
+const socialImages = siteUrl
+  ? [
+      {
+        url: "/images/profile/profile-photo.jpg",
+        width: 1200,
+        height: 1500,
+        alt: "Mateusz Koczorowski",
+      },
+    ]
+  : undefined;
 
 export const metadata: Metadata = {
-  metadataBase: siteUrl ? new URL(siteUrl) : undefined,
+  metadataBase,
   title: {
     default: "Senior QA Engineer | Quality Strategy and Test Automation",
     template: "%s | Senior QA Engineer",
@@ -26,12 +37,35 @@ export const metadata: Metadata = {
   applicationName: "Senior QA Engineer Portfolio",
   authors: [{ name: "Mateusz Koczorowski" }],
   creator: "Mateusz Koczorowski",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon.svg",
+    apple: "/apple-icon.svg",
+  },
+  alternates: siteUrl
+    ? {
+        canonical: "/",
+      }
+    : undefined,
   openGraph: {
     title: "Senior QA Engineer | Quality Strategy and Test Automation",
     description:
       "Technical brand website covering QA leadership, automation architecture, AI-assisted workflows, case studies, and public speaking.",
+    url: siteUrl ?? undefined,
+    siteName: "Mateusz Koczorowski",
     type: "website",
     locale: "en_US",
+    images: socialImages,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Senior QA Engineer | Quality Strategy and Test Automation",
+    description:
+      "QA leadership, automation architecture, AI-assisted workflows, case studies, and public speaking.",
+    images: siteUrl ? ["/images/profile/profile-photo.jpg"] : undefined,
   },
   robots: {
     index: true,

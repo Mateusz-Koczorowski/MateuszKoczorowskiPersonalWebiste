@@ -58,11 +58,13 @@
 
 html {
   color-scheme: dark;
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at 18% 0%, oklch(0.3 0.08 190 / 0.24), transparent 34rem),
     radial-gradient(circle at 82% 18%, oklch(0.2 0.04 255 / 0.22), transparent 30rem),
@@ -78,4 +80,29 @@ body {
 :focus-visible {
   outline: 2px solid var(--ring);
   outline-offset: 3px;
+}
+
+button,
+a,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .group:hover .group-hover\:translate-x-1 {
+    transform: none !important;
+  }
 }

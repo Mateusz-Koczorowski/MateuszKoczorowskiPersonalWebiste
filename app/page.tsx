@@ -3,7 +3,6 @@ import {
   Award,
   Bot,
   CheckCircle2,
-  ChevronDown,
   Github,
   Linkedin,
   Mail,
@@ -12,6 +11,7 @@ import {
 import Image from "next/image";
 
 import { AnimatedSection } from "@/components/animated-section";
+import { Disclosure } from "@/components/disclosure";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import {
@@ -62,7 +62,9 @@ function getDateSortValue(dateRange?: { start: string; isCurrent?: boolean }) {
 function sortProjectsNewestFirst(projects: readonly ProjectContribution[]) {
   return [...projects].sort((a, b) => {
     if (a.displayOrder !== undefined || b.displayOrder !== undefined) {
-      return (a.displayOrder ?? Number.MAX_SAFE_INTEGER) - (b.displayOrder ?? Number.MAX_SAFE_INTEGER);
+      return (
+        (a.displayOrder ?? Number.MAX_SAFE_INTEGER) - (b.displayOrder ?? Number.MAX_SAFE_INTEGER)
+      );
     }
 
     return getDateSortValue(b.duration) - getDateSortValue(a.duration);
@@ -70,7 +72,12 @@ function sortProjectsNewestFirst(projects: readonly ProjectContribution[]) {
 }
 
 function LinkArrow() {
-  return <ArrowRight aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-1" />;
+  return (
+    <ArrowRight
+      aria-hidden="true"
+      className="size-4 transition-transform group-hover:translate-x-1"
+    />
+  );
 }
 
 function SectionHeading({
@@ -130,7 +137,9 @@ function RoleProgression({ company }: { company: CompanyExperience }) {
           >
             <p className="text-sm text-muted-foreground">{formatDateRange(milestone.dates)}</p>
             <div className="mt-2 flex flex-wrap items-center gap-3">
-              <h4 className="text-lg font-semibold leading-tight text-foreground">{milestone.title}</h4>
+              <h4 className="text-lg font-semibold leading-tight text-foreground">
+                {milestone.title}
+              </h4>
               {milestone.isPromotion ? (
                 <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
                   <Award aria-hidden="true" className="size-3.5" />
@@ -153,7 +162,11 @@ function RoleProgression({ company }: { company: CompanyExperience }) {
     <div className="mt-8 flex flex-wrap gap-x-3 gap-y-2 text-sm text-muted-foreground">
       {company.roleProgression.map((role, index) => (
         <span key={role} className="inline-flex items-center gap-3">
-          <span className={index === company.roleProgression!.length - 1 ? "text-foreground" : undefined}>
+          <span
+            className={
+              index === company.roleProgression!.length - 1 ? "text-foreground" : undefined
+            }
+          >
             {role}
           </span>
           {index < company.roleProgression!.length - 1 ? (
@@ -165,11 +178,7 @@ function RoleProgression({ company }: { company: CompanyExperience }) {
   );
 }
 
-function ProjectCaseStudy({
-  project,
-}: {
-  project: ProjectContribution;
-}) {
+function ProjectCaseStudy({ project }: { project: ProjectContribution }) {
   const isCurrent = Boolean(project.duration?.isCurrent);
 
   return (
@@ -217,64 +226,57 @@ function ProjectCaseStudy({
             </div>
           </div>
 
-          <details className="group/details mt-6 border-t border-border/35 pt-5">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-medium text-foreground transition-colors hover:text-primary [&::-webkit-details-marker]:hidden">
-              <span>View technical ownership</span>
-              <ChevronDown
-                aria-hidden="true"
-                className="size-4 shrink-0 transition-transform group-open/details:rotate-180"
-              />
-            </summary>
-            <div className="mt-6 grid gap-7 lg:grid-cols-[minmax(0,0.58fr)_minmax(15rem,0.42fr)]">
-              <div>
-                <p className="text-sm font-semibold text-foreground">Responsibilities and QA strategy</p>
-                <DetailList items={project.responsibilities} />
-              </div>
-              <div className="space-y-6">
-                <div>
-                  <p className="text-sm font-semibold text-foreground">Automation, tooling, and stack</p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {project.techStack.map((tool) => (
-                      <span
-                        key={tool}
-                        className="rounded-full border border-border/45 px-3 py-1 text-xs text-muted-foreground"
-                      >
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">Engineering themes</p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="text-xs text-primary/85">
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                {project.confidentialityNote ? (
-                  <p className="border-t border-border/35 pt-5 text-xs leading-6 text-muted-foreground">
-                    {project.confidentialityNote}
-                  </p>
-                ) : null}
-              </div>
+          <Disclosure
+            label="View technical ownership"
+            className="mt-6 border-t border-border/35 pt-5"
+            contentClassName="mt-6 grid gap-7 lg:grid-cols-[minmax(0,0.58fr)_minmax(15rem,0.42fr)]"
+          >
+            <div>
+              <p className="text-sm font-semibold text-foreground">
+                Responsibilities and QA strategy
+              </p>
+              <DetailList items={project.responsibilities} />
             </div>
-          </details>
+            <div className="space-y-6">
+              <div>
+                <p className="text-sm font-semibold text-foreground">
+                  Automation, tooling, and stack
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.techStack.map((tool) => (
+                    <span
+                      key={tool}
+                      className="rounded-full border border-border/45 px-3 py-1 text-xs text-muted-foreground"
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Engineering themes</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="text-xs text-primary/85">
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              {project.confidentialityNote ? (
+                <p className="border-t border-border/35 pt-5 text-xs leading-6 text-muted-foreground">
+                  {project.confidentialityNote}
+                </p>
+              ) : null}
+            </div>
+          </Disclosure>
         </div>
       </div>
     </article>
   );
 }
 
-function CompanyTimelineItem({
-  company,
-  index,
-}: {
-  company: CompanyExperience;
-  index: number;
-}) {
+function CompanyTimelineItem({ company, index }: { company: CompanyExperience; index: number }) {
   const isLast = index === experienceItems.length - 1;
   const isCurrentCompany = Boolean(company.employmentDates?.isCurrent);
   const orderedProjects = sortProjectsNewestFirst(company.projects);
@@ -283,7 +285,9 @@ function CompanyTimelineItem({
     <AnimatedSection>
       <article className="grid grid-cols-[1.25rem_minmax(0,1fr)] gap-x-5 pb-16 last:pb-0 lg:grid-cols-[minmax(11rem,0.22fr)_2rem_minmax(0,1fr)] lg:gap-x-10">
         <div className="hidden lg:block">
-          <p className="text-sm font-medium text-primary">{formatDateRange(company.employmentDates)}</p>
+          <p className="text-sm font-medium text-primary">
+            {formatDateRange(company.employmentDates)}
+          </p>
           <h3 className="mt-2 text-3xl font-semibold leading-tight text-foreground">
             {company.companyName}
           </h3>
@@ -313,7 +317,9 @@ function CompanyTimelineItem({
 
         <div>
           <div className="lg:hidden">
-            <p className="text-sm font-medium text-primary">{formatDateRange(company.employmentDates)}</p>
+            <p className="text-sm font-medium text-primary">
+              {formatDateRange(company.employmentDates)}
+            </p>
             <h3 className="mt-2 text-3xl font-semibold leading-tight text-foreground">
               {company.companyName}
             </h3>
@@ -333,27 +339,24 @@ function CompanyTimelineItem({
           <RoleProgression company={company} />
 
           {company.organizationalContributions?.length ? (
-            <details className="group/details mt-8 border-y border-border/35 py-5">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-medium text-foreground transition-colors hover:text-primary [&::-webkit-details-marker]:hidden">
-                <span>View company-level ownership</span>
-                <ChevronDown
-                  aria-hidden="true"
-                  className="size-4 shrink-0 transition-transform group-open/details:rotate-180"
-                />
-              </summary>
-              <div className="mt-5 grid gap-7 md:grid-cols-2">
-                <div>
-                  <p className="text-sm font-semibold text-foreground">Process, mentoring, and impact</p>
-                  <DetailList items={company.organizationalContributions} />
-                </div>
-                {company.mentoringActivities?.length ? (
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">Mentoring and community</p>
-                    <DetailList items={company.mentoringActivities} />
-                  </div>
-                ) : null}
+            <Disclosure
+              label="View company-level ownership"
+              className="mt-8 border-y border-border/35 py-5"
+              contentClassName="mt-5 grid gap-7 md:grid-cols-2"
+            >
+              <div>
+                <p className="text-sm font-semibold text-foreground">
+                  Process, mentoring, and impact
+                </p>
+                <DetailList items={company.organizationalContributions} />
               </div>
-            </details>
+              {company.mentoringActivities?.length ? (
+                <div>
+                  <p className="text-sm font-semibold text-foreground">Mentoring and community</p>
+                  <DetailList items={company.mentoringActivities} />
+                </div>
+              ) : null}
+            </Disclosure>
           ) : null}
 
           <div className="mt-10">
@@ -381,7 +384,7 @@ export default function Home() {
   return (
     <>
       <SiteHeader />
-      <main id="main-content" className="overflow-hidden">
+      <main id="main-content" className="overflow-x-hidden">
         <section
           aria-labelledby="home-hero-heading"
           className="relative px-6 pb-20 pt-28 sm:px-8 sm:pb-24 sm:pt-32 lg:px-10 lg:pb-28 lg:pt-36"
@@ -458,7 +461,10 @@ export default function Home() {
               <ul className="space-y-4 pt-2">
                 {profile.about.principles.map((principle) => (
                   <li key={principle} className="flex gap-3">
-                    <CheckCircle2 aria-hidden="true" className="mt-1 size-4 shrink-0 text-primary" />
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-1 size-4 shrink-0 text-primary"
+                    />
                     <span>{principle}</span>
                   </li>
                 ))}
@@ -524,7 +530,9 @@ export default function Home() {
                     <Bot aria-hidden="true" className="size-5" />
                   </span>
                   <div>
-                    <h3 className="text-2xl font-semibold text-foreground">Human-in-the-loop by design.</h3>
+                    <h3 className="text-2xl font-semibold text-foreground">
+                      Human-in-the-loop by design.
+                    </h3>
                     <ul className="mt-5 space-y-4 text-base leading-8 text-muted-foreground">
                       {aiQaNarrative.highlights.map((highlight) => (
                         <li key={highlight}>{highlight}</li>
@@ -582,7 +590,7 @@ export default function Home() {
               <SectionHeading
                 id="contact-heading"
                 eyebrow="Let's work together"
-                title="Let&apos;s build reliable software with clearer risk, better automation, and calmer releases."
+                title="Let's build reliable software with clearer risk, better automation, and calmer releases."
                 intro="Open to selected QA leadership, automation architecture, AI-assisted QA workflow, mentoring, and speaking conversations."
               />
               <AnimatedSection>

@@ -26,7 +26,7 @@ export default function HeroDesignSandboxPage() {
   const linkedin = socialLinks.find((link) => link.label === "LinkedIn");
 
   return (
-    <main id="main-content" className="min-h-screen overflow-hidden bg-background/35">
+    <main id="main-content" className="min-h-screen overflow-x-hidden bg-background/35">
       <section
         aria-labelledby="hero-sandbox-heading"
         className="relative flex min-h-screen items-center px-6 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
