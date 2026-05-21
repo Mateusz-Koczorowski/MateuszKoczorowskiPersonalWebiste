@@ -3,6 +3,7 @@ import {
   Award,
   Bot,
   CheckCircle2,
+  CircleDot,
   Github,
   Linkedin,
   Mail,
@@ -127,31 +128,57 @@ function DetailList({ items }: { items: readonly string[] }) {
 function RoleProgression({ company }: { company: CompanyExperience }) {
   if (company.roleMilestones?.length) {
     return (
-      <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        {company.roleMilestones.map((milestone) => (
+      <div className="mt-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/85">
+          Role evolution
+        </p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {company.roleMilestones.map((milestone, index) => (
           <article
             key={`${milestone.title}-${milestone.dates.displayLabel}`}
-            className={`border-l pl-5 ${
-              milestone.isPromotion ? "border-primary" : "border-border/45"
+            className={`relative border-l py-1 pl-5 ${
+              milestone.isPromotion
+                ? "border-primary"
+                : "border-border/60 sm:border-border/45"
             }`}
           >
+            <span
+              aria-hidden="true"
+              className={`absolute -left-[0.3125rem] top-2 size-2.5 rounded-full border ${
+                milestone.isPromotion
+                  ? "border-primary bg-primary shadow-[0_0_0_6px_oklch(0.78_0.12_190_/_0.1)]"
+                  : "border-border bg-background"
+              }`}
+            />
             <p className="text-sm text-muted-foreground">{formatDateRange(milestone.dates)}</p>
             <div className="mt-2 flex flex-wrap items-center gap-3">
               <h4 className="text-lg font-semibold leading-tight text-foreground">
                 {milestone.title}
               </h4>
               {milestone.isPromotion ? (
-                <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                <span className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
                   <Award aria-hidden="true" className="size-3.5" />
                   Promoted
+                </span>
+              ) : null}
+              {milestone.dates.isCurrent ? (
+                <span className="rounded-full border border-primary/20 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-primary">
+                  Current
                 </span>
               ) : null}
             </div>
             {milestone.note ? (
               <p className="mt-3 text-sm leading-7 text-muted-foreground">{milestone.note}</p>
             ) : null}
+            {index < company.roleMilestones!.length - 1 ? (
+              <div
+                aria-hidden="true"
+                className="absolute -right-2 top-1/2 hidden h-px w-4 bg-primary/30 sm:block"
+              />
+            ) : null}
           </article>
-        ))}
+          ))}
+        </div>
       </div>
     );
   }
@@ -178,21 +205,41 @@ function RoleProgression({ company }: { company: CompanyExperience }) {
   );
 }
 
+function OwnershipDetailGrid({ project }: { project: ProjectContribution }) {
+  const ownershipDetails = project.ownershipDetails;
+
+  if (!ownershipDetails?.length) return <DetailList items={project.responsibilities} />;
+
+  return (
+    <div className="grid gap-5 md:grid-cols-2">
+      {ownershipDetails.map((item) => (
+        <section key={item.title} className="border-t border-border/35 pt-5">
+          <p className="flex items-center gap-2 text-sm font-semibold text-foreground">
+            <CircleDot aria-hidden="true" className="size-3.5 text-primary" />
+            {item.title}
+          </p>
+          <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.detail}</p>
+        </section>
+      ))}
+    </div>
+  );
+}
+
 function ProjectCaseStudy({ project }: { project: ProjectContribution }) {
   const isCurrent = Boolean(project.duration?.isCurrent);
 
   return (
     <article
-      className={`border-t py-8 first:border-t-0 first:pt-0 ${
+      className={`border-t py-9 first:border-t-0 first:pt-0 ${
         isCurrent ? "border-primary/35" : "border-border/35"
       }`}
     >
-      <div className="grid gap-5 lg:grid-cols-[minmax(9rem,0.22fr)_minmax(0,1fr)] lg:gap-10">
+      <div className="grid gap-6 lg:grid-cols-[minmax(9rem,0.22fr)_minmax(0,1fr)] lg:gap-10">
         <div>
           <div className="flex flex-wrap items-center gap-3">
             <p className="text-sm font-medium text-primary">{formatDateRange(project.duration)}</p>
             {isCurrent ? (
-              <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-primary">
+              <span className="rounded-full border border-primary/25 bg-primary/10 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-primary">
                 Current
               </span>
             ) : null}
@@ -227,15 +274,25 @@ function ProjectCaseStudy({ project }: { project: ProjectContribution }) {
           </div>
 
           <Disclosure
-            label="View technical ownership"
-            className="mt-6 border-t border-border/35 pt-5"
-            contentClassName="mt-6 grid gap-7 lg:grid-cols-[minmax(0,0.58fr)_minmax(15rem,0.42fr)]"
+            label="Open engineering case study"
+            className={`mt-7 border-y py-5 ${
+              isCurrent ? "border-primary/25" : "border-border/35"
+            }`}
+            contentClassName="mt-7 grid gap-8 lg:grid-cols-[minmax(0,0.64fr)_minmax(15rem,0.36fr)]"
           >
             <div>
-              <p className="text-sm font-semibold text-foreground">
-                Responsibilities and QA strategy
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/85">
+                Technical ownership
               </p>
-              <DetailList items={project.responsibilities} />
+              <div className="mt-1">
+                <OwnershipDetailGrid project={project} />
+              </div>
+              <div className="mt-8 border-t border-border/35 pt-6">
+                <p className="text-sm font-semibold text-foreground">
+                  Responsibilities and QA strategy
+                </p>
+                <DetailList items={project.responsibilities} />
+              </div>
             </div>
             <div className="space-y-6">
               <div>
@@ -246,7 +303,7 @@ function ProjectCaseStudy({ project }: { project: ProjectContribution }) {
                   {project.techStack.map((tool) => (
                     <span
                       key={tool}
-                      className="rounded-full border border-border/45 px-3 py-1 text-xs text-muted-foreground"
+                      className="rounded-full border border-border/45 px-3 py-1 text-xs text-muted-foreground transition-colors hover:border-primary/35 hover:text-foreground"
                     >
                       {tool}
                     </span>
@@ -283,7 +340,11 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
 
   return (
     <AnimatedSection>
-      <article className="grid grid-cols-[1.25rem_minmax(0,1fr)] gap-x-5 pb-16 last:pb-0 lg:grid-cols-[minmax(11rem,0.22fr)_2rem_minmax(0,1fr)] lg:gap-x-10">
+      <article
+        className={`grid grid-cols-[1.5rem_minmax(0,1fr)] gap-x-5 pb-20 last:pb-0 lg:grid-cols-[minmax(11rem,0.22fr)_2.25rem_minmax(0,1fr)] lg:gap-x-10 ${
+          isCurrentCompany ? "relative" : ""
+        }`}
+      >
         <div className="hidden lg:block">
           <p className="text-sm font-medium text-primary">
             {formatDateRange(company.employmentDates)}
@@ -294,7 +355,7 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
           <div className="mt-3 flex flex-wrap items-center gap-3 text-sm leading-7 text-muted-foreground">
             <span>{company.roleTitle}</span>
             {isCurrentCompany ? (
-              <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-primary">
+              <span className="rounded-full border border-primary/25 bg-primary/10 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-primary">
                 Present
               </span>
             ) : null}
@@ -303,14 +364,21 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
 
         <div className="relative flex justify-center">
           {!isLast ? (
-            <span aria-hidden="true" className="absolute bottom-[-4rem] top-5 w-px bg-border/45" />
+            <span
+              aria-hidden="true"
+              className={`absolute bottom-[-5rem] top-6 w-px ${
+                isCurrentCompany
+                  ? "bg-gradient-to-b from-primary/70 via-border/70 to-border/35"
+                  : "bg-border/55"
+              }`}
+            />
           ) : null}
           <span
             aria-hidden="true"
-            className={`relative mt-2 size-4 shrink-0 rounded-full border ${
+            className={`relative mt-2 shrink-0 rounded-full border ${
               isCurrentCompany
-                ? "border-primary bg-primary shadow-[0_0_0_7px_oklch(0.78_0.12_190_/_0.1)]"
-                : "border-border bg-background"
+                ? "size-5 border-primary bg-primary shadow-[0_0_0_8px_oklch(0.78_0.12_190_/_0.12),0_0_34px_oklch(0.78_0.12_190_/_0.28)]"
+                : "size-4 border-border bg-background shadow-[0_0_0_5px_oklch(0.12_0.018_260_/_1)]"
             }`}
           />
         </div>
@@ -326,7 +394,7 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
             <div className="mt-3 flex flex-wrap items-center gap-3 text-sm leading-7 text-muted-foreground">
               <span>{company.roleTitle}</span>
               {isCurrentCompany ? (
-                <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-primary">
+                <span className="rounded-full border border-primary/25 bg-primary/10 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-primary">
                   Present
                 </span>
               ) : null}
@@ -342,7 +410,7 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
             <Disclosure
               label="View company-level ownership"
               className="mt-8 border-y border-border/35 py-5"
-              contentClassName="mt-5 grid gap-7 md:grid-cols-2"
+              contentClassName="mt-6 grid gap-7 md:grid-cols-2"
             >
               <div>
                 <p className="text-sm font-semibold text-foreground">

@@ -10,6 +10,10 @@ export type ProjectContribution = {
   summary: string;
   challenge: string;
   responsibilities: string[];
+  ownershipDetails?: {
+    title: string;
+    detail: string;
+  }[];
   techStack: string[];
   impact: string;
   tags: string[];
@@ -53,7 +57,7 @@ export const professionalExperience = [
       displayLabel: "07.2024 - Present",
     },
     contextDescription:
-      "European software engineering company delivering industrial, healthcare, and AI-driven digital platforms.",
+      "AI, Data, and Cloud engineering consultancy with strong Python engineering roots, delivering scalable enterprise systems, digital platforms, and modern software solutions for international clients.",
     roleMilestones: [
       {
         title: "Regular QA Engineer",
@@ -100,6 +104,28 @@ export const professionalExperience = [
           "Performed manual and exploratory testing across high-risk product areas.",
           "Collaborated with engineering and delivery stakeholders on quality improvements.",
         ],
+        ownershipDetails: [
+          {
+            title: "Automation Architecture",
+            detail:
+              "Built the Cypress and TypeScript foundation, shaped test structure, and kept the suite oriented around maintainable coverage of product-critical workflows.",
+          },
+          {
+            title: "QA Strategy",
+            detail:
+              "Introduced clearer planning, test management, and quality process practices so the team could reason about risk before release pressure accumulated.",
+          },
+          {
+            title: "Data & Visualization Validation",
+            detail:
+              "Focused validation on analytical flows, operational data behavior, and visualization states where defects could distort product interpretation.",
+          },
+          {
+            title: "Collaboration & Process Improvement",
+            detail:
+              "Worked with engineering and delivery stakeholders to make quality feedback more structured, actionable, and visible across the team.",
+          },
+        ],
         techStack: ["Cypress", "TypeScript", "REST APIs", "Data Visualization"],
         impact:
           "Improved QA process maturity, defect detection workflows, release confidence, and product stability without publishing unsupported numerical claims.",
@@ -133,6 +159,28 @@ export const professionalExperience = [
           "Performed manual and exploratory testing for release validation.",
           "Worked in Scrum collaboration with product and engineering teams.",
         ],
+        ownershipDetails: [
+          {
+            title: "Automation Architecture",
+            detail:
+              "Developed and maintained end-to-end coverage while supporting the migration path from Cypress toward a more scalable Playwright-based strategy.",
+          },
+          {
+            title: "CI/CD & Release Validation",
+            detail:
+              "Kept automated regression and manual release checks aligned with high-quality clinical research expectations and recurring delivery needs.",
+          },
+          {
+            title: "Exploratory Testing",
+            detail:
+              "Used exploratory sessions to investigate product behavior around important workflows, complementing automation with human judgment.",
+          },
+          {
+            title: "AI-assisted Workflows",
+            detail:
+              "Worked in an AI-driven product context with attention to practical validation, review discipline, and maintainable QA workflows.",
+          },
+        ],
         techStack: ["Cypress", "Playwright", "TypeScript", "End-to-End Testing"],
         impact:
           "Significantly increased automation coverage, improved maintainability of the automation architecture, and supported a scalable future testing strategy.",
@@ -146,6 +194,7 @@ export const professionalExperience = [
     ],
     organizationalContributions: [
       "Promoted to Senior QA Engineer within the first year based on technical contribution, organizational impact, and strong performance.",
+      "Contributed as a Technical Recruiter, supporting hiring for QA engineering roles.",
       "Contributed to AI-focused QA initiatives and internal quality engineering knowledge sharing.",
       "Presented practical AI usage in QA during PAIDA Meetup as part of STX Next QA community activity.",
       "Provided consultations for an internal AI bootcamp focused on practical software quality workflows.",
@@ -172,7 +221,7 @@ export const professionalExperience = [
       displayLabel: "03.2023 - 06.2024",
     },
     contextDescription:
-      "Software development agency delivering industrial, analytics, and AI-related digital products for international clients.",
+      "Technology consultancy combining product strategy, design, and software engineering to deliver scalable digital platforms and modern web applications for international clients.",
     projects: [
       {
         slug: "industrial-emergency-lighting-control-platform",
@@ -196,6 +245,28 @@ export const professionalExperience = [
           "Supported QA across frontend, backend, and hardware-connected systems.",
           "Implemented Cypress automation for the web platform.",
           "Supported automation execution through GitLab CI workers connected by VPN to dedicated VLAN infrastructure hosting physical devices.",
+        ],
+        ownershipDetails: [
+          {
+            title: "Hardware & Software Validation",
+            detail:
+              "Validated web behavior together with physical device interfaces, embedded touch flows, and scenarios where hardware state changed product risk.",
+          },
+          {
+            title: "CI/CD & Environment Strategy",
+            detail:
+              "Supported GitLab CI execution against controlled infrastructure connected through VPN and VLAN access to physical devices.",
+          },
+          {
+            title: "Automation Ownership",
+            detail:
+              "Added Cypress coverage where web workflows could be automated while keeping manual validation for device-dependent scenarios.",
+          },
+          {
+            title: "Technical Challenges",
+            detail:
+              "Balanced application testing, backend interactions, and physical-device constraints in an environment where quality depended on the full system.",
+          },
         ],
         techStack: ["Vue.js", "TypeScript", "Python", "FastAPI", "C++", "Linux", "Cypress"],
         impact:
@@ -230,6 +301,28 @@ export const professionalExperience = [
           "Validated visualization behavior and measurement accuracy.",
           "Collaborated with developers on QA improvements and mentored junior QA engineers.",
         ],
+        ownershipDetails: [
+          {
+            title: "Automation Architecture",
+            detail:
+              "Created a Cypress and JavaScript framework from scratch to cover regression-prone workflows and support repeatable delivery checks.",
+          },
+          {
+            title: "API & Integration Testing",
+            detail:
+              "Used Postman and integration-level investigation to validate external API behavior feeding the product's analytical experience.",
+          },
+          {
+            title: "CI/CD & Release Validation",
+            detail:
+              "Integrated automated checks into GitLab CI/CD so regression feedback became part of the delivery workflow.",
+          },
+          {
+            title: "Collaboration & Mentoring",
+            detail:
+              "Partnered with developers on QA improvements and supported junior QA engineers in practical automation and validation work.",
+          },
+        ],
         techStack: ["React", "TypeScript", "Cypress", "Postman", "REST APIs", "GitLab CI/CD"],
         impact:
           "Improved regression reliability, increased automation coverage, and strengthened QA maturity and release confidence.",
@@ -259,6 +352,23 @@ export const professionalExperience = [
           "Performed exploratory QA activities around AI-related analytics workflows.",
           "Reviewed product behavior and supported defect investigation.",
           "Kept findings structured for engineering follow-up.",
+        ],
+        ownershipDetails: [
+          {
+            title: "Exploratory Testing",
+            detail:
+              "Investigated AI-related analytics behavior through structured exploratory work where detailed public examples need to remain limited.",
+          },
+          {
+            title: "Defect Investigation",
+            detail:
+              "Reviewed product behavior, captured findings clearly, and supported engineering follow-up without exposing client-specific details.",
+          },
+          {
+            title: "AI-assisted Quality Context",
+            detail:
+              "Focused on practical quality review around AI-supported workflows, keeping the public case study intentionally lightweight.",
+          },
         ],
         techStack: ["AI Analytics", "Exploratory Testing", "Web Application Testing"],
         impact:
@@ -290,7 +400,7 @@ export const professionalExperience = [
       displayLabel: "06.2021 - 02.2023",
     },
     contextDescription:
-      "Large-scale online printing ecosystem supporting e-commerce operations, CMS systems, production workflows, and partner integrations.",
+      "Large-scale online printing and production ecosystem integrating e-commerce platforms, CMS systems, production workflows, print infrastructure, and partner operations.",
     projects: [
       {
         slug: "online-printing-platform-quality-operations",
@@ -309,6 +419,28 @@ export const professionalExperience = [
           "Performed advanced PostgreSQL database operations.",
           "Created technical documentation for repeatable operational work.",
           "Performed manual testing and developed automation testing skills in Cypress.",
+        ],
+        ownershipDetails: [
+          {
+            title: "Operational Quality Ownership",
+            detail:
+              "Worked across customer-facing, backoffice, CMS, and production workflows where testing had to account for business operations as well as software behavior.",
+          },
+          {
+            title: "Migration & Release Risk",
+            detail:
+              "Owned technical parts of partner migration work, helping make repeatable processes clearer through documentation and system knowledge.",
+          },
+          {
+            title: "Database & Integration Support",
+            detail:
+              "Performed advanced PostgreSQL operations and supported validation around partner integrations and production-adjacent workflows.",
+          },
+          {
+            title: "QA Foundations",
+            detail:
+              "Built the foundation for later automation ownership by combining manual testing, support responsibility, documentation, and early Cypress practice.",
+          },
         ],
         techStack: ["Vue.js", "TypeScript", "Python", "Django", "PostgreSQL", "Cypress"],
         impact:
