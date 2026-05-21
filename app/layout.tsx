@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import { absoluteUrl, siteConfig } from "@/lib/seo";
+
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,15 +15,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-const metadataBase = siteUrl ? new URL(siteUrl) : undefined;
-const socialImages = siteUrl
+const metadataBase = new URL(siteConfig.url || "http://localhost:3000");
+const socialImages = siteConfig.url
   ? [
       {
-        url: "/images/profile/profile-photo.jpg",
+        url: absoluteUrl("/opengraph-image"),
         width: 1200,
-        height: 1500,
-        alt: "Mateusz Koczorowski",
+        height: 630,
+        alt: "Mateusz Koczorowski - Senior QA Engineer",
       },
     ]
   : undefined;
@@ -29,14 +30,24 @@ const socialImages = siteUrl
 export const metadata: Metadata = {
   metadataBase,
   title: {
-    default: "Senior QA Engineer | Quality Strategy and Test Automation",
-    template: "%s | Senior QA Engineer",
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "Personal technical brand website for a Senior QA Engineer focused on test automation, AI-assisted QA workflows, quality strategy, and engineering community work.",
-  applicationName: "Senior QA Engineer Portfolio",
-  authors: [{ name: "Mateusz Koczorowski" }],
-  creator: "Mateusz Koczorowski",
+  description: siteConfig.description,
+  keywords: [...siteConfig.keywords],
+  applicationName: siteConfig.manifestName,
+  authors: [{ name: siteConfig.name, url: siteConfig.url || undefined }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  category: "Professional portfolio",
+  classification: "Senior QA Engineering portfolio",
+  referrer: "origin-when-cross-origin",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  manifest: "/manifest.webmanifest",
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
@@ -45,38 +56,45 @@ export const metadata: Metadata = {
     shortcut: "/favicon.svg",
     apple: "/apple-icon.svg",
   },
-  alternates: siteUrl
+  alternates: siteConfig.url
     ? {
         canonical: "/",
       }
     : undefined,
   openGraph: {
-    title: "Senior QA Engineer | Quality Strategy and Test Automation",
-    description:
-      "Technical brand website covering QA leadership, automation architecture, AI-assisted workflows, case studies, and public speaking.",
-    url: siteUrl ?? undefined,
-    siteName: "Mateusz Koczorowski",
+    title: siteConfig.previewTitle,
+    description: siteConfig.previewDescription,
+    url: siteConfig.url || undefined,
+    siteName: siteConfig.name,
     type: "website",
-    locale: "en_US",
+    locale: siteConfig.locale,
     images: socialImages,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Senior QA Engineer | Quality Strategy and Test Automation",
-    description:
-      "QA leadership, automation architecture, AI-assisted workflows, case studies, and public speaking.",
-    images: siteUrl ? ["/images/profile/profile-photo.jpg"] : undefined,
+    title: siteConfig.previewTitle,
+    description: siteConfig.previewDescription,
+    images: siteConfig.url ? [absoluteUrl("/twitter-image")] : undefined,
   },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#071019",
+  themeColor: siteConfig.themeColor,
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
@@ -85,7 +103,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang={siteConfig.language} className="dark">
       <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
         {children}
       </body>

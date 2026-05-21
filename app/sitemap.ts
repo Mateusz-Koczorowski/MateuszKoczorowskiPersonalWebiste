@@ -1,16 +1,16 @@
 import type { MetadataRoute } from "next";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+import { siteConfig } from "@/lib/seo";
 
-  if (!siteUrl) {
+export default function sitemap(): MetadataRoute.Sitemap {
+  if (!siteConfig.url) {
     return [];
   }
 
   return [
     {
-      url: siteUrl,
-      lastModified: new Date("2026-05-12T00:00:00.000Z"),
+      url: siteConfig.url,
+      lastModified: new Date("2026-05-21T00:00:00.000Z"),
       changeFrequency: "monthly",
       priority: 1,
     },

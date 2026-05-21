@@ -35,6 +35,7 @@ import {
   socialLinks,
 } from "@/content";
 import type { CompanyExperience, ProjectContribution } from "@/content/experience";
+import { createStructuredData } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 const profileImagePath = "/images/profile/profile-photo.jpg";
@@ -692,9 +693,14 @@ export default function Home() {
   const linkedin = socialLinks.find((link) => link.label === "LinkedIn");
   const github = socialLinks.find((link) => link.label === "GitHub");
   const primaryContactLinks = [contactLinks[0], linkedin, github].filter(Boolean);
+  const structuredData = createStructuredData();
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <SiteHeader />
       <main id="main-content" className="overflow-x-hidden">
         <section
