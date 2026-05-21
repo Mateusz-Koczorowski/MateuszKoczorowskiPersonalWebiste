@@ -134,12 +134,12 @@ function SectionHeading({
       <p className="text-sm font-medium text-primary">{eyebrow}</p>
       <h2
         id={id}
-        className="mt-4 max-w-4xl text-[clamp(2rem,4vw,4.4rem)] font-semibold leading-[1.02] text-foreground"
+        className="mt-4 max-w-4xl text-[clamp(2rem,4vw,4.4rem)] font-semibold leading-[1.08] text-foreground sm:leading-[1.04] lg:leading-[1.02]"
       >
         {title}
       </h2>
       {intro ? (
-        <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
+        <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground sm:mt-6 sm:text-lg">
           {intro}
         </p>
       ) : null}
@@ -149,7 +149,7 @@ function SectionHeading({
 
 function DetailList({ items }: { items: readonly string[] }) {
   return (
-    <ul className="mt-4 space-y-3 text-sm leading-7 text-muted-foreground">
+    <ul className="mt-5 space-y-3.5 text-sm leading-7 text-muted-foreground sm:mt-4 sm:space-y-3">
       {items.map((item) => (
         <li key={item} className="flex gap-3">
           <span aria-hidden="true" className="mt-3 size-1 shrink-0 rounded-full bg-primary/75" />
@@ -163,7 +163,7 @@ function DetailList({ items }: { items: readonly string[] }) {
 function RoleProgression({ company }: { company: CompanyExperience }) {
   if (company.roleMilestones?.length) {
     return (
-      <div className="mt-9 border-t border-border/35 pt-7">
+      <div className="mt-10 border-t border-border/35 pt-8 sm:mt-9 sm:pt-7">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/85">
             Role evolution
@@ -172,12 +172,12 @@ function RoleProgression({ company }: { company: CompanyExperience }) {
             QA foundations into senior automation and quality ownership
           </p>
         </div>
-        <div className="mt-5 grid gap-4 sm:grid-cols-2">
+        <div className="mt-6 grid gap-6 sm:mt-5 sm:grid-cols-2 sm:gap-4">
           {company.roleMilestones.map((milestone, index) => (
             <article
               key={`${milestone.title}-${milestone.dates.displayLabel}`}
               className={cn(
-                "relative border-l py-1 pl-5",
+                "relative border-l py-1.5 pl-5 sm:py-1",
                 milestone.isPromotion ? "border-primary" : "border-border/60 sm:border-border/45",
               )}
             >
@@ -211,7 +211,9 @@ function RoleProgression({ company }: { company: CompanyExperience }) {
                 ) : null}
               </div>
               {milestone.note ? (
-                <p className="mt-3 text-sm leading-7 text-muted-foreground">{milestone.note}</p>
+                <p className="mt-4 text-sm leading-7 text-muted-foreground sm:mt-3">
+                  {milestone.note}
+                </p>
               ) : null}
               {index < company.roleMilestones!.length - 1 ? (
                 <div
@@ -229,7 +231,7 @@ function RoleProgression({ company }: { company: CompanyExperience }) {
   if (!company.roleProgression?.length) return null;
 
   return (
-    <div className="mt-8 flex flex-wrap gap-x-3 gap-y-2 text-sm text-muted-foreground">
+    <div className="mt-9 flex flex-wrap gap-x-3 gap-y-3 text-sm text-muted-foreground sm:mt-8 sm:gap-y-2">
       {company.roleProgression.map((role, index) => (
         <span key={role} className="inline-flex items-center gap-3">
           <span
@@ -254,7 +256,7 @@ function OwnershipDetailGrid({ project }: { project: ProjectContribution }) {
   if (!ownershipDetails?.length) return <DetailList items={project.responsibilities} />;
 
   return (
-    <div className="grid gap-x-7 gap-y-6 md:grid-cols-2">
+    <div className="grid gap-x-7 gap-y-7 md:grid-cols-2">
       {ownershipDetails.map((item) => (
         <section key={item.title} className="border-t border-border/35 pt-5">
           <p className="flex items-center gap-2 text-sm font-semibold text-foreground">
@@ -274,17 +276,19 @@ function ProjectCaseStudy({ project }: { project: ProjectContribution }) {
   return (
     <article
       className={cn(
-        "border-t py-9 first:border-t-0 first:pt-0 sm:py-10",
+        "border-t py-10 first:border-t-0 first:pt-0 sm:py-10",
         isCurrent ? "border-primary/35" : "border-border/35",
       )}
     >
-      <div className="grid gap-6 lg:grid-cols-[minmax(10rem,0.23fr)_minmax(0,1fr)] lg:gap-10">
+      <div className="grid gap-7 lg:grid-cols-[minmax(10rem,0.23fr)_minmax(0,1fr)] lg:gap-10">
         <div>
           <div className="flex flex-wrap items-center gap-3">
             <p className="text-sm font-medium text-primary">{formatDateRange(project.duration)}</p>
             {isCurrent ? <ExperienceBadge tone="strong">Present</ExperienceBadge> : null}
           </div>
-          <p className="mt-2 text-sm leading-6 text-muted-foreground">{project.roleInProject}</p>
+          <p className="mt-3 text-sm leading-6 text-muted-foreground sm:mt-2">
+            {project.roleInProject}
+          </p>
         </div>
         <div>
           <div className="flex flex-wrap items-center gap-3">
@@ -293,16 +297,16 @@ function ProjectCaseStudy({ project }: { project: ProjectContribution }) {
           </div>
           <h4
             className={cn(
-              "mt-2 text-2xl font-semibold leading-tight sm:text-[1.7rem]",
+              "mt-3 text-2xl font-semibold leading-[1.16] sm:mt-2 sm:text-[1.7rem] sm:leading-tight",
               isCurrent ? "text-foreground" : "text-foreground/92",
             )}
           >
             {project.anonymizedName}
           </h4>
-          <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
+          <p className="mt-5 max-w-3xl text-base leading-8 text-muted-foreground sm:mt-4">
             {project.summary}
           </p>
-          <div className="mt-5 grid gap-5 md:grid-cols-2">
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/85">
                 Context
@@ -320,11 +324,11 @@ function ProjectCaseStudy({ project }: { project: ProjectContribution }) {
           <Disclosure
             label="Open engineering case study"
             className={cn(
-              "mt-7 border-y py-5",
+              "mt-8 border-y py-5",
               isCurrent ? "border-primary/25" : "border-border/35",
             )}
             buttonClassName="py-2"
-            contentClassName="mt-8 grid gap-9 pb-1 lg:grid-cols-[minmax(0,0.64fr)_minmax(15rem,0.36fr)]"
+            contentClassName="mt-8 grid gap-10 pb-2 lg:grid-cols-[minmax(0,0.64fr)_minmax(15rem,0.36fr)] lg:gap-9"
           >
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/85">
@@ -333,14 +337,14 @@ function ProjectCaseStudy({ project }: { project: ProjectContribution }) {
               <div className="mt-3">
                 <OwnershipDetailGrid project={project} />
               </div>
-              <div className="mt-9 border-t border-border/35 pt-6">
+              <div className="mt-10 border-t border-border/35 pt-7 sm:mt-9 sm:pt-6">
                 <p className="text-sm font-semibold text-foreground">
                   Responsibilities and QA strategy
                 </p>
                 <DetailList items={project.responsibilities} />
               </div>
             </div>
-            <div className="space-y-6">
+            <div className="space-y-7 sm:space-y-6">
               <div>
                 <p className="text-sm font-semibold text-foreground">
                   Automation, tooling, and stack
@@ -438,10 +442,10 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
             <p className="mt-3 text-sm font-medium text-primary">
               {formatDateRange(company.employmentDates)}
             </p>
-            <h3 className="mt-2 text-3xl font-semibold leading-tight text-foreground">
+            <h3 className="mt-3 text-3xl font-semibold leading-[1.14] text-foreground">
               {company.companyName}
             </h3>
-            <div className="mt-3 flex flex-wrap items-center gap-3 text-sm leading-7 text-muted-foreground">
+            <div className="mt-4 flex flex-wrap items-center gap-3 text-sm leading-7 text-muted-foreground">
               <span>{company.roleTitle}</span>
               {isCurrentCompany ? <ExperienceBadge tone="strong">Present</ExperienceBadge> : null}
             </div>
@@ -449,11 +453,11 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
 
           <div
             className={cn(
-              "mt-6 max-w-4xl border-t pt-6 lg:mt-0",
+              "mt-7 max-w-4xl border-t pt-7 lg:mt-0 lg:pt-6",
               isCurrentCompany ? "border-primary/30" : "border-border/35",
             )}
           >
-            <p className="max-w-3xl text-lg leading-8 text-foreground/88">
+            <p className="max-w-3xl text-base leading-8 text-foreground/88 sm:text-lg">
               {company.contextDescription}
             </p>
           </div>
@@ -463,11 +467,11 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
             <Disclosure
               label="View company-level ownership"
               className={cn(
-                "mt-8 border-y py-5",
+                "mt-9 border-y py-5",
                 isCurrentCompany ? "border-primary/25" : "border-border/35",
               )}
               buttonClassName="py-2"
-              contentClassName="mt-7 grid gap-7 pb-1 md:grid-cols-2"
+              contentClassName="mt-8 grid gap-8 pb-2 md:grid-cols-2 md:gap-7"
             >
               <div>
                 <p className="text-sm font-semibold text-foreground">
@@ -484,7 +488,7 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
             </Disclosure>
           ) : null}
 
-          <div className="mt-11">
+          <div className="mt-12">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary/85">
                 Project case studies
@@ -493,7 +497,7 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
                 {orderedProjects.length} {orderedProjects.length === 1 ? "case" : "cases"}
               </p>
             </div>
-            <div className="mt-5">
+            <div className="mt-6">
               {orderedProjects.map((project) => (
                 <ProjectCaseStudy key={project.slug} project={project} />
               ))}
@@ -532,13 +536,13 @@ function AiWorkflowBlock({
   const icons = index === 0 ? aiInvestigationWorkflowIcons : aiAutomationWorkflowIcons;
 
   return (
-    <article className="border-t border-border/35 pt-8 first:border-t-0 first:pt-0">
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,0.34fr)_minmax(0,0.66fr)] lg:gap-12">
+    <article className="border-t border-border/35 pt-10 first:border-t-0 first:pt-0 sm:pt-8">
+      <div className="grid gap-9 lg:grid-cols-[minmax(0,0.34fr)_minmax(0,0.66fr)] lg:gap-12">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/85">
             {workflow.eyebrow}
           </p>
-          <h3 className="mt-4 text-2xl font-semibold leading-tight text-foreground">
+          <h3 className="mt-4 text-2xl font-semibold leading-[1.16] text-foreground sm:leading-tight">
             {workflow.title}
           </h3>
           <p className="mt-5 text-base leading-8 text-muted-foreground">{workflow.summary}</p>
@@ -546,9 +550,12 @@ function AiWorkflowBlock({
             {workflow.boundary}
           </p>
 
-          <div className="mt-7 space-y-4">
+          <div className="mt-8 space-y-5 sm:mt-7 sm:space-y-4">
             {workflow.supportingNotes.map((note) => (
-              <p key={note} className="border-t border-border/35 pt-4 text-sm leading-7 text-muted-foreground">
+              <p
+                key={note}
+                className="border-t border-border/35 pt-5 text-sm leading-7 text-muted-foreground sm:pt-4"
+              >
                 {note}
               </p>
             ))}
@@ -562,7 +569,7 @@ function AiWorkflowBlock({
             return (
               <section
                 key={step.label}
-                className="relative border-t border-border/35 py-5 md:border-l md:px-4 md:first:border-l-0"
+                className="relative border-t border-border/35 py-6 md:border-l md:px-4 md:py-5 md:first:border-l-0"
               >
                 {stepIndex < workflow.steps.length - 1 ? (
                   <span
@@ -581,12 +588,12 @@ function AiWorkflowBlock({
                     <h4 className="mt-2 text-base font-semibold leading-6 text-foreground">
                       {step.label}
                     </h4>
-                    <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                    <p className="mt-3.5 text-sm leading-7 text-muted-foreground md:mt-3">
                       {step.description}
                     </p>
                     <AiStepLabels labels={step.labels} />
                     {step.notes?.length ? (
-                      <ul className="mt-4 space-y-2 text-xs leading-6 text-muted-foreground">
+                      <ul className="mt-5 space-y-2.5 text-xs leading-6 text-muted-foreground md:mt-4 md:space-y-2">
                         {step.notes.map((note) => (
                           <li key={note} className="flex gap-2">
                             <span
@@ -613,14 +620,14 @@ function AiWorkflowArchitectureSection() {
   const workflowAreas = aiQaWorkflowAreas.slice(0, 3);
 
   return (
-    <AnimatedSection className="mt-14">
-      <div className="border-y border-border/35 py-8 sm:py-10">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.38fr)_minmax(0,0.62fr)] lg:gap-14">
+    <AnimatedSection className="mt-16 sm:mt-14">
+      <div className="border-y border-border/35 py-9 sm:py-10">
+        <div className="grid gap-9 lg:grid-cols-[minmax(0,0.38fr)_minmax(0,0.62fr)] lg:gap-14">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/85">
               Operating model
             </p>
-            <h3 className="mt-4 text-2xl font-semibold leading-tight text-foreground">
+            <h3 className="mt-4 text-2xl font-semibold leading-[1.16] text-foreground sm:leading-tight">
               Two AI-assisted workflows, separated by engineering intent.
             </h3>
           </div>
@@ -630,7 +637,7 @@ function AiWorkflowArchitectureSection() {
               and review. The workflow boundary matters: investigation work should not be confused
               with automation creation.
             </p>
-            <div className="mt-6 grid gap-4 sm:grid-cols-3">
+            <div className="mt-7 grid gap-5 sm:mt-6 sm:grid-cols-3 sm:gap-4">
               {workflowAreas.map((area) => (
                 <div key={area.slug} className="border-t border-border/35 pt-4">
                   <p className="text-sm font-semibold text-foreground">{area.title}</p>
@@ -641,13 +648,13 @@ function AiWorkflowArchitectureSection() {
           </div>
         </div>
 
-        <div className="mt-10 space-y-12">
+        <div className="mt-12 space-y-14 sm:mt-10 sm:space-y-12">
           {aiQaWorkflowModels.map((workflow, index) => (
             <AiWorkflowBlock key={workflow.slug} workflow={workflow} index={index} />
           ))}
         </div>
 
-        <div className="mt-12 border-t border-border/35 pt-8">
+        <div className="mt-14 border-t border-border/35 pt-9 sm:mt-12 sm:pt-8">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,0.34fr)_minmax(0,0.66fr)] lg:gap-12">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/85">
@@ -712,7 +719,7 @@ export default function Home() {
               <p className="mt-6 max-w-[20rem] text-base leading-8 text-muted-foreground sm:max-w-2xl sm:text-lg sm:leading-9">
                 {profile.positioning}
               </p>
-              <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <div className="mt-11 flex flex-col gap-3.5 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-3">
                 <Button asChild className="min-h-12 w-fit max-w-full px-5 text-sm">
                   <a href="#contact">
                     Let&apos;s work together
@@ -750,20 +757,20 @@ export default function Home() {
         <section
           id="about"
           aria-labelledby="about-heading"
-          className="px-6 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+          className="px-6 py-[4.5rem] sm:px-8 sm:py-20 lg:px-10 lg:py-24"
         >
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.64fr)_minmax(18rem,0.36fr)] lg:gap-16">
+          <div className="mx-auto grid max-w-7xl gap-11 lg:grid-cols-[minmax(0,0.64fr)_minmax(18rem,0.36fr)] lg:gap-16">
             <SectionHeading
               id="about-heading"
               eyebrow="Quality ownership"
               title="Quality engineering that helps teams understand risk before it becomes release pressure."
               intro={profile.about.intro}
             />
-            <AnimatedSection className="space-y-5 text-base leading-8 text-muted-foreground">
+            <AnimatedSection className="space-y-6 text-base leading-8 text-muted-foreground sm:space-y-5">
               {profile.about.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
-              <ul className="space-y-4 pt-2">
+              <ul className="space-y-[1.125rem] pt-3 sm:space-y-4 sm:pt-2">
                 {profile.about.principles.map((principle) => (
                   <li key={principle} className="flex gap-3">
                     <CheckCircle2
@@ -781,7 +788,7 @@ export default function Home() {
         <section
           id="expertise"
           aria-labelledby="expertise-heading"
-          className="px-6 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+          className="px-6 py-[4.5rem] sm:px-8 sm:py-20 lg:px-10 lg:py-24"
         >
           <div className="mx-auto max-w-7xl">
             <SectionHeading
@@ -790,7 +797,7 @@ export default function Home() {
               title="A focused quality practice across automation, architecture, delivery feedback, and risk."
               intro="The homepage keeps the signal high: the areas below are the core patterns I bring into product teams."
             />
-            <div className="mt-12 grid gap-x-14 gap-y-10 md:grid-cols-2">
+            <div className="mt-[3.25rem] grid gap-x-14 gap-y-11 md:grid-cols-2">
               {selectedExpertise.map((area) => (
                 <AnimatedSection key={area.slug}>
                   <article className="max-w-xl">
@@ -811,24 +818,24 @@ export default function Home() {
         <section
           id="ai-in-qa"
           aria-labelledby="ai-heading"
-          className="px-6 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+          className="px-6 py-[4.5rem] sm:px-8 sm:py-20 lg:px-10 lg:py-24"
         >
           <div className="mx-auto max-w-7xl">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.68fr)_minmax(17rem,0.32fr)] lg:gap-16">
+            <div className="grid gap-11 lg:grid-cols-[minmax(0,0.68fr)_minmax(17rem,0.32fr)] lg:gap-16">
               <SectionHeading
                 id="ai-heading"
                 eyebrow={aiQaNarrative.eyebrow}
                 title={aiQaNarrative.title}
                 intro={aiQaNarrative.intro}
               />
-              <AnimatedSection className="space-y-5 text-base leading-8 text-muted-foreground">
+              <AnimatedSection className="space-y-6 text-base leading-8 text-muted-foreground sm:space-y-5">
                 {aiQaNarrative.paragraphs.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
               </AnimatedSection>
             </div>
 
-            <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,0.45fr)_minmax(0,0.55fr)] lg:gap-16">
+            <div className="mt-[3.25rem] grid gap-9 lg:grid-cols-[minmax(0,0.45fr)_minmax(0,0.55fr)] lg:gap-16">
               <AnimatedSection>
                 <div className="flex items-start gap-4">
                   <span className="mt-1 text-primary">
@@ -838,7 +845,7 @@ export default function Home() {
                     <h3 className="text-2xl font-semibold text-foreground">
                       Human-in-the-loop by design.
                     </h3>
-                    <ul className="mt-5 space-y-4 text-base leading-8 text-muted-foreground">
+                    <ul className="mt-6 space-y-[1.125rem] text-base leading-8 text-muted-foreground sm:mt-5 sm:space-y-4">
                       {aiQaNarrative.highlights.map((highlight) => (
                         <li key={highlight}>{highlight}</li>
                       ))}
@@ -847,7 +854,7 @@ export default function Home() {
                 </div>
               </AnimatedSection>
               <AnimatedSection>
-                <div className="grid gap-5 sm:grid-cols-2">
+                <div className="grid gap-6 sm:grid-cols-2 sm:gap-5">
                   {aiQaNarrative.tags.map((tag) => (
                     <article key={tag} className="border-t border-border/35 pt-5">
                       <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary/85">
@@ -871,7 +878,7 @@ export default function Home() {
         <section
           id="experience"
           aria-labelledby="experience-heading"
-          className="px-6 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+          className="px-6 py-[4.5rem] sm:px-8 sm:py-20 lg:px-10 lg:py-24"
         >
           <div className="mx-auto max-w-7xl">
             <SectionHeading
@@ -880,7 +887,7 @@ export default function Home() {
               title="A technical growth story across industrial systems, healthcare platforms, automation architecture, and release quality."
               intro="Company-grouped project history with expandable engineering detail: what needed validation, how quality systems were shaped, and where ownership improved release confidence."
             />
-            <div className="mt-14">
+            <div className="mt-16 sm:mt-14">
               {experienceItems.map((company, index) => (
                 <CompanyTimelineItem key={company.slug} company={company} index={index} />
               ))}
@@ -891,10 +898,10 @@ export default function Home() {
         <section
           id="contact"
           aria-labelledby="contact-heading"
-          className="px-6 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28"
+          className="px-6 py-24 sm:px-8 sm:py-24 lg:px-10 lg:py-28"
         >
           <div className="mx-auto max-w-7xl">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.68fr)_minmax(17rem,0.32fr)] lg:items-end lg:gap-16">
+            <div className="grid gap-12 lg:grid-cols-[minmax(0,0.68fr)_minmax(17rem,0.32fr)] lg:items-end lg:gap-16">
               <SectionHeading
                 id="contact-heading"
                 eyebrow="Let's work together"
@@ -902,7 +909,7 @@ export default function Home() {
                 intro="Open to selected QA leadership, automation architecture, AI-assisted QA workflow, mentoring, and speaking conversations."
               />
               <AnimatedSection>
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-3.5 sm:gap-3">
                   {primaryContactLinks.map((link) => {
                     if (!link) return null;
                     const Icon = contactIconMap[link.label as keyof typeof contactIconMap] ?? Mail;
@@ -913,7 +920,7 @@ export default function Home() {
                         href={link.href}
                         target={link.href.startsWith("http") ? "_blank" : undefined}
                         rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="group inline-flex items-center justify-between gap-4 border-t border-border/35 py-4 text-foreground transition-colors hover:text-primary"
+                        className="group inline-flex min-h-14 items-center justify-between gap-4 border-t border-border/35 py-[1.125rem] text-foreground transition-colors hover:text-primary sm:min-h-0 sm:py-4"
                       >
                         <span className="inline-flex items-center gap-3">
                           <Icon aria-hidden="true" className="size-4" />
@@ -924,7 +931,7 @@ export default function Home() {
                     );
                   })}
                 </div>
-                <Button asChild className="mt-8 min-h-12 w-full px-5 text-sm sm:w-auto">
+                <Button asChild className="mt-9 min-h-12 w-full px-5 text-sm sm:mt-8 sm:w-auto">
                   <a href={contactHref}>
                     Start a conversation
                     <Mail aria-hidden="true" className="size-4" />
