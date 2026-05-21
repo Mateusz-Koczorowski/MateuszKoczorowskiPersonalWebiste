@@ -18,23 +18,35 @@ export type AiMcpIntegration = {
 export type AiWorkflowStep = {
   label: string;
   description: string;
+  notes?: string[];
+  labels?: string[];
+};
+
+export type AiWorkflowModel = {
+  slug: string;
+  eyebrow: string;
+  title: string;
+  summary: string;
+  boundary: string;
+  steps: AiWorkflowStep[];
+  supportingNotes: string[];
 };
 
 export const aiQaNarrative = {
   eyebrow: "AI in QA",
   title: "AI-assisted QA workflows built around orchestration, not replacement.",
   intro:
-    "My AI work has evolved into a deliberate QA engineering workflow: specialized agents, reusable skills, MCP integrations, and reviewed processes that connect ticket analysis, planning, automation, and review.",
+    "My AI work is organized into two deliberate QA engineering workflows: investigation and testing on one side, automation creation and review on the other.",
   paragraphs: [
     "The goal is not to hand testing over to a model. The value is orchestration: using AI to prepare structure, surface blind spots, and accelerate routine analysis while a human engineer owns risk, architecture, and release confidence.",
-    "I use OpenAI Codex and Claude Code for modular Playwright and Cypress workflows, Jira-driven planning, structured reviews, application exploration, and documentation tied to delivery context.",
+    "I use OpenAI Codex, Claude Code, reusable review skills, and MCP integrations for Jira-driven analysis, application exploration, automation drafting, and documentation tied to delivery context.",
   ],
   highlights: [
     "Human review stays present at every quality decision.",
-    "Reusable skills support automation, planning, reporting, and review.",
+    "Workflow boundaries separate QA investigation from automation engineering.",
     "MCP integrations connect tickets, code, browsers, and design context.",
   ],
-  tags: ["OpenAI Codex", "Claude Code", "AI agents", "MCP", "workflow orchestration"],
+  tags: ["OpenAI Codex", "Claude Code", "review skills", "MCP", "workflow boundaries"],
 } as const;
 
 export const aiQaWorkflowAreas = [
@@ -182,34 +194,44 @@ export const aiPracticalWorkflowExample = {
     "A realistic workflow starts with a ticket and ends with reviewed engineering output. AI carries context between steps, while the QA engineer keeps ownership of risk, evidence, and final decisions.",
   steps: [
     {
-      label: "Analyze the Jira ticket",
+      label: "Jira Ticket",
       description:
-        "Extract acceptance criteria, risk areas, missing questions, test conditions, and likely regression scope.",
+        "Start from delivery context: acceptance criteria, linked discussions, constraints, and open questions.",
     },
     {
-      label: "Inspect the application",
+      label: "Risk Analysis",
       description:
-        "Use Playwright MCP or browser tooling to validate the actual UI workflow and compare assumptions with product behavior.",
+        "Extract quality risks, ambiguous requirements, impacted workflows, and likely regression scope.",
     },
     {
-      label: "Generate automation structure",
+      label: "AI-assisted Test Planning",
       description:
-        "Draft a Playwright or Cypress test outline using reusable skills, framework conventions, and feature-oriented test data.",
+        "Draft scenario groups, exploratory notes, data needs, and automation candidates for human review.",
     },
     {
-      label: "Review and harden tests",
+      label: "Playwright MCP Exploration",
       description:
-        "Use specialized review workflows to check intent, selectors, assertions, maintainability, and gaps before code review.",
+        "Inspect real application behavior and validate assumptions before committing to automation design.",
     },
     {
-      label: "Validate scenarios",
+      label: "Automation Draft Generation",
+      description:
+        "Generate Playwright or Cypress structure using project conventions, reusable skills, selectors, and fixtures.",
+    },
+    {
+      label: "Review Workflow",
+      description:
+        "Check intent, maintainability, assertion quality, selector stability, and coverage gaps before code review.",
+    },
+    {
+      label: "Scenario Validation",
       description:
         "Run or inspect the scenario path, refine edge cases, and separate useful coverage from checks that would add noise.",
     },
     {
-      label: "Prepare defect report",
+      label: "Defect Reporting",
       description:
-        "If a problem is found, turn evidence into a structured Jira-ready report with context, reproduction steps, and technical notes.",
+        "Turn evidence into a structured Jira-ready report with reproduction steps, scope, and technical notes.",
     },
   ] satisfies readonly AiWorkflowStep[],
   tags: [
@@ -219,6 +241,111 @@ export const aiPracticalWorkflowExample = {
     "productivity optimization",
   ],
 } as const;
+
+export const aiQaWorkflowModels = [
+  {
+    slug: "qa-investigation-workflow",
+    eyebrow: "Workflow 01",
+    title: "AI-assisted QA investigation workflow",
+    summary:
+      "Real QA execution work: ticket analysis, risk planning, MCP-assisted application exploration, validation, and structured defect reporting.",
+    boundary:
+      "This workflow does not generate automation. It supports investigation, planning, testing, validation, and reporting.",
+    steps: [
+      {
+        label: "Jira ticket analysis",
+        description:
+          "Analyze tickets, acceptance criteria, linked discussions, merge requests, code changes, and implementation context.",
+        notes: ["Identify quality risks", "Map impacted areas", "Surface open questions"],
+        labels: ["ENGINEERING WORKFLOW", "HUMAN REVIEW REQUIRED"],
+      },
+      {
+        label: "Risk and test planning",
+        description:
+          "Define regression scope, exploratory areas, manual validation paths, automation gaps, and testing priority.",
+        notes: ["Prioritize risk", "Separate manual and automated coverage", "Clarify validation depth"],
+        labels: ["QA EXECUTION", "REVIEW DISCIPLINE"],
+      },
+      {
+        label: "MCP-assisted application exploration",
+        description:
+          "Use Playwright MCP to inspect real application behavior, UI states, browser behavior, flows, and edge cases.",
+        notes: ["Validate assumptions", "Compare ticket intent with implementation", "Observe real product behavior"],
+        labels: ["MCP-ASSISTED"],
+      },
+      {
+        label: "QA execution",
+        description:
+          "Perform exploratory testing, regression checks, existing automation validation, manual scenario verification, API validation, and cross-flow validation.",
+        notes: ["Execute scenarios", "Validate integrations", "Check regression-sensitive paths"],
+        labels: ["QA EXECUTION", "HUMAN REVIEW REQUIRED"],
+      },
+      {
+        label: "Defect reporting",
+        description:
+          "Create structured Jira-ready defect reports with evidence, reproduction steps, implementation observations, and risk context.",
+        notes: ["Attach evidence", "Include reproduction path", "Explain engineering impact"],
+        labels: ["REVIEW DISCIPLINE"],
+      },
+    ],
+    supportingNotes: [
+      "AI helps structure context and reduce preparation time, but the QA engineer owns risk interpretation.",
+      "MCP tooling is used to observe the real product before finalizing conclusions.",
+      "The output is better investigation quality, clearer validation scope, and more actionable defect reporting.",
+    ],
+  },
+  {
+    slug: "automation-engineering-workflow",
+    eyebrow: "Workflow 02",
+    title: "AI-assisted automation engineering workflow",
+    summary:
+      "Automation creation and review work: test analysis, application exploration, framework-aware draft generation, dedicated review, and final pull-request preparation.",
+    boundary:
+      "This workflow is specifically for automation engineering. It starts from reviewed test scope and ends with implementation prepared for normal engineering review.",
+    steps: [
+      {
+        label: "Xray / Jira test analysis",
+        description:
+          "Analyze existing test cases, acceptance criteria, reusable patterns, automation scope, and framework conventions.",
+        notes: ["Review existing coverage", "Identify reusable patterns", "Confirm automation value"],
+        labels: ["ENGINEERING WORKFLOW", "HUMAN REVIEW REQUIRED"],
+      },
+      {
+        label: "Application exploration with Playwright MCP",
+        description:
+          "Inspect real application behavior, selectors, flows, UI states, and edge cases before implementation.",
+        notes: ["Validate selectors", "Check UI state transitions", "Observe edge paths"],
+        labels: ["MCP-ASSISTED"],
+      },
+      {
+        label: "Automation draft generation",
+        description:
+          "Generate Playwright or Cypress test structure using existing framework architecture, fixtures, selectors, utilities, and patterns.",
+        notes: ["Reuse fixtures", "Follow local architecture", "Avoid one-off test structure"],
+        labels: ["IMPLEMENTATION SUPPORT"],
+      },
+      {
+        label: "Automation review workflow",
+        description:
+          "Review generated code with dedicated review skills and Codex reviewer validation for maintainability, assertions, negative paths, and framework consistency.",
+        notes: ["Validate assertions", "Check maintainability", "Review negative paths"],
+        labels: ["REVIEW DISCIPLINE", "HUMAN REVIEW REQUIRED"],
+      },
+      {
+        label: "Final automation preparation",
+        description:
+          "Refine implementation, improve readability, align with project conventions, and prepare for pull request review.",
+        notes: ["Polish readability", "Align naming", "Prepare PR-ready code"],
+        labels: ["ENGINEERING WORKFLOW"],
+      },
+    ],
+    supportingNotes: [
+      "AI accelerates scaffolding, but architecture, test intent, and review quality remain engineering responsibilities.",
+      "Application exploration happens before code generation so automation reflects observed product behavior.",
+      "The output is maintainable automation prepared for normal pull request review, not one-click testing.",
+    ],
+  },
+] as const satisfies readonly AiWorkflowModel[];
 
 export const aiWorkflowImpact = [
   "Routine QA preparation becomes faster without removing engineering review.",

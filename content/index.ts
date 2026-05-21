@@ -2,6 +2,7 @@ export { contactLinks, socialLinks } from "./contact";
 export {
   aiMcpIntegrations,
   aiPracticalWorkflowExample,
+  aiQaWorkflowModels,
   aiQaNarrative,
   aiQaWorkflowAreas,
   aiWorkflowImpact,

@@ -2,14 +2,22 @@ import {
   ArrowRight,
   Award,
   Bot,
+  Bug,
   CheckCircle2,
   CircleDot,
+  ClipboardCheck,
+  Code2,
+  FileText,
   Github,
+  MonitorCheck,
   Linkedin,
   Mail,
+  SearchCheck,
+  ShieldCheck,
   Workflow,
 } from "lucide-react";
 import Image from "next/image";
+import type { ReactNode } from "react";
 
 import { AnimatedSection } from "@/components/animated-section";
 import { Disclosure } from "@/components/disclosure";
@@ -17,7 +25,9 @@ import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import {
   aiMcpIntegrations,
+  aiQaWorkflowModels,
   aiQaNarrative,
+  aiQaWorkflowAreas,
   contactLinks,
   expertiseAreas,
   professionalExperience,
@@ -25,6 +35,7 @@ import {
   socialLinks,
 } from "@/content";
 import type { CompanyExperience, ProjectContribution } from "@/content/experience";
+import { cn } from "@/lib/utils";
 
 const profileImagePath = "/images/profile/profile-photo.jpg";
 
@@ -45,6 +56,30 @@ const contactIconMap = {
   LinkedIn: Linkedin,
   GitHub: Github,
 };
+
+const aiInvestigationWorkflowIcons = [FileText, ShieldCheck, MonitorCheck, SearchCheck, Bug];
+const aiAutomationWorkflowIcons = [ClipboardCheck, MonitorCheck, Code2, SearchCheck, CheckCircle2];
+
+function ExperienceBadge({
+  children,
+  tone = "default",
+}: {
+  children: ReactNode;
+  tone?: "default" | "strong";
+}) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center rounded-full border px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em]",
+        tone === "strong"
+          ? "border-primary/30 bg-primary/10 text-primary shadow-[0_0_24px_oklch(0.78_0.12_190_/_0.08)]"
+          : "border-border/55 text-muted-foreground",
+      )}
+    >
+      {children}
+    </span>
+  );
+}
 
 function formatDateRange(dateRange?: { start: string; end?: string; displayLabel?: string }) {
   if (!dateRange) return "";
@@ -128,55 +163,63 @@ function DetailList({ items }: { items: readonly string[] }) {
 function RoleProgression({ company }: { company: CompanyExperience }) {
   if (company.roleMilestones?.length) {
     return (
-      <div className="mt-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/85">
-          Role evolution
-        </p>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+      <div className="mt-9 border-t border-border/35 pt-7">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/85">
+            Role evolution
+          </p>
+          <p className="text-xs leading-6 text-muted-foreground">
+            QA foundations into senior automation and quality ownership
+          </p>
+        </div>
+        <div className="mt-5 grid gap-4 sm:grid-cols-2">
           {company.roleMilestones.map((milestone, index) => (
-          <article
-            key={`${milestone.title}-${milestone.dates.displayLabel}`}
-            className={`relative border-l py-1 pl-5 ${
-              milestone.isPromotion
-                ? "border-primary"
-                : "border-border/60 sm:border-border/45"
-            }`}
-          >
-            <span
-              aria-hidden="true"
-              className={`absolute -left-[0.3125rem] top-2 size-2.5 rounded-full border ${
-                milestone.isPromotion
-                  ? "border-primary bg-primary shadow-[0_0_0_6px_oklch(0.78_0.12_190_/_0.1)]"
-                  : "border-border bg-background"
-              }`}
-            />
-            <p className="text-sm text-muted-foreground">{formatDateRange(milestone.dates)}</p>
-            <div className="mt-2 flex flex-wrap items-center gap-3">
-              <h4 className="text-lg font-semibold leading-tight text-foreground">
-                {milestone.title}
-              </h4>
-              {milestone.isPromotion ? (
-                <span className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                  <Award aria-hidden="true" className="size-3.5" />
-                  Promoted
-                </span>
-              ) : null}
-              {milestone.dates.isCurrent ? (
-                <span className="rounded-full border border-primary/20 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-primary">
-                  Current
-                </span>
-              ) : null}
-            </div>
-            {milestone.note ? (
-              <p className="mt-3 text-sm leading-7 text-muted-foreground">{milestone.note}</p>
-            ) : null}
-            {index < company.roleMilestones!.length - 1 ? (
-              <div
+            <article
+              key={`${milestone.title}-${milestone.dates.displayLabel}`}
+              className={cn(
+                "relative border-l py-1 pl-5",
+                milestone.isPromotion ? "border-primary" : "border-border/60 sm:border-border/45",
+              )}
+            >
+              <span
                 aria-hidden="true"
-                className="absolute -right-2 top-1/2 hidden h-px w-4 bg-primary/30 sm:block"
+                className={cn(
+                  "absolute -left-[0.3125rem] top-2 size-2.5 rounded-full border",
+                  milestone.isPromotion
+                    ? "border-primary bg-primary shadow-[0_0_0_6px_oklch(0.78_0.12_190_/_0.1)]"
+                    : "border-border bg-background",
+                )}
               />
-            ) : null}
-          </article>
+              <p className="text-sm text-muted-foreground">{formatDateRange(milestone.dates)}</p>
+              <div className="mt-2 flex flex-wrap items-center gap-3">
+                <h4
+                  className={cn(
+                    "text-lg font-semibold leading-tight",
+                    milestone.dates.isCurrent ? "text-foreground" : "text-foreground/90",
+                  )}
+                >
+                  {milestone.title}
+                </h4>
+                {milestone.isPromotion ? (
+                  <span className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                    <Award aria-hidden="true" className="size-3.5" />
+                    Promoted
+                  </span>
+                ) : null}
+                {milestone.dates.isCurrent ? (
+                  <ExperienceBadge tone="strong">Current role</ExperienceBadge>
+                ) : null}
+              </div>
+              {milestone.note ? (
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">{milestone.note}</p>
+              ) : null}
+              {index < company.roleMilestones!.length - 1 ? (
+                <div
+                  aria-hidden="true"
+                  className="absolute -right-2 top-1/2 hidden h-px w-4 bg-primary/30 sm:block"
+                />
+              ) : null}
+            </article>
           ))}
         </div>
       </div>
@@ -211,7 +254,7 @@ function OwnershipDetailGrid({ project }: { project: ProjectContribution }) {
   if (!ownershipDetails?.length) return <DetailList items={project.responsibilities} />;
 
   return (
-    <div className="grid gap-5 md:grid-cols-2">
+    <div className="grid gap-x-7 gap-y-6 md:grid-cols-2">
       {ownershipDetails.map((item) => (
         <section key={item.title} className="border-t border-border/35 pt-5">
           <p className="flex items-center gap-2 text-sm font-semibold text-foreground">
@@ -230,28 +273,29 @@ function ProjectCaseStudy({ project }: { project: ProjectContribution }) {
 
   return (
     <article
-      className={`border-t py-9 first:border-t-0 first:pt-0 ${
-        isCurrent ? "border-primary/35" : "border-border/35"
-      }`}
+      className={cn(
+        "border-t py-9 first:border-t-0 first:pt-0 sm:py-10",
+        isCurrent ? "border-primary/35" : "border-border/35",
+      )}
     >
-      <div className="grid gap-6 lg:grid-cols-[minmax(9rem,0.22fr)_minmax(0,1fr)] lg:gap-10">
+      <div className="grid gap-6 lg:grid-cols-[minmax(10rem,0.23fr)_minmax(0,1fr)] lg:gap-10">
         <div>
           <div className="flex flex-wrap items-center gap-3">
             <p className="text-sm font-medium text-primary">{formatDateRange(project.duration)}</p>
-            {isCurrent ? (
-              <span className="rounded-full border border-primary/25 bg-primary/10 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-primary">
-                Current
-              </span>
-            ) : null}
+            {isCurrent ? <ExperienceBadge tone="strong">Present</ExperienceBadge> : null}
           </div>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">{project.roleInProject}</p>
         </div>
         <div>
-          <p className="text-sm text-muted-foreground">{project.domain}</p>
+          <div className="flex flex-wrap items-center gap-3">
+            <p className="text-sm text-muted-foreground">{project.domain}</p>
+            {isCurrent ? <ExperienceBadge>Active case study</ExperienceBadge> : null}
+          </div>
           <h4
-            className={`mt-2 text-2xl font-semibold leading-tight ${
-              isCurrent ? "text-foreground" : "text-foreground/92"
-            }`}
+            className={cn(
+              "mt-2 text-2xl font-semibold leading-tight sm:text-[1.7rem]",
+              isCurrent ? "text-foreground" : "text-foreground/92",
+            )}
           >
             {project.anonymizedName}
           </h4>
@@ -275,19 +319,21 @@ function ProjectCaseStudy({ project }: { project: ProjectContribution }) {
 
           <Disclosure
             label="Open engineering case study"
-            className={`mt-7 border-y py-5 ${
-              isCurrent ? "border-primary/25" : "border-border/35"
-            }`}
-            contentClassName="mt-7 grid gap-8 lg:grid-cols-[minmax(0,0.64fr)_minmax(15rem,0.36fr)]"
+            className={cn(
+              "mt-7 border-y py-5",
+              isCurrent ? "border-primary/25" : "border-border/35",
+            )}
+            buttonClassName="py-2"
+            contentClassName="mt-8 grid gap-9 pb-1 lg:grid-cols-[minmax(0,0.64fr)_minmax(15rem,0.36fr)]"
           >
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/85">
                 Technical ownership
               </p>
-              <div className="mt-1">
+              <div className="mt-3">
                 <OwnershipDetailGrid project={project} />
               </div>
-              <div className="mt-8 border-t border-border/35 pt-6">
+              <div className="mt-9 border-t border-border/35 pt-6">
                 <p className="text-sm font-semibold text-foreground">
                   Responsibilities and QA strategy
                 </p>
@@ -341,12 +387,17 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
   return (
     <AnimatedSection>
       <article
-        className={`grid grid-cols-[1.5rem_minmax(0,1fr)] gap-x-5 pb-20 last:pb-0 lg:grid-cols-[minmax(11rem,0.22fr)_2.25rem_minmax(0,1fr)] lg:gap-x-10 ${
-          isCurrentCompany ? "relative" : ""
-        }`}
+        className={cn(
+          "grid grid-cols-[1.5rem_minmax(0,1fr)] gap-x-5 pb-20 last:pb-0 lg:grid-cols-[minmax(11rem,0.22fr)_2.25rem_minmax(0,1fr)] lg:gap-x-10",
+          index > 0 && "pt-2",
+          isCurrentCompany && "relative",
+        )}
       >
         <div className="hidden lg:block">
-          <p className="text-sm font-medium text-primary">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            Chapter {String(index + 1).padStart(2, "0")}
+          </p>
+          <p className="mt-3 text-sm font-medium text-primary">
             {formatDateRange(company.employmentDates)}
           </p>
           <h3 className="mt-2 text-3xl font-semibold leading-tight text-foreground">
@@ -354,11 +405,7 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
           </h3>
           <div className="mt-3 flex flex-wrap items-center gap-3 text-sm leading-7 text-muted-foreground">
             <span>{company.roleTitle}</span>
-            {isCurrentCompany ? (
-              <span className="rounded-full border border-primary/25 bg-primary/10 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-primary">
-                Present
-              </span>
-            ) : null}
+            {isCurrentCompany ? <ExperienceBadge tone="strong">Present</ExperienceBadge> : null}
           </div>
         </div>
 
@@ -385,7 +432,10 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
 
         <div>
           <div className="lg:hidden">
-            <p className="text-sm font-medium text-primary">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              Chapter {String(index + 1).padStart(2, "0")}
+            </p>
+            <p className="mt-3 text-sm font-medium text-primary">
               {formatDateRange(company.employmentDates)}
             </p>
             <h3 className="mt-2 text-3xl font-semibold leading-tight text-foreground">
@@ -393,24 +443,31 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
             </h3>
             <div className="mt-3 flex flex-wrap items-center gap-3 text-sm leading-7 text-muted-foreground">
               <span>{company.roleTitle}</span>
-              {isCurrentCompany ? (
-                <span className="rounded-full border border-primary/25 bg-primary/10 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-primary">
-                  Present
-                </span>
-              ) : null}
+              {isCurrentCompany ? <ExperienceBadge tone="strong">Present</ExperienceBadge> : null}
             </div>
           </div>
 
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-foreground/88 lg:mt-0">
-            {company.contextDescription}
-          </p>
+          <div
+            className={cn(
+              "mt-6 max-w-4xl border-t pt-6 lg:mt-0",
+              isCurrentCompany ? "border-primary/30" : "border-border/35",
+            )}
+          >
+            <p className="max-w-3xl text-lg leading-8 text-foreground/88">
+              {company.contextDescription}
+            </p>
+          </div>
           <RoleProgression company={company} />
 
           {company.organizationalContributions?.length ? (
             <Disclosure
               label="View company-level ownership"
-              className="mt-8 border-y border-border/35 py-5"
-              contentClassName="mt-6 grid gap-7 md:grid-cols-2"
+              className={cn(
+                "mt-8 border-y py-5",
+                isCurrentCompany ? "border-primary/25" : "border-border/35",
+              )}
+              buttonClassName="py-2"
+              contentClassName="mt-7 grid gap-7 pb-1 md:grid-cols-2"
             >
               <div>
                 <p className="text-sm font-semibold text-foreground">
@@ -427,10 +484,15 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
             </Disclosure>
           ) : null}
 
-          <div className="mt-10">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary/85">
-              Project case studies
-            </p>
+          <div className="mt-11">
+            <div className="flex flex-wrap items-end justify-between gap-3">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary/85">
+                Project case studies
+              </p>
+              <p className="text-xs leading-6 text-muted-foreground">
+                {orderedProjects.length} {orderedProjects.length === 1 ? "case" : "cases"}
+              </p>
+            </div>
             <div className="mt-5">
               {orderedProjects.map((project) => (
                 <ProjectCaseStudy key={project.slug} project={project} />
@@ -439,6 +501,181 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
           </div>
         </div>
       </article>
+    </AnimatedSection>
+  );
+}
+
+function AiStepLabels({ labels }: { labels?: readonly string[] }) {
+  if (!labels?.length) return null;
+
+  return (
+    <div className="mt-4 flex flex-wrap gap-2">
+      {labels.map((label) => (
+        <span
+          key={label}
+          className="rounded-full border border-primary/20 px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-primary/85"
+        >
+          {label}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function AiWorkflowBlock({
+  workflow,
+  index,
+}: {
+  workflow: (typeof aiQaWorkflowModels)[number];
+  index: number;
+}) {
+  const icons = index === 0 ? aiInvestigationWorkflowIcons : aiAutomationWorkflowIcons;
+
+  return (
+    <article className="border-t border-border/35 pt-8 first:border-t-0 first:pt-0">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,0.34fr)_minmax(0,0.66fr)] lg:gap-12">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/85">
+            {workflow.eyebrow}
+          </p>
+          <h3 className="mt-4 text-2xl font-semibold leading-tight text-foreground">
+            {workflow.title}
+          </h3>
+          <p className="mt-5 text-base leading-8 text-muted-foreground">{workflow.summary}</p>
+          <p className="mt-5 border-l border-primary/35 pl-4 text-sm leading-7 text-foreground/86">
+            {workflow.boundary}
+          </p>
+
+          <div className="mt-7 space-y-4">
+            {workflow.supportingNotes.map((note) => (
+              <p key={note} className="border-t border-border/35 pt-4 text-sm leading-7 text-muted-foreground">
+                {note}
+              </p>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid gap-0 md:grid-cols-5">
+          {workflow.steps.map((step, stepIndex) => {
+            const Icon = icons[stepIndex] ?? Workflow;
+
+            return (
+              <section
+                key={step.label}
+                className="relative border-t border-border/35 py-5 md:border-l md:px-4 md:first:border-l-0"
+              >
+                {stepIndex < workflow.steps.length - 1 ? (
+                  <span
+                    aria-hidden="true"
+                    className="absolute left-4 top-full h-5 w-px bg-primary/35 md:left-auto md:right-0 md:top-8 md:h-px md:w-5"
+                  />
+                ) : null}
+                <div className="flex items-start gap-4 md:block">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-sm border border-primary/25 bg-primary/10 text-primary">
+                    <Icon aria-hidden="true" className="size-4" />
+                  </span>
+                  <div className="md:mt-4">
+                    <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-primary/85">
+                      Step {String(stepIndex + 1).padStart(2, "0")}
+                    </p>
+                    <h4 className="mt-2 text-base font-semibold leading-6 text-foreground">
+                      {step.label}
+                    </h4>
+                    <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                      {step.description}
+                    </p>
+                    <AiStepLabels labels={step.labels} />
+                    {step.notes?.length ? (
+                      <ul className="mt-4 space-y-2 text-xs leading-6 text-muted-foreground">
+                        {step.notes.map((note) => (
+                          <li key={note} className="flex gap-2">
+                            <span
+                              aria-hidden="true"
+                              className="mt-2.5 size-1 shrink-0 rounded-full bg-primary/70"
+                            />
+                            <span>{note}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
+                </div>
+              </section>
+            );
+          })}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function AiWorkflowArchitectureSection() {
+  const workflowAreas = aiQaWorkflowAreas.slice(0, 3);
+
+  return (
+    <AnimatedSection className="mt-14">
+      <div className="border-y border-border/35 py-8 sm:py-10">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.38fr)_minmax(0,0.62fr)] lg:gap-14">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/85">
+              Operating model
+            </p>
+            <h3 className="mt-4 text-2xl font-semibold leading-tight text-foreground">
+              Two AI-assisted workflows, separated by engineering intent.
+            </h3>
+          </div>
+          <div>
+            <p className="text-base leading-8 text-muted-foreground">
+              AI is used as structured support for analysis, exploration, planning, implementation,
+              and review. The workflow boundary matters: investigation work should not be confused
+              with automation creation.
+            </p>
+            <div className="mt-6 grid gap-4 sm:grid-cols-3">
+              {workflowAreas.map((area) => (
+                <div key={area.slug} className="border-t border-border/35 pt-4">
+                  <p className="text-sm font-semibold text-foreground">{area.title}</p>
+                  <p className="mt-2 text-sm leading-7 text-muted-foreground">{area.summary}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-10 space-y-12">
+          {aiQaWorkflowModels.map((workflow, index) => (
+            <AiWorkflowBlock key={workflow.slug} workflow={workflow} index={index} />
+          ))}
+        </div>
+
+        <div className="mt-12 border-t border-border/35 pt-8">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,0.34fr)_minmax(0,0.66fr)] lg:gap-12">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/85">
+                Tooling context
+              </p>
+              <h3 className="mt-4 text-xl font-semibold text-foreground">
+                MCP integrations support specific workflow moments.
+              </h3>
+              <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                Tooling is presented as connected engineering context, not as autonomous QA.
+              </p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {aiMcpIntegrations.map((integration) => (
+                <article key={integration.slug} className="border-t border-border/35 pt-5">
+                  <div className="flex items-center gap-3">
+                    <Workflow aria-hidden="true" className="size-4 text-primary" />
+                    <h4 className="font-semibold text-foreground">{integration.title}</h4>
+                  </div>
+                  <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                    {integration.summary}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </AnimatedSection>
   );
 }
@@ -611,20 +848,23 @@ export default function Home() {
               </AnimatedSection>
               <AnimatedSection>
                 <div className="grid gap-5 sm:grid-cols-2">
-                  {aiMcpIntegrations.slice(0, 4).map((integration) => (
-                    <article key={integration.slug} className="border-t border-border/35 pt-5">
-                      <div className="flex items-center gap-3">
-                        <Workflow aria-hidden="true" className="size-4 text-primary" />
-                        <h4 className="font-semibold text-foreground">{integration.title}</h4>
-                      </div>
+                  {aiQaNarrative.tags.map((tag) => (
+                    <article key={tag} className="border-t border-border/35 pt-5">
+                      <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary/85">
+                        Workflow signal
+                      </p>
+                      <h4 className="mt-2 font-semibold text-foreground">{tag}</h4>
                       <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                        {integration.summary}
+                        Used as part of a reviewed QA process, not as an autonomous replacement for
+                        engineering judgment.
                       </p>
                     </article>
                   ))}
                 </div>
               </AnimatedSection>
             </div>
+
+            <AiWorkflowArchitectureSection />
           </div>
         </section>
 

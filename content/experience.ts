@@ -60,7 +60,7 @@ export const professionalExperience = [
       "AI, Data, and Cloud engineering consultancy with strong Python engineering roots, delivering scalable enterprise systems, digital platforms, and modern software solutions for international clients.",
     roleMilestones: [
       {
-        title: "Regular QA Engineer",
+        title: "Regular+ QA Engineer",
         dates: {
           start: "07.2024",
           end: "07.2025",
@@ -91,7 +91,7 @@ export const professionalExperience = [
           end: "01.2025",
           displayLabel: "07.2024 - 01.2025",
         },
-        roleInProject: "Senior QA Engineer / automation and quality strategy ownership",
+        roleInProject: "Regular+ QA Engineer / automation and quality strategy ownership",
         summary:
           "Large-scale monitoring platform visualizing operational and sensor-driven industrial data, anomaly detection signals, and analytical workflows.",
         challenge:
@@ -119,6 +119,16 @@ export const professionalExperience = [
             title: "Data & Visualization Validation",
             detail:
               "Focused validation on analytical flows, operational data behavior, and visualization states where defects could distort product interpretation.",
+          },
+          {
+            title: "Risk-based Testing",
+            detail:
+              "Prioritized coverage around high-risk analytical and operational flows, balancing automation with manual investigation where system behavior needed context.",
+          },
+          {
+            title: "Exploratory Testing",
+            detail:
+              "Used exploratory testing to probe edge cases in visualization behavior, data interpretation, and product states that were difficult to express as stable automated checks.",
           },
           {
             title: "Collaboration & Process Improvement",
@@ -171,14 +181,24 @@ export const professionalExperience = [
               "Kept automated regression and manual release checks aligned with high-quality clinical research expectations and recurring delivery needs.",
           },
           {
+            title: "API & Integration Testing",
+            detail:
+              "Validated cross-system behavior around important product workflows, using integration-focused checks to support confidence beyond the UI layer.",
+          },
+          {
             title: "Exploratory Testing",
             detail:
               "Used exploratory sessions to investigate product behavior around important workflows, complementing automation with human judgment.",
           },
           {
+            title: "Risk-based Testing",
+            detail:
+              "Prioritized validation around workflow risk, regression sensitivity, and areas where product changes needed careful release review.",
+          },
+          {
             title: "AI-assisted Workflows",
             detail:
-              "Worked in an AI-driven product context with attention to practical validation, review discipline, and maintainable QA workflows.",
+              "Worked in an AI-driven product context with attention to practical validation, review discipline, and maintainable human-in-the-loop QA workflows.",
           },
         ],
         techStack: ["Cypress", "Playwright", "TypeScript", "End-to-End Testing"],
@@ -233,7 +253,7 @@ export const professionalExperience = [
           end: "04.2024",
           displayLabel: "03.2023 - 04.2024",
         },
-        roleInProject: "QA Specialist / hardware-connected web platform validation",
+        roleInProject: "Regular QA Specialist / hardware-connected web platform validation",
         summary:
           "Web-based platform integrated with dedicated physical emergency lighting hardware devices and embedded touch interfaces.",
         challenge:
@@ -266,6 +286,11 @@ export const professionalExperience = [
             title: "Technical Challenges",
             detail:
               "Balanced application testing, backend interactions, and physical-device constraints in an environment where quality depended on the full system.",
+          },
+          {
+            title: "Risk-based Testing",
+            detail:
+              "Prioritized emergency, failover, integration, and device-state scenarios where defects would carry higher operational consequence.",
           },
         ],
         techStack: ["Vue.js", "TypeScript", "Python", "FastAPI", "C++", "Linux", "Cypress"],
@@ -318,6 +343,11 @@ export const professionalExperience = [
               "Integrated automated checks into GitLab CI/CD so regression feedback became part of the delivery workflow.",
           },
           {
+            title: "Risk-based Testing",
+            detail:
+              "Focused test design on data flows, measurement interpretation, and regression-prone user journeys where external API behavior affected product trust.",
+          },
+          {
             title: "Collaboration & Mentoring",
             detail:
               "Partnered with developers on QA improvements and supported junior QA engineers in practical automation and validation work.",
@@ -343,7 +373,7 @@ export const professionalExperience = [
           end: "03.2024",
           displayLabel: "02.2024 - 03.2024",
         },
-        roleInProject: "QA Specialist / exploratory quality support",
+        roleInProject: "Regular QA Specialist / exploratory quality support",
         summary:
           "AI-related analytics platform where QA work focused on exploratory validation, product behavior review, and practical investigation.",
         challenge:
@@ -368,6 +398,11 @@ export const professionalExperience = [
             title: "AI-assisted Quality Context",
             detail:
               "Focused on practical quality review around AI-supported workflows, keeping the public case study intentionally lightweight.",
+          },
+          {
+            title: "Risk-based Testing",
+            detail:
+              "Kept validation centered on analytical workflow risk, unclear behavior, and findings that needed structured engineering follow-up.",
           },
         ],
         techStack: ["AI Analytics", "Exploratory Testing", "Web Application Testing"],
