@@ -15,8 +15,8 @@ export function AnimatedSection({ children, className }: AnimatedSectionProps) {
   return (
     <motion.div
       className={cn(className)}
-      initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+      initial={false}
+      whileInView={reduceMotion ? undefined : { y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.45, ease: "easeOut" }}
     >

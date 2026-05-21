@@ -4,6 +4,7 @@ export type ProjectContribution = {
   slug: string;
   anonymizedName: string;
   domain: string;
+  displayOrder?: number;
   duration?: DateRange;
   roleInProject: string;
   summary: string;
@@ -24,6 +25,12 @@ export type CompanyExperience = {
   logoPath?: string;
   roleTitle: string;
   roleProgression?: string[];
+  roleMilestones?: {
+    title: string;
+    dates: DateRange;
+    note?: string;
+    isPromotion?: boolean;
+  }[];
   employmentDates?: DateRange;
   contextDescription: string;
   projects: ProjectContribution[];
@@ -47,11 +54,34 @@ export const professionalExperience = [
     },
     contextDescription:
       "European software engineering company delivering industrial, healthcare, and AI-driven digital platforms.",
+    roleMilestones: [
+      {
+        title: "Regular QA Engineer",
+        dates: {
+          start: "07.2024",
+          end: "07.2025",
+          displayLabel: "07.2024 - 07.2025",
+        },
+        note: "Built trust through automation ownership, QA strategy work, and delivery impact across production systems.",
+      },
+      {
+        title: "Senior QA Engineer",
+        dates: {
+          start: "07.2025",
+          end: "Present",
+          isCurrent: true,
+          displayLabel: "07.2025 - Present",
+        },
+        note: "Promoted to Senior QA Engineer with broader ownership across automation architecture, mentoring, AI-assisted workflows, and quality strategy.",
+        isPromotion: true,
+      },
+    ],
     projects: [
       {
         slug: "industrial-monitoring-risk-analysis-platform",
         anonymizedName: "Industrial Monitoring & Risk Analysis Platform",
         domain: "Industrial Systems / Petrochemical Analytics",
+        displayOrder: 2,
         duration: {
           start: "07.2024",
           end: "01.2025",
@@ -84,6 +114,7 @@ export const professionalExperience = [
         slug: "ai-driven-clinical-trials-platform",
         anonymizedName: "AI-driven Clinical Trials Platform",
         domain: "Healthcare / Biotech / AI-driven Clinical Research",
+        displayOrder: 1,
         duration: {
           start: "02.2025",
           end: "Present",
@@ -135,7 +166,6 @@ export const professionalExperience = [
     slug: "merixstudio",
     companyName: "Merixstudio",
     roleTitle: "Regular QA Specialist",
-    roleProgression: ["QA Specialist", "Regular QA Specialist"],
     employmentDates: {
       start: "03.2023",
       end: "06.2024",
@@ -148,6 +178,7 @@ export const professionalExperience = [
         slug: "industrial-emergency-lighting-control-platform",
         anonymizedName: "Industrial Emergency Lighting Control Platform",
         domain: "Industrial Systems / Hardware & Software Integration",
+        displayOrder: 1,
         duration: {
           start: "03.2023",
           end: "04.2024",
@@ -180,6 +211,7 @@ export const professionalExperience = [
         slug: "sports-field-analytics-platform",
         anonymizedName: "Sports Field Analytics Platform",
         domain: "Sports Analytics / Data Visualization",
+        displayOrder: 2,
         duration: {
           start: "06.2023",
           end: "06.2024",
@@ -212,6 +244,7 @@ export const professionalExperience = [
         slug: "ai-supported-threat-analysis-platform",
         anonymizedName: "AI-supported Threat Analysis Platform",
         domain: "AI Analytics / Threat Analysis",
+        displayOrder: 3,
         duration: {
           start: "02.2024",
           end: "03.2024",
@@ -239,7 +272,6 @@ export const professionalExperience = [
       },
     ],
     organizationalContributions: [
-      "Progressed from QA Specialist to Regular QA Specialist.",
       "Mentored junior QA engineers on automation and QA practice.",
       "Collaborated with development teams on QA process improvements.",
     ],

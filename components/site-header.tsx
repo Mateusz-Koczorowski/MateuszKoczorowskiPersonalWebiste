@@ -1,20 +1,18 @@
-import { ShieldCheck } from "lucide-react";
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
-
 const navItems = [
-  { href: "#about", label: "About" },
   { href: "#expertise", label: "Expertise" },
+  { href: "#ai-in-qa", label: "AI" },
+  { href: "#experience", label: "Experience" },
   { href: "#contact", label: "Contact" },
 ];
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-30 border-b bg-background/80 backdrop-blur-xl">
+    <header className="absolute inset-x-0 top-0 z-30">
       <nav
         aria-label="Primary navigation"
-        className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 sm:px-8 lg:px-10"
+        className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-10"
       >
         <a
           href="#main-content"
@@ -22,17 +20,21 @@ export function SiteHeader() {
         >
           Skip to content
         </a>
-        <Link href="/" className="flex min-w-0 items-center gap-3 font-semibold">
-          <span className="flex size-9 items-center justify-center rounded-md border bg-card">
-            <ShieldCheck aria-hidden="true" className="size-5 text-primary" />
-          </span>
-          <span className="truncate">Mateusz Koczorowski</span>
+        <Link
+          href="/"
+          className="text-sm font-medium tracking-[0.01em] text-foreground/90 transition-colors hover:text-primary"
+        >
+          Mateusz Koczorowski
         </Link>
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-7 md:flex">
           {navItems.map((item) => (
-            <Button key={item.href} asChild variant="ghost" size="sm">
-              <a href={item.href}>{item.label}</a>
-            </Button>
+            <a
+              key={item.href}
+              href={item.href}
+              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {item.label}
+            </a>
           ))}
         </div>
       </nav>
