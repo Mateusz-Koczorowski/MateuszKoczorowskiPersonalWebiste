@@ -951,7 +951,12 @@ export default function Home() {
       <footer className="px-6 py-8 sm:px-8 lg:px-10">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 border-t border-border/35 pt-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>{profile.name}</p>
-          <p>Senior QA Engineer / automation / AI-assisted quality</p>
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+            <p>Senior QA Engineer / automation / AI-assisted quality</p>
+            <a href="/privacy" className="transition-colors hover:text-primary">
+              Privacy
+            </a>
+          </div>
         </div>
       </footer>
     </>
