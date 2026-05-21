@@ -263,14 +263,22 @@ export const aiQaWorkflowModels = [
         label: "Risk and test planning",
         description:
           "Define regression scope, exploratory areas, manual validation paths, automation gaps, and testing priority.",
-        notes: ["Prioritize risk", "Separate manual and automated coverage", "Clarify validation depth"],
+        notes: [
+          "Prioritize risk",
+          "Separate manual and automated coverage",
+          "Clarify validation depth",
+        ],
         labels: ["QA EXECUTION", "REVIEW DISCIPLINE"],
       },
       {
         label: "MCP-assisted application exploration",
         description:
           "Use Playwright MCP to inspect real application behavior, UI states, browser behavior, flows, and edge cases.",
-        notes: ["Validate assumptions", "Compare ticket intent with implementation", "Observe real product behavior"],
+        notes: [
+          "Validate assumptions",
+          "Compare ticket intent with implementation",
+          "Observe real product behavior",
+        ],
         labels: ["MCP-ASSISTED"],
       },
       {
@@ -307,7 +315,11 @@ export const aiQaWorkflowModels = [
         label: "Xray / Jira test analysis",
         description:
           "Analyze existing test cases, acceptance criteria, reusable patterns, automation scope, and framework conventions.",
-        notes: ["Review existing coverage", "Identify reusable patterns", "Confirm automation value"],
+        notes: [
+          "Review existing coverage",
+          "Identify reusable patterns",
+          "Confirm automation value",
+        ],
         labels: ["ENGINEERING WORKFLOW", "HUMAN REVIEW REQUIRED"],
       },
       {

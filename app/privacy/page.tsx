@@ -53,7 +53,10 @@ export default function PrivacyPage() {
             <ul className="mt-5 space-y-3 text-sm leading-7 text-muted-foreground">
               {currentPractices.map((item) => (
                 <li key={item} className="flex gap-3">
-                  <span aria-hidden="true" className="mt-3 size-1 shrink-0 rounded-full bg-primary" />
+                  <span
+                    aria-hidden="true"
+                    className="mt-3 size-1 shrink-0 rounded-full bg-primary"
+                  />
                   <span>{item}</span>
                 </li>
               ))}
@@ -81,7 +84,10 @@ export default function PrivacyPage() {
             </p>
           </section>
 
-          <section aria-labelledby="external-links-heading" className="border-t border-border/35 pt-10">
+          <section
+            aria-labelledby="external-links-heading"
+            className="border-t border-border/35 pt-10"
+          >
             <h2 id="external-links-heading" className="text-xl font-semibold text-foreground">
               External Links
             </h2>
@@ -92,14 +98,17 @@ export default function PrivacyPage() {
             </p>
           </section>
 
-          <section aria-labelledby="future-changes-heading" className="border-t border-border/35 pt-10">
+          <section
+            aria-labelledby="future-changes-heading"
+            className="border-t border-border/35 pt-10"
+          >
             <h2 id="future-changes-heading" className="text-xl font-semibold text-foreground">
               Future Changes
             </h2>
             <p className="mt-5 text-sm leading-7 text-muted-foreground">
               If analytics, embeds, forms, newsletter signup, or other data-processing features are
-              added in the future, this privacy notice should be updated before or when those changes
-              go live.
+              added in the future, this privacy notice should be updated before or when those
+              changes go live.
             </p>
           </section>
         </div>
