@@ -5,8 +5,6 @@ import {
   Bug,
   CheckCircle2,
   CircleDot,
-  ClipboardCheck,
-  Code2,
   FileText,
   Github,
   MonitorCheck,
@@ -59,7 +57,20 @@ const contactIconMap = {
 };
 
 const aiInvestigationWorkflowIcons = [FileText, ShieldCheck, MonitorCheck, SearchCheck, Bug];
-const aiAutomationWorkflowIcons = [ClipboardCheck, MonitorCheck, Code2, SearchCheck, CheckCircle2];
+const aiSupportCards = [
+  {
+    title: "Risk before coverage",
+    body: "AI helps organize ticket context and possible impact areas, but prioritization stays with the QA engineer.",
+  },
+  {
+    title: "Evidence over assumptions",
+    body: "Browser inspection, logs, screenshots, and reproduction paths matter more than generated scenario volume.",
+  },
+  {
+    title: "Human-reviewed output",
+    body: "Reports and plans are treated as engineering notes that need judgment, not as automatic truth.",
+  },
+] as const;
 
 function ExperienceBadge({
   children,
@@ -399,10 +410,7 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
         )}
       >
         <div className="hidden lg:block">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-            Chapter {String(index + 1).padStart(2, "0")}
-          </p>
-          <p className="mt-3 text-sm font-medium text-primary">
+          <p className="text-sm font-medium text-primary">
             {formatDateRange(company.employmentDates)}
           </p>
           <h3 className="mt-2 text-3xl font-semibold leading-tight text-foreground">
@@ -437,10 +445,7 @@ function CompanyTimelineItem({ company, index }: { company: CompanyExperience; i
 
         <div>
           <div className="lg:hidden">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              Chapter {String(index + 1).padStart(2, "0")}
-            </p>
-            <p className="mt-3 text-sm font-medium text-primary">
+            <p className="text-sm font-medium text-primary">
               {formatDateRange(company.employmentDates)}
             </p>
             <h3 className="mt-3 text-3xl font-semibold leading-[1.14] text-foreground">
@@ -527,14 +532,8 @@ function AiStepLabels({ labels }: { labels?: readonly string[] }) {
   );
 }
 
-function AiWorkflowBlock({
-  workflow,
-  index,
-}: {
-  workflow: (typeof aiQaWorkflowModels)[number];
-  index: number;
-}) {
-  const icons = index === 0 ? aiInvestigationWorkflowIcons : aiAutomationWorkflowIcons;
+function AiWorkflowBlock({ workflow }: { workflow: (typeof aiQaWorkflowModels)[number] }) {
+  const icons = aiInvestigationWorkflowIcons;
 
   return (
     <article className="border-t border-border/35 pt-10 first:border-t-0 first:pt-0 sm:pt-8">
@@ -618,8 +617,6 @@ function AiWorkflowBlock({
 }
 
 function AiWorkflowArchitectureSection() {
-  const workflowAreas = aiQaWorkflowAreas.slice(0, 3);
-
   return (
     <AnimatedSection className="mt-16 sm:mt-14">
       <div className="border-y border-border/35 py-9 sm:py-10">
@@ -629,17 +626,17 @@ function AiWorkflowArchitectureSection() {
               Operating model
             </p>
             <h3 className="mt-4 text-2xl font-semibold leading-[1.16] text-foreground sm:leading-tight">
-              Two AI-assisted workflows, separated by engineering intent.
+              One investigation workflow, grounded in QA evidence.
             </h3>
           </div>
           <div>
             <p className="text-base leading-8 text-muted-foreground">
-              AI is used as structured support for analysis, exploration, planning, implementation,
-              and review. The workflow boundary matters: investigation work should not be confused
-              with automation creation.
+              AI is used as structured support for analysis, exploration, planning, and reporting.
+              It helps organize context and evidence while QA judgment stays responsible for the
+              conclusions.
             </p>
             <div className="mt-7 grid gap-5 sm:mt-6 sm:grid-cols-3 sm:gap-4">
-              {workflowAreas.map((area) => (
+              {aiQaWorkflowAreas.map((area) => (
                 <div key={area.slug} className="border-t border-border/35 pt-4">
                   <p className="text-sm font-semibold text-foreground">{area.title}</p>
                   <p className="mt-2 text-sm leading-7 text-muted-foreground">{area.summary}</p>
@@ -650,8 +647,8 @@ function AiWorkflowArchitectureSection() {
         </div>
 
         <div className="mt-12 space-y-14 sm:mt-10 sm:space-y-12">
-          {aiQaWorkflowModels.map((workflow, index) => (
-            <AiWorkflowBlock key={workflow.slug} workflow={workflow} index={index} />
+          {aiQaWorkflowModels.map((workflow) => (
+            <AiWorkflowBlock key={workflow.slug} workflow={workflow} />
           ))}
         </div>
 
@@ -665,7 +662,8 @@ function AiWorkflowArchitectureSection() {
                 MCP integrations support specific workflow moments.
               </h3>
               <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                Tooling is presented as connected engineering context, not as autonomous QA.
+                Tooling is presented as connected engineering context, not as a replacement for QA
+                ownership.
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -705,27 +703,44 @@ export default function Home() {
       <main id="main-content" className="overflow-x-hidden">
         <section
           aria-labelledby="home-hero-heading"
-          className="relative px-6 pb-20 pt-28 sm:px-8 sm:pb-24 sm:pt-32 lg:px-10 lg:pb-28 lg:pt-36"
+          className="relative px-6 pb-14 pt-24 sm:px-8 sm:pb-24 sm:pt-32 lg:px-10 lg:pb-28 lg:pt-36"
         >
-          <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.42fr)] lg:gap-20">
+          <div className="mx-auto grid max-w-7xl items-center lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.42fr)] lg:gap-20">
             <AnimatedSection className="max-w-4xl">
               <p className="max-w-[20rem] text-sm font-medium leading-6 text-primary sm:max-w-none">
                 Senior QA Engineering / AI-assisted quality workflows
               </p>
               <h1
                 id="home-hero-heading"
-                className="mt-6 max-w-full text-[clamp(2.8rem,11vw,8.25rem)] font-semibold leading-[0.9] text-foreground"
+                className="mt-5 max-w-full text-[clamp(2.8rem,11vw,8.25rem)] font-semibold leading-[0.9] text-foreground sm:mt-6"
               >
                 <span className="block">Mateusz</span>
                 <span className="block">Koczorowski</span>
               </h1>
-              <p className="mt-8 max-w-2xl text-2xl font-medium leading-9 text-foreground sm:text-3xl sm:leading-10">
+              <figure className="mt-7 max-w-[18.5rem] lg:hidden">
+                <div className="relative aspect-[5/6] overflow-hidden rounded-lg bg-card/40 shadow-2xl shadow-black/30">
+                  <Image
+                    src={profileImagePath}
+                    alt="Mateusz Koczorowski"
+                    fill
+                    priority
+                    sizes="86vw"
+                    className="object-cover object-[50%_9%] saturate-[0.94]"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-t from-background/28 via-transparent to-transparent"
+                  />
+                </div>
+                <figcaption className="sr-only">Portrait of Mateusz Koczorowski.</figcaption>
+              </figure>
+              <p className="mt-6 max-w-2xl text-2xl font-medium leading-9 text-foreground sm:mt-8 sm:text-3xl sm:leading-10">
                 {profile.role}
               </p>
-              <p className="mt-6 max-w-[20rem] text-base leading-8 text-muted-foreground sm:max-w-2xl sm:text-lg sm:leading-9">
+              <p className="mt-5 max-w-[20rem] text-base leading-8 text-muted-foreground sm:mt-6 sm:max-w-2xl sm:text-lg sm:leading-9">
                 {profile.positioning}
               </p>
-              <div className="mt-11 flex flex-col gap-3.5 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-3">
+              <div className="mt-8 flex flex-col gap-3.5 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-3">
                 <Button asChild className="min-h-12 w-fit max-w-full px-5 text-sm">
                   <a href="#contact">
                     Let&apos;s work together
@@ -738,7 +753,7 @@ export default function Home() {
               </div>
             </AnimatedSection>
 
-            <AnimatedSection>
+            <AnimatedSection className="hidden lg:block">
               <figure className="mx-auto max-w-[20rem] lg:ml-auto lg:mr-0">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-card/40 shadow-2xl shadow-black/30">
                   <Image
@@ -861,16 +876,13 @@ export default function Home() {
               </AnimatedSection>
               <AnimatedSection>
                 <div className="grid gap-6 sm:grid-cols-2 sm:gap-5">
-                  {aiQaNarrative.tags.map((tag) => (
-                    <article key={tag} className="border-t border-border/35 pt-5">
+                  {aiSupportCards.map((card) => (
+                    <article key={card.title} className="border-t border-border/35 pt-5">
                       <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary/85">
-                        Workflow signal
+                        QA practice
                       </p>
-                      <h4 className="mt-2 font-semibold text-foreground">{tag}</h4>
-                      <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                        Used as part of a reviewed QA process, not as an autonomous replacement for
-                        engineering judgment.
-                      </p>
+                      <h4 className="mt-2 font-semibold text-foreground">{card.title}</h4>
+                      <p className="mt-3 text-sm leading-7 text-muted-foreground">{card.body}</p>
                     </article>
                   ))}
                 </div>
@@ -893,7 +905,7 @@ export default function Home() {
               title="A technical growth story across industrial systems, healthcare platforms, automation architecture, and release quality."
               intro="Company-grouped project history with expandable engineering detail: what needed validation, how quality systems were shaped, and where ownership improved release confidence."
             />
-            <div className="mt-16 sm:mt-14">
+            <div id="projects" className="mt-16 scroll-mt-24 sm:mt-14">
               {experienceItems.map((company, index) => (
                 <CompanyTimelineItem key={company.slug} company={company} index={index} />
               ))}
