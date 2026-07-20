@@ -39,14 +39,17 @@ export const aiQaNarrative = {
     "My AI work supports QA investigation: understanding tickets, exploring product behavior, finding risk, and preparing clearer evidence for engineering decisions.",
   paragraphs: [
     "The goal is not to hand testing or automation over to a model. AI is useful when it helps structure context, surface blind spots, and reduce repetitive preparation while the QA engineer owns risk, evidence, and release confidence.",
-    "I use AI tools and MCP integrations for Jira-driven analysis, browser inspection, exploratory testing support, regression planning, defect investigation, and clearer reporting tied to delivery context.",
+    "I use AI tools and MCP integrations for ticket-driven analysis, browser inspection, exploratory testing support, regression planning, defect investigation, and clearer reporting tied to delivery context.",
+    "I do not only use AI tooling, I build it. I designed and continue to develop an exploratory testing agent that has been running in a real delivery context for several months, composed of reusable skills chained across ticket analysis, code-change review, test planning, MCP-driven exploration, regression execution, and defect reporting. It is shared with a QA organization of around forty engineers and used on projects beyond my own.",
+    "A large part of that work is cost engineering rather than prompting: a component playbook layer documents how parts of the application actually behave, so the agent spends fewer tokens rediscovering context and reaches useful conclusions faster.",
   ],
   highlights: [
     "Human review stays present at every quality decision.",
     "MCP integrations connect tickets, code, browsers, and design context.",
+    "Agent design is treated as engineering: reusable skills, documented context, measured token cost.",
     "Outputs support investigation, reporting, and regression thinking rather than software generation.",
   ],
-  tags: ["Ticket analysis", "Browser inspection", "Risk mapping"],
+  tags: ["Agent design", "Ticket analysis", "Token cost optimisation", "Risk mapping"],
 } as const;
 
 export const aiQaWorkflowAreas = [
@@ -201,12 +204,12 @@ export const aiPracticalWorkflowExample = {
 export const aiQaWorkflowModels = [
   {
     slug: "qa-investigation-workflow",
-    eyebrow: "Workflow",
-    title: "AI-assisted QA investigation workflow",
+    eyebrow: "Agent in production",
+    title: "Exploratory testing agent: built, running, and still evolving",
     summary:
-      "Real QA execution work: ticket analysis, risk planning, MCP-assisted application exploration, validation, and structured defect reporting.",
+      "An agent I designed and continue to develop, in use in a real delivery context for several months. It chains reusable skills across ticket analysis, code-change review, risk planning, MCP-assisted exploration, regression execution, manual result intake, and structured defect reporting.",
     boundary:
-      "This workflow does not generate automation. It supports investigation, planning, testing, validation, and reporting.",
+      "The agent does not generate automation or replace QA judgment. It carries context between investigation steps so the engineer spends time on risk interpretation rather than preparation.",
     steps: [
       {
         label: "Jira ticket analysis",
@@ -245,17 +248,29 @@ export const aiQaWorkflowModels = [
         labels: ["QA EXECUTION", "HUMAN REVIEW REQUIRED"],
       },
       {
+        label: "Regression execution and manual intake",
+        description:
+          "Trigger existing Cypress and Playwright regression suites, then collect manual testing results from the engineer so automated and human findings land in one place.",
+        notes: [
+          "Run existing suites",
+          "Merge manual and automated results",
+          "Keep the engineer in the loop",
+        ],
+        labels: ["QA EXECUTION", "HUMAN REVIEW REQUIRED"],
+      },
+      {
         label: "Defect reporting",
         description:
-          "Create structured Jira-ready defect reports with evidence, reproduction steps, implementation observations, and risk context.",
+          "Create structured, ticket-ready defect reports with evidence, reproduction steps, implementation observations, and risk context.",
         notes: ["Attach evidence", "Include reproduction path", "Explain engineering impact"],
         labels: ["REVIEW DISCIPLINE"],
       },
     ],
     supportingNotes: [
+      "Built as a set of reusable skills rather than a single prompt, so individual steps can be improved or replaced independently.",
+      "A component playbook layer documents how parts of the application behave, cutting token consumption and shortening agent run times.",
       "AI helps structure context and reduce preparation time, but the QA engineer owns risk interpretation.",
       "MCP tooling is used to observe the real product before finalizing conclusions.",
-      "The output is better investigation quality, clearer validation scope, and more actionable defect reporting.",
     ],
   },
 ] as const satisfies readonly AiWorkflowModel[];

@@ -32,7 +32,7 @@ export const profile = {
     label: "Open to selected QA leadership, automation, mentoring, and speaking conversations.",
   },
   editingNotes: [
-    "Keep claims specific and evidence-led. Do not add metrics unless they can be verified publicly.",
+    "Keep claims specific and evidence-led. Metrics describing what was built or measured directly (suite size, runtime, coverage ratios, number of frameworks) are allowed. Metrics claiming improvement that was never systematically measured are not.",
     "Keep availability and preferred contact language current.",
   ],
 } as const;

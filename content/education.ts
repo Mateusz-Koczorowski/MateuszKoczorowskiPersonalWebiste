@@ -15,7 +15,7 @@ export const education = [
     institution: "WSB Merito University",
     credential: "Master's Degree",
     field: "Computer Science",
-    dateRange: "2026 - Present",
+    dateRange: "03.2026 - Present",
     status: "in-progress",
     notes:
       "Research focus: comparative analysis of AI agents, including OpenAI Codex and Claude Code, in automated software testing generation across multiple testing levels and QA workflows.",
@@ -31,7 +31,7 @@ export const education = [
     institution: "WSB Merito University",
     credential: "Bachelor of Engineering",
     field: "Computer Science",
-    dateRange: "Completed 2025",
+    dateRange: "10.2021 - 02.2025",
     status: "verified",
     notes:
       "Engineering thesis: GlukoMate, an application supporting diabetes management and monitoring workflows.",

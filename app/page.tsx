@@ -11,6 +11,8 @@ import {
   Linkedin,
   Mail,
   SearchCheck,
+  GraduationCap,
+  Mic,
   ShieldCheck,
   Workflow,
 } from "lucide-react";
@@ -30,7 +32,12 @@ import {
   expertiseAreas,
   professionalExperience,
   profile,
+  education,
+  mentoringAreas,
+  skills,
   socialLinks,
+  speakingEntries,
+  writingEntries,
 } from "@/content";
 import type { CompanyExperience, ProjectContribution } from "@/content/experience";
 import { createStructuredData } from "@/lib/seo";
@@ -125,6 +132,288 @@ function LinkArrow() {
       aria-hidden="true"
       className="size-4 transition-transform group-hover:translate-x-1"
     />
+  );
+}
+
+function ProofStrip() {
+  const facts = [
+    {
+      value: "AI agent shared with a 40-person QA org",
+      label: "Built solo, used beyond my own projects",
+      detail:
+        "An exploratory testing agent that reads tickets, inspects the running product, runs regression, and writes defect reports.",
+    },
+    {
+      value: "20% to 80% critical-path coverage",
+      label: "Then 75% faster regression after migrating it",
+      detail:
+        "Grew the Cypress suite on a clinical trials platform, then led its migration to Playwright.",
+    },
+    {
+      value: "Graduate research on AI agents",
+      label: "Comparing Codex and Claude Code in test generation",
+      detail: "The same question as the day job, examined formally across multiple testing levels.",
+    },
+  ];
+
+  return (
+    <section
+      aria-label="Selected proof points"
+      className="border-y border-border/40 px-6 py-10 sm:px-8 sm:py-12 lg:px-10"
+    >
+      <div className="mx-auto grid max-w-7xl gap-8 sm:grid-cols-3 sm:gap-6">
+        {facts.map((fact) => (
+          <div key={fact.label}>
+            <p className="text-[clamp(1.35rem,2.2vw,1.75rem)] font-semibold leading-tight text-primary">
+              {fact.value}
+            </p>
+            <p className="mt-2.5 text-sm font-medium leading-6 text-foreground">{fact.label}</p>
+            <p className="mt-1.5 text-sm leading-6 text-muted-foreground">{fact.detail}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function SkillsSection() {
+  return (
+    <section
+      id="skills"
+      aria-labelledby="skills-heading"
+      className="px-6 py-[4.5rem] sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+    >
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          id="skills-heading"
+          eyebrow="Capabilities"
+          title="What I actually do, at the depth I do it."
+          intro="A practical map of quality engineering capability, from automation architecture and API validation through to AI-assisted workflows and hardware-connected testing."
+        />
+        <div className="mt-12 grid gap-5 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
+          {skills.map((skill) => (
+            <article
+              key={skill.name}
+              className="flex h-full flex-col rounded-lg border border-border/75 bg-card/45 p-5 sm:p-6"
+            >
+              <h3 className="text-base font-semibold leading-6 text-foreground">{skill.name}</h3>
+              <p className="mt-4 text-sm leading-7 text-muted-foreground">{skill.summary}</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {skill.keywords.map((keyword) => (
+                  <span
+                    key={keyword}
+                    className="rounded-full border border-border/45 px-3 py-1 text-xs text-muted-foreground"
+                  >
+                    {keyword}
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MentoringSection() {
+  return (
+    <section
+      id="mentoring"
+      aria-labelledby="mentoring-heading"
+      className="px-6 py-[4.5rem] sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+    >
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          id="mentoring-heading"
+          eyebrow="Mentoring"
+          title="Passing on automation practice and a disciplined way of using AI."
+          intro="Mentoring is shaped around where the person actually is rather than a fixed curriculum, covering automation craft as well as the economics of using AI in day-to-day QA work."
+        />
+        <div className="mt-12 grid gap-5 sm:mt-14 sm:grid-cols-2">
+          {mentoringAreas.map((area) => (
+            <article
+              key={area.slug}
+              className="flex h-full flex-col rounded-lg border border-border/75 bg-card/45 p-5 sm:p-6 lg:p-7"
+            >
+              <h3 className="text-lg font-semibold leading-7 text-foreground">{area.title}</h3>
+              <p className="mt-4 text-sm leading-7 text-muted-foreground">{area.summary}</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {area.topics.map((topic) => (
+                  <span
+                    key={topic}
+                    className="rounded-full border border-border/45 px-3 py-1 text-xs text-muted-foreground"
+                  >
+                    {topic}
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function EducationSection() {
+  return (
+    <section
+      id="education"
+      aria-labelledby="education-heading"
+      className="px-6 py-[4.5rem] sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+    >
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          id="education-heading"
+          eyebrow="Education and research"
+          title="Formal study aimed at the same question I work on daily: how far AI agents can be trusted in testing."
+          intro="Computer science study at WSB Merito University, with graduate research focused on comparing AI agents in automated test generation across testing levels."
+        />
+        <div className="mt-12 grid gap-5 sm:mt-14 lg:grid-cols-2">
+          {education.map((item) => (
+            <article
+              key={item.slug}
+              className="flex h-full flex-col rounded-lg border border-border/75 bg-card/45 p-5 sm:p-6 lg:p-7"
+            >
+              <div className="flex items-start gap-3">
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-md border border-border/80 bg-background/40">
+                  <GraduationCap aria-hidden="true" className="size-5 text-primary" />
+                </span>
+                <div>
+                  <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                    {item.dateRange}
+                    {item.status === "in-progress" ? " \u00b7 In progress" : ""}
+                  </p>
+                  <h3 className="mt-2 text-lg font-semibold leading-7 text-foreground">
+                    {item.credential}, {item.field}
+                  </h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{item.institution}</p>
+                </div>
+              </div>
+              {item.notes ? (
+                <p className="mt-5 text-sm leading-7 text-muted-foreground">{item.notes}</p>
+              ) : null}
+              {item.focusAreas.length > 0 ? (
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {item.focusAreas.map((focus) => (
+                    <span
+                      key={focus}
+                      className="rounded-full border border-border/45 px-3 py-1 text-xs text-muted-foreground"
+                    >
+                      {focus}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+type SpeakingLinks = {
+  recording?: string;
+  slides?: string;
+  article?: string;
+};
+
+function SpeakingAndWritingSection() {
+  const entries = [
+    ...speakingEntries.map((entry) => {
+      const links: SpeakingLinks = entry.links ?? {};
+
+      return {
+        key: entry.slug,
+        kind: entry.format === "talk" ? "Talk" : "Session",
+        title: entry.title,
+        context: [entry.eventName, entry.date].filter(Boolean).join(" \u00b7 "),
+        summary: entry.summary,
+        topics: entry.topics,
+        href: links.recording ?? links.slides ?? links.article,
+        linkLabel: links.recording ? "Watch the recording" : "View materials",
+      };
+    }),
+    ...writingEntries.map((entry) => ({
+      key: entry.slug,
+      kind: "Article",
+      title: entry.title,
+      context: [entry.publication, entry.date].filter(Boolean).join(" \u00b7 "),
+      summary: entry.summary,
+      topics: entry.topics,
+      href: entry.links?.article,
+      linkLabel: "Read the article",
+    })),
+  ];
+
+  if (entries.length === 0) return null;
+
+  return (
+    <section
+      id="speaking"
+      aria-labelledby="speaking-heading"
+      className="px-6 py-[4.5rem] sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+    >
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          id="speaking-heading"
+          eyebrow="Speaking and writing"
+          title="Public work on AI in QA, put where it can be checked."
+          intro="Talks and published writing on practical AI-assisted quality engineering. Recordings and articles are linked directly so the claims can be reviewed rather than taken on trust."
+        />
+        <div className="mt-12 grid gap-5 sm:mt-14 sm:grid-cols-2">
+          {entries.map((entry) => (
+            <article
+              key={entry.key}
+              className="flex h-full flex-col rounded-lg border border-border/75 bg-card/45 p-5 sm:p-6 lg:p-7"
+            >
+              <div className="flex items-start gap-3">
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-md border border-border/80 bg-background/40">
+                  {entry.kind === "Article" ? (
+                    <FileText aria-hidden="true" className="size-5 text-primary" />
+                  ) : (
+                    <Mic aria-hidden="true" className="size-5 text-primary" />
+                  )}
+                </span>
+                <div>
+                  <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                    {entry.kind}
+                    {entry.context ? ` \u00b7 ${entry.context}` : ""}
+                  </p>
+                  <h3 className="mt-2 text-lg font-semibold leading-7 text-foreground">
+                    {entry.title}
+                  </h3>
+                </div>
+              </div>
+              <p className="mt-5 text-sm leading-7 text-muted-foreground">{entry.summary}</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {entry.topics.map((topic) => (
+                  <span
+                    key={topic}
+                    className="rounded-full border border-border/45 px-3 py-1 text-xs text-muted-foreground transition-colors hover:border-primary/35 hover:text-foreground"
+                  >
+                    {topic}
+                  </span>
+                ))}
+              </div>
+              {entry.href ? (
+                <a
+                  href={entry.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-6 inline-flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-primary"
+                >
+                  {entry.linkLabel}
+                  <LinkArrow />
+                </a>
+              ) : null}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -775,6 +1064,8 @@ export default function Home() {
           </div>
         </section>
 
+        <ProofStrip />
+
         <section
           id="about"
           aria-labelledby="about-heading"
@@ -836,6 +1127,8 @@ export default function Home() {
           </div>
         </section>
 
+        <SkillsSection />
+
         <section
           id="ai-in-qa"
           aria-labelledby="ai-heading"
@@ -893,6 +1186,8 @@ export default function Home() {
           </div>
         </section>
 
+        <EducationSection />
+
         <section
           id="experience"
           aria-labelledby="experience-heading"
@@ -912,6 +1207,10 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <SpeakingAndWritingSection />
+
+        <MentoringSection />
 
         <section
           id="contact"

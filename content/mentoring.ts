@@ -19,13 +19,18 @@ export const mentoringAreas = [
     activityType: "technical-review",
     status: "published",
     summary:
-      "Support for QA engineers improving Cypress, Playwright, test architecture, maintainability, and practical automation ownership.",
+      "Support for QA engineers improving Cypress, Playwright, Git fundamentals, test architecture, maintainability, and practical automation ownership. Scope and depth are adapted to each mentee's starting point rather than delivered as a fixed curriculum.",
     suitableFor: [
       "QA engineers",
       "Automation engineers",
       "Engineers moving into quality-focused roles",
     ],
-    topics: ["automation architecture", "test maintainability", "technical judgment"],
+    topics: [
+      "automation architecture",
+      "test maintainability",
+      "Git fundamentals",
+      "technical judgment",
+    ],
     boundaries: [
       "Mentoring content should stay educational and should not disclose employer-specific processes.",
       "Proprietary code and internal project details are not reviewed publicly.",
@@ -53,25 +58,18 @@ export const mentoringAreas = [
     activityType: "workshop-support",
     status: "published",
     summary:
-      "STX Next internal knowledge sharing and consultation around practical AI-assisted QA workflows, including support for AI bootcamp initiatives.",
+      "Knowledge sharing and consultation around practical AI-assisted QA workflows, delivered internally and inside client engineering organizations, including support for AI bootcamp initiatives. Mentoring covers agent and workflow design, context strategy, and optimising token consumption so AI use stays economical at team scale.",
     suitableFor: ["QA engineers", "Technical leads", "Internal learning programs"],
-    topics: ["AI-assisted QA", "prompt engineering", "workflow optimization"],
+    topics: [
+      "AI-assisted QA",
+      "agent and workflow design",
+      "context strategy",
+      "token-cost optimisation",
+    ],
     boundaries: [
       "AI examples must be reviewed for accuracy and confidentiality.",
       "Public materials should use sanitized or synthetic examples.",
     ],
     needsManualInput: ["Approved public references to internal AI bootcamp materials"],
-  },
-  {
-    slug: "talent-navigator",
-    title: "Talent Navigator Participation",
-    activityType: "career-mentoring",
-    status: "published",
-    summary:
-      "Participation in a high-potential development initiative focused on leadership, growth, collaboration, and broader organizational impact.",
-    suitableFor: ["Engineering organizations", "Leadership development programs"],
-    topics: ["leadership growth", "collaboration", "organizational impact"],
-    boundaries: ["Internal program details should remain high-level unless explicitly approved."],
-    needsManualInput: ["Approved date range or cohort details"],
   },
 ] as const satisfies readonly MentoringArea[];

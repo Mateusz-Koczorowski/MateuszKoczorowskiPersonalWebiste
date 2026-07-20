@@ -138,7 +138,7 @@ export const professionalExperience = [
         ],
         techStack: ["Cypress", "TypeScript", "REST APIs", "Data Visualization"],
         impact:
-          "Improved QA process maturity, defect detection workflows, release confidence, and product stability without publishing unsupported numerical claims.",
+          "Built the Cypress and TypeScript automation framework from scratch, established test structure and QA process ownership, and improved defect detection workflows and release confidence.",
         tags: ["automation architecture", "industrial systems", "risk analysis", "test metrics"],
         confidentialityLevel: "sanitized",
         confidentialityNote:
@@ -203,7 +203,7 @@ export const professionalExperience = [
         ],
         techStack: ["Cypress", "Playwright", "TypeScript", "End-to-End Testing"],
         impact:
-          "Significantly increased automation coverage, improved maintainability of the automation architecture, and supported a scalable future testing strategy.",
+          "Grew automated coverage of critical user paths from ~20% to ~80%, then led the Cypress-to-Playwright migration that cut regression suite runtime by ~75% while preserving that coverage.",
         tags: ["healthcare", "biotech", "AI platform", "Playwright migration"],
         confidentialityLevel: "sanitized",
         confidentialityNote:
@@ -215,13 +215,15 @@ export const professionalExperience = [
     organizationalContributions: [
       "Promoted to Senior QA Engineer within the first year based on technical contribution, organizational impact, and strong performance.",
       "Contributed as a Technical Recruiter, supporting hiring for QA engineering roles.",
-      "Contributed to AI-focused QA initiatives and internal quality engineering knowledge sharing.",
+      "Built and continue to develop a production AI agent for exploratory testing, running in a real delivery context for several months.",
+      "Contributed to AI-focused QA initiatives and quality engineering knowledge sharing, both internally and inside client engineering organizations.",
       "Presented practical AI usage in QA during PAIDA Meetup as part of STX Next QA community activity.",
       "Provided consultations for an internal AI bootcamp focused on practical software quality workflows.",
       "Participated in Talent Navigator, a high-potential development program focused on leadership, growth, collaboration, and broader company impact.",
     ],
     mentoringActivities: [
-      "Mentoring in automation testing and quality engineering practices.",
+      "Mentoring in test automation: Playwright, Cypress, Git fundamentals, and end-to-end automation practice, with scope adapted to each mentee's level and goals.",
+      "Mentoring in applied AI for QA: workflow and agent design, context strategy, and token-cost optimisation.",
       "Technical recruitment support for QA engineering roles.",
       "Internal knowledge sharing around automation and AI-assisted QA workflows.",
     ],
@@ -355,7 +357,7 @@ export const professionalExperience = [
         ],
         techStack: ["React", "TypeScript", "Cypress", "Postman", "REST APIs", "GitLab CI/CD"],
         impact:
-          "Improved regression reliability, increased automation coverage, and strengthened QA maturity and release confidence.",
+          "Built the Cypress and JavaScript automation framework from scratch, improved regression reliability, and strengthened QA maturity and release confidence.",
         tags: ["sports analytics", "data visualization", "API testing", "automation framework"],
         confidentialityLevel: "sanitized",
         confidentialityNote:

@@ -17,7 +17,7 @@ export const languages = [
   {
     name: "English",
     proficiency: "professional",
-    publicLabel: "B2",
+    publicLabel: "C1",
     needsConfirmation: false,
   },
 ] as const satisfies readonly Language[];

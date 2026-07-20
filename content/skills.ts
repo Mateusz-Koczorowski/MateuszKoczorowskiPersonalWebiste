@@ -36,7 +36,7 @@ export const skills = [
   {
     name: "AI-assisted QA workflows",
     category: "ai",
-    level: "advanced",
+    level: "lead",
     summary:
       "Using AI for reviewed test design support, debugging hypotheses, exploratory charters, documentation, and automation maintenance ideas.",
     keywords: ["prompt engineering", "human review", "AI agents"],

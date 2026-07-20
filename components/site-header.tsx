@@ -13,6 +13,7 @@ const navItems = [
   { href: "#expertise", label: "Expertise" },
   { href: "#ai-in-qa", label: "AI" },
   { href: "#experience", label: "Experience" },
+  { href: "#speaking", label: "Speaking" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -20,6 +21,10 @@ const mobileMenuItems = [
   { href: "#experience", label: "Experience" },
   { href: "#ai-in-qa", label: "AI workflows" },
   { href: "#projects", label: "Projects" },
+  { href: "#speaking", label: "Speaking & writing" },
+  { href: "#skills", label: "Capabilities" },
+  { href: "#mentoring", label: "Mentoring" },
+  { href: "#education", label: "Education" },
   { href: "#contact", label: "Contact" },
   { href: linkedInUrl ?? "https://www.linkedin.com/in/mateusz-koczorowski/", label: "LinkedIn" },
   { href: githubUrl ?? "https://github.com/Mateusz-Koczorowski", label: "GitHub" },
