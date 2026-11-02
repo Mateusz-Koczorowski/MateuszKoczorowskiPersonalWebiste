@@ -1,5 +1,3 @@
-import { focusAreas } from "./expertise";
-
 export const profile = {
   name: "Mateusz Koczorowski",
   role: "Senior QA Engineer",
@@ -38,4 +36,3 @@ export const profile = {
 } as const;
 
 export const profileSummary = profile.summary;
-export { focusAreas };

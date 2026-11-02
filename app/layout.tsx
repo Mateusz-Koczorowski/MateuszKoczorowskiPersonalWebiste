@@ -1,19 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import "@fontsource-variable/schibsted-grotesk";
 
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { absoluteUrl, siteConfig } from "@/lib/seo";
 
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const metadataBase = new URL(siteConfig.url || "http://localhost:3000");
 const socialImages = siteConfig.url
@@ -22,7 +14,7 @@ const socialImages = siteConfig.url
         url: absoluteUrl("/opengraph-image"),
         width: 1200,
         height: 630,
-        alt: "Mateusz Koczorowski - Senior QA Engineer",
+        alt: "Mateusz Koczorowski - AI-first quality engineering",
       },
     ]
   : undefined;
@@ -94,7 +86,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: siteConfig.themeColor,
-  colorScheme: "dark",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
@@ -103,9 +95,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={siteConfig.language} className="dark">
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
+    <html lang={siteConfig.language}>
+      <body className="font-sans antialiased">
+        <SiteHeader />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );

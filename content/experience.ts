@@ -157,7 +157,7 @@ export const professionalExperience = [
           isCurrent: true,
           displayLabel: "02.2025 - Present",
         },
-        roleInProject: "Senior QA Engineer / automation coverage and migration support",
+        roleInProject: "Senior QA Engineer / automation coverage and Playwright migration lead",
         summary:
           "AI-driven clinical trials platform operating under quality expectations typical for pharmaceutical and biotech environments.",
         challenge:
@@ -165,7 +165,7 @@ export const professionalExperience = [
         responsibilities: [
           "Developed and maintained end-to-end automation tests.",
           "Increased automated regression coverage across important user workflows.",
-          "Supported migration from Cypress to Playwright.",
+          "Led the migration from Cypress to Playwright.",
           "Performed manual and exploratory testing for release validation.",
           "Worked in Scrum collaboration with product and engineering teams.",
         ],
@@ -173,7 +173,7 @@ export const professionalExperience = [
           {
             title: "Automation Architecture",
             detail:
-              "Developed and maintained end-to-end coverage while supporting the migration path from Cypress toward a more scalable Playwright-based strategy.",
+              "Developed and maintained end-to-end coverage and led the migration from Cypress to a more scalable Playwright-based suite.",
           },
           {
             title: "CI/CD & Release Validation",

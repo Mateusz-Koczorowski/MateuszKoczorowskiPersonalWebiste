@@ -1,117 +1,145 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import type { ReactNode } from "react";
 
+import { contactLinks } from "@/content";
 import { siteConfig } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
+  title: "Privacy notice",
   description:
-    "Privacy notice for Mateusz Koczorowski's personal portfolio website, including contact, hosting logs, external links, cookies, and analytics.",
-  alternates: siteConfig.url
-    ? {
-        canonical: "/privacy",
-      }
-    : undefined,
+    "How mateuszkoczorowski.com handles personal data: no analytics, no cookies, no forms. Email contact and standard hosting logs only.",
+  alternates: siteConfig.url ? { canonical: "/privacy" } : undefined,
 };
 
-const currentPractices = [
-  "This website does not currently use analytics.",
-  "This website does not currently use tracking cookies.",
-  "This website does not include contact forms.",
-  "This website does not use newsletter signup.",
-  "This website does not intentionally store data in localStorage, sessionStorage, or cookies.",
-];
+const lastUpdated = "2 November 2026";
+const email = contactLinks[0].href.replace("mailto:", "");
+
+function Block({ id, title, children }: { id: string; title: string; children: ReactNode }) {
+  return (
+    <section aria-labelledby={id} className="flex flex-col gap-3 border-t border-rule pt-8">
+      <h2 id={id} className="text-[1.375rem] font-bold leading-snug">
+        {title}
+      </h2>
+      <div className="flex flex-col gap-3 text-ink-soft">{children}</div>
+    </section>
+  );
+}
 
 export default function PrivacyPage() {
   return (
-    <main id="main-content" className="min-h-screen px-6 py-24 sm:px-8 sm:py-28 lg:px-10">
-      <div className="mx-auto max-w-3xl">
-        <Link
-          href="/"
-          className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-        >
-          Back to home
-        </Link>
+    <main id="main-content" className="mx-auto max-w-3xl px-4 pb-20 pt-8 sm:px-8 sm:pt-10">
+      <Link href="/" className="inline-flex min-h-11 items-center text-[0.9375rem] font-semibold">
+        Back to home
+      </Link>
 
-        <header className="mt-12 border-b border-border/35 pb-10">
-          <p className="text-sm font-medium text-primary">Privacy notice</p>
-          <h1 className="mt-4 text-[clamp(2.5rem,8vw,5rem)] font-semibold leading-[0.96] text-foreground">
-            Privacy Policy
-          </h1>
-          <p className="mt-6 text-base leading-8 text-muted-foreground sm:text-lg">
-            This is a simple privacy notice for a personal portfolio website. It explains what is
-            currently collected, what is not used, and what may happen when you follow external
-            links or contact me by email.
+      <header className="mt-6 flex flex-col gap-4 pb-10">
+        <h1 className="text-[2.25rem] font-extrabold leading-[1.06] tracking-[-0.025em] sm:text-5xl">
+          Privacy notice
+        </h1>
+        <p className="text-lg leading-[1.55] text-ink-soft">
+          I don&apos;t collect any personal data through this site: there are no analytics, no
+          tracking cookies, no forms and no embedded third-party content. Two things still happen
+          that the law asks me to explain: the hosting provider keeps standard technical logs, and
+          if you email me, I receive your message.
+        </p>
+        <p className="text-[0.9375rem] text-graphite">Last updated: {lastUpdated}</p>
+      </header>
+
+      <div className="flex flex-col gap-10">
+        <Block id="controller" title="Who is responsible for your data">
+          <p>
+            Mateusz Koczorowski, Poznań, Poland, is the controller of personal data processed
+            through this website. You can reach me at{" "}
+            <a href={contactLinks[0].href} className="font-semibold">
+              {email}
+            </a>
+            .
           </p>
-        </header>
+        </Block>
 
-        <div className="space-y-12 py-12">
-          <section aria-labelledby="current-practices-heading">
-            <h2 id="current-practices-heading" className="text-xl font-semibold text-foreground">
-              Current Website Practices
-            </h2>
-            <ul className="mt-5 space-y-3 text-sm leading-7 text-muted-foreground">
-              {currentPractices.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span
-                    aria-hidden="true"
-                    className="mt-3 size-1 shrink-0 rounded-full bg-primary"
-                  />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
+        <Block id="not-used" title="What this site does not do">
+          <ul className="flex list-disc flex-col gap-1.5 pl-5">
+            <li>No analytics or tracking of any kind.</li>
+            <li>
+              No cookies and nothing stored in localStorage or sessionStorage. The only exception
+              would be a strictly necessary security cookie that the hosting provider may set if it
+              ever has to run a security check on suspicious traffic. Such cookies do not need
+              consent, which is why this site has no cookie banner.
+            </li>
+            <li>No contact forms and no newsletter.</li>
+            <li>
+              No embedded videos, maps or social widgets. Fonts and images are served from this
+              site, not from third parties.
+            </li>
+          </ul>
+        </Block>
 
-          <section aria-labelledby="contact-heading" className="border-t border-border/35 pt-10">
-            <h2 id="contact-heading" className="text-xl font-semibold text-foreground">
-              Contact By Email
-            </h2>
-            <p className="mt-5 text-sm leading-7 text-muted-foreground">
-              Contact happens through email links only. If you email me, I process the email address
-              and message you provide only to read, manage, and respond to that conversation.
-            </p>
-          </section>
+        <Block id="email" title="When you email me">
+          <p>
+            I process your email address, name and the content of your message to read it, reply and
+            keep the conversation going. The legal basis is my legitimate interest in answering
+            messages sent to me (Article 6(1)(f) GDPR).
+          </p>
+          <p>
+            My mailbox is hosted by Google (Gmail), so your message is also processed by Google LLC,
+            which is certified under the EU-U.S. Data Privacy Framework and relies on the EU
+            Standard Contractual Clauses where required. I keep the conversation for as long as it
+            is relevant and delete it when it no longer is, or earlier if you ask me to.
+          </p>
+        </Block>
 
-          <section aria-labelledby="hosting-heading" className="border-t border-border/35 pt-10">
-            <h2 id="hosting-heading" className="text-xl font-semibold text-foreground">
-              Hosting And Technical Logs
-            </h2>
-            <p className="mt-5 text-sm leading-7 text-muted-foreground">
-              Hosting providers may process standard technical logs such as IP address, user agent,
-              request path, and timestamps for website security, operation, reliability, and abuse
-              prevention.
-            </p>
-          </section>
+        <Block id="hosting" title="Hosting and technical logs">
+          <p>
+            The site is hosted by Vercel Inc. (USA). When you open a page, Vercel processes
+            technical data such as your IP address, browser user agent, the page requested and the
+            time of the request. This is needed to deliver the site and protect it from abuse. The
+            legal basis is the legitimate interest in running a secure website (Article 6(1)(f)
+            GDPR).
+          </p>
+          <p>
+            Vercel keeps these logs for a limited time under its own retention rules. I do not
+            export them or combine them with any other data. Vercel is certified under the EU-U.S.
+            Data Privacy Framework and also relies on the EU Standard Contractual Clauses for
+            transfers outside the EEA. Details are in{" "}
+            <a
+              href="https://vercel.com/legal/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold"
+            >
+              Vercel&apos;s privacy policy
+            </a>
+            .
+          </p>
+        </Block>
 
-          <section
-            aria-labelledby="external-links-heading"
-            className="border-t border-border/35 pt-10"
-          >
-            <h2 id="external-links-heading" className="text-xl font-semibold text-foreground">
-              External Links
-            </h2>
-            <p className="mt-5 text-sm leading-7 text-muted-foreground">
-              This website may link to third-party websites such as LinkedIn, GitHub, YouTube, and
-              STX Next. Those websites are operated by third parties and have their own privacy
-              policies and practices.
-            </p>
-          </section>
+        <Block id="rights" title="Your rights">
+          <p>
+            You can ask me for access to your data, to correct or delete it, to restrict its
+            processing, or object to it. Write to the email address above. You also have the right
+            to lodge a complaint with the Polish data protection authority, the President of the
+            Personal Data Protection Office (UODO, uodo.gov.pl).
+          </p>
+          <p>
+            Sending me an email is voluntary. No decisions about you are made automatically and no
+            profiling takes place.
+          </p>
+        </Block>
 
-          <section
-            aria-labelledby="future-changes-heading"
-            className="border-t border-border/35 pt-10"
-          >
-            <h2 id="future-changes-heading" className="text-xl font-semibold text-foreground">
-              Future Changes
-            </h2>
-            <p className="mt-5 text-sm leading-7 text-muted-foreground">
-              If analytics, embeds, forms, newsletter signup, or other data-processing features are
-              added in the future, this privacy notice should be updated before or when those
-              changes go live.
-            </p>
-          </section>
-        </div>
+        <Block id="links" title="Links to other websites">
+          <p>
+            This site links to LinkedIn, GitHub, YouTube and the STX Next blog. Once you follow a
+            link, the other site&apos;s own privacy policy applies.
+          </p>
+        </Block>
+
+        <Block id="changes" title="Changes to this notice">
+          <p>
+            If I ever add analytics, embedded content, forms or anything else that processes data, I
+            will update this notice before it goes live.
+          </p>
+        </Block>
       </div>
     </main>
   );

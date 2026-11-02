@@ -1,32 +1,69 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
+/*
+ * Visual system: hybrid.
+ * Light "paper" sections for reading, night-navy bands (.theme-night) for the
+ * header, hero, AI-first section and footer. Teal is the only accent: the
+ * "verified" marker, the highlight behind evidence links and the main call to action.
+ */
 :root {
-  --background: oklch(0.12 0.018 260);
-  --foreground: oklch(0.96 0.01 255);
-  --card: oklch(0.16 0.02 260);
-  --card-foreground: oklch(0.96 0.01 255);
-  --popover: oklch(0.14 0.018 260);
-  --popover-foreground: oklch(0.96 0.01 255);
-  --primary: oklch(0.78 0.12 190);
-  --primary-foreground: oklch(0.12 0.018 260);
-  --secondary: oklch(0.24 0.025 255);
-  --secondary-foreground: oklch(0.94 0.01 255);
-  --muted: oklch(0.22 0.018 260);
-  --muted-foreground: oklch(0.72 0.018 250);
-  --accent: oklch(0.73 0.13 150);
-  --accent-foreground: oklch(0.1 0.015 250);
-  --destructive: oklch(0.64 0.2 25);
-  --destructive-foreground: oklch(0.98 0.01 255);
-  --border: oklch(0.29 0.02 255);
-  --input: oklch(0.29 0.02 255);
-  --ring: oklch(0.78 0.12 190);
-  --radius: 0.5rem;
+  --paper: #f1f3f6;
+  --surface: #ffffff;
+  --surface-muted: #e4e8ee;
+  --ink: #121c33;
+  --ink-soft: #2a3550;
+  --graphite: #4b566b;
+  --rule: #c9d0db;
+  --rule-strong: #8a95a8;
+  --verified: #0f766e;
+  --marker: #a7ece4;
+  --on-ink: #ffffff;
+  --on-ink-soft: #d5dbe5;
+  --cta: var(--ink);
+  --on-cta: #ffffff;
+
+  /* shadcn-compatible aliases */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--surface);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--on-ink);
+  --secondary: var(--surface-muted);
+  --secondary-foreground: var(--ink);
+  --muted: var(--surface-muted);
+  --muted-foreground: var(--graphite);
+  --accent: var(--verified);
+  --accent-foreground: var(--on-ink);
+  --destructive: #b42318;
+  --destructive-foreground: #ffffff;
+  --border: var(--rule);
+  --input: var(--rule-strong);
+  --ring: var(--ink);
+  --radius: 0.625rem;
 }
 
 @theme inline {
+  --font-sans: "Schibsted Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-graphite: var(--graphite);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-verified: var(--verified);
+  --color-marker: var(--marker);
+  --color-on-ink: var(--on-ink);
+  --color-on-ink-soft: var(--on-ink-soft);
+  --color-cta: var(--cta);
+  --color-on-cta: var(--on-cta);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -52,40 +89,78 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-* {
-  border-color: var(--border);
+/* Night band: same token names, dark values. Everything inside adapts. */
+.theme-night {
+  --paper: #08111c;
+  --surface: #0f1b2a;
+  --surface-muted: #16253a;
+  --ink: #edf2f9;
+  --ink-soft: #c9d3df;
+  --graphite: #9ca6b0;
+  --rule: #2a3a52;
+  --rule-strong: #4a5d7a;
+  --verified: #3ed0c8;
+  --marker: rgb(62 208 200 / 0.32);
+  --on-ink: #08111c;
+  --on-ink-soft: #2a3a52;
+  --cta: #3ed0c8;
+  --on-cta: #08111c;
+  --border: var(--rule);
+  --ring: #3ed0c8;
+  color-scheme: dark;
+  background-color: var(--paper);
+  color: var(--ink);
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--border);
+  }
 }
 
 html {
-  color-scheme: dark;
-  overflow-x: hidden;
+  color-scheme: light;
   scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
 }
 
 body {
   min-height: 100vh;
-  overflow-x: hidden;
-  background:
-    radial-gradient(circle at 18% 0%, oklch(0.3 0.08 190 / 0.24), transparent 34rem),
-    radial-gradient(circle at 82% 18%, oklch(0.2 0.04 255 / 0.22), transparent 30rem),
-    linear-gradient(180deg, oklch(0.12 0.018 260), oklch(0.085 0.014 255));
-  color: var(--foreground);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 1.0625rem;
+  line-height: 1.6;
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: oklch(0.78 0.12 190 / 0.35);
+  background: var(--marker);
+  color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--ring);
+  outline: 3px solid var(--ink);
   outline-offset: 3px;
+  border-radius: 4px;
 }
 
-button,
-a,
-summary {
-  -webkit-tap-highlight-color: transparent;
+a {
+  text-underline-offset: 0.2em;
+}
+
+/* Link to evidence: a highlighter stroke under the text. */
+.evidence-link {
+  background-image: linear-gradient(transparent 58%, var(--marker) 58%);
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background-size 0.15s ease;
+}
+
+.evidence-link:hover {
+  background-image: linear-gradient(var(--marker), var(--marker));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -100,9 +175,5 @@ summary {
 
   html {
     scroll-behavior: auto;
-  }
-
-  .group:hover .group-hover\:translate-x-1 {
-    transform: none !important;
   }
 }

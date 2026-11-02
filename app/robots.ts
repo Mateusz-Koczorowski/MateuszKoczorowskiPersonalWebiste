@@ -8,7 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/design-sandbox/"],
       },
     ],
     ...(siteConfig.url ? { host: siteConfig.url, sitemap: `${siteConfig.url}/sitemap.xml` } : {}),
